@@ -1,0 +1,155 @@
+\hypertarget{fonctions_8c}{}\section{fonctions.\+c File Reference}
+\label{fonctions_8c}\index{fonctions.\+c@{fonctions.\+c}}
+
+
+Définis les structures et les méthodes du jeu.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}fonctions.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{fonctions_8c_a3b3037a6fd882b7b3c8151f925c7605e}{afficher\+\_\+grille} (\hyperlink{structJoueur}{Joueur} jo)
+\begin{DoxyCompactList}\small\item\em Affiche la grille de jeu. \end{DoxyCompactList}\item 
+void \hyperlink{fonctions_8c_a7783762af6aef6a5530a18255b3ed8e1}{afficher\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} j)
+\item 
+void \hyperlink{fonctions_8c_aabd6df5599bff60f4c2a9f7f60ea25b1}{afficher\+\_\+bateaux} (\hyperlink{structBateau}{Bateau} $\ast$b)
+\item 
+void \hyperlink{fonctions_8c_a010fdf7cb46b5e6ea23c5a3017b8d8eb}{f\+\_\+purge} (F\+I\+LE $\ast$fp)
+\item 
+int \hyperlink{fonctions_8c_ade18a303e83af8e99fcdf7134675ba82}{initialiser\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\item 
+void \hyperlink{fonctions_8c_a352a3b7d939437bef1a8127b1ba88b75}{free\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\item 
+void \hyperlink{fonctions_8c_a54d9432c05c745402aa41ab985458d55}{saisir\+\_\+bateaux} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\item 
+int \hyperlink{fonctions_8c_ad8cea070a02b5d2d4424e086f3433698}{verifier\+\_\+saisie\+\_\+bateaux} (int l, int c, int s, int taille, \hyperlink{structJoueur}{Joueur} j)
+\item 
+int \hyperlink{fonctions_8c_abc27361f55ea6127b1d98dc538205470}{verifier\+\_\+lignes} (int s)
+\item 
+int \hyperlink{fonctions_8c_a8b63fc91845790d5bd3936e664a41e03}{verifier\+\_\+colonne} (int s)
+\item 
+int \hyperlink{fonctions_8c_acb05a764ee45789ec44dfd00b0d36b39}{verifier\+\_\+sens} (int s)
+\item 
+int \hyperlink{fonctions_8c_a385484b82955bff9dc724959c91d5235}{is\+\_\+case\+\_\+bateau} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$b)
+\item 
+int \hyperlink{fonctions_8c_a8003ad8778e12bc3781b4a0e059ad8d2}{dans\+\_\+la\+\_\+grille} (int l, int c, int s, int taille)
+\item 
+int \hyperlink{fonctions_8c_a2481c4ea2f7ebc63b9be1912fa1654df}{touche\+\_\+bateau} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$b)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Définis les structures et les méthodes du jeu. 
+
+\begin{DoxyAuthor}{Author}
+L\+A\+U\+G\+I\+ER AA -\/ R\+E\+Y\+ES Laura -\/ L\+A\+N\+D\+R\+Y-\/\+L\+I\+N\+ET Lou 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+23 Décembre 2016
+\end{DoxyDate}
+$\sim$ 
+
+\subsection{Function Documentation}
+\hypertarget{fonctions_8c_aabd6df5599bff60f4c2a9f7f60ea25b1}{}\label{fonctions_8c_aabd6df5599bff60f4c2a9f7f60ea25b1} 
+\index{fonctions.\+c@{fonctions.\+c}!afficher\+\_\+bateaux@{afficher\+\_\+bateaux}}
+\index{afficher\+\_\+bateaux@{afficher\+\_\+bateaux}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{afficher\+\_\+bateaux()}{afficher\_bateaux()}}
+{\footnotesize\ttfamily void afficher\+\_\+bateaux (\begin{DoxyParamCaption}\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a3b3037a6fd882b7b3c8151f925c7605e}{}\label{fonctions_8c_a3b3037a6fd882b7b3c8151f925c7605e} 
+\index{fonctions.\+c@{fonctions.\+c}!afficher\+\_\+grille@{afficher\+\_\+grille}}
+\index{afficher\+\_\+grille@{afficher\+\_\+grille}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{afficher\+\_\+grille()}{afficher\_grille()}}
+{\footnotesize\ttfamily void afficher\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur}}]{jo }\end{DoxyParamCaption})}
+
+
+
+Affiche la grille de jeu. 
+
+La grille et les bateaux de {\itshape jo} (\textquotesingle{}.\textquotesingle{} inconnu; \textquotesingle{}o\textquotesingle{} eau; \textquotesingle{}d\textquotesingle{} bateau; \textquotesingle{}c\textquotesingle{} coulé) des coordonnées des points. (cf \#\+Point) 
+\begin{DoxyParams}{Parameters}
+{\em jo} & \hyperlink{structJoueur}{Joueur} correspondant à la grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{fonctions_8c_a7783762af6aef6a5530a18255b3ed8e1}{}\label{fonctions_8c_a7783762af6aef6a5530a18255b3ed8e1} 
+\index{fonctions.\+c@{fonctions.\+c}!afficher\+\_\+joueur@{afficher\+\_\+joueur}}
+\index{afficher\+\_\+joueur@{afficher\+\_\+joueur}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{afficher\+\_\+joueur()}{afficher\_joueur()}}
+{\footnotesize\ttfamily void afficher\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur}}]{j }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a8003ad8778e12bc3781b4a0e059ad8d2}{}\label{fonctions_8c_a8003ad8778e12bc3781b4a0e059ad8d2} 
+\index{fonctions.\+c@{fonctions.\+c}!dans\+\_\+la\+\_\+grille@{dans\+\_\+la\+\_\+grille}}
+\index{dans\+\_\+la\+\_\+grille@{dans\+\_\+la\+\_\+grille}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{dans\+\_\+la\+\_\+grille()}{dans\_la\_grille()}}
+{\footnotesize\ttfamily int dans\+\_\+la\+\_\+grille (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{int}]{s,  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a010fdf7cb46b5e6ea23c5a3017b8d8eb}{}\label{fonctions_8c_a010fdf7cb46b5e6ea23c5a3017b8d8eb} 
+\index{fonctions.\+c@{fonctions.\+c}!f\+\_\+purge@{f\+\_\+purge}}
+\index{f\+\_\+purge@{f\+\_\+purge}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{f\+\_\+purge()}{f\_purge()}}
+{\footnotesize\ttfamily void f\+\_\+purge (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a352a3b7d939437bef1a8127b1ba88b75}{}\label{fonctions_8c_a352a3b7d939437bef1a8127b1ba88b75} 
+\index{fonctions.\+c@{fonctions.\+c}!free\+\_\+joueur@{free\+\_\+joueur}}
+\index{free\+\_\+joueur@{free\+\_\+joueur}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{free\+\_\+joueur()}{free\_joueur()}}
+{\footnotesize\ttfamily void free\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_ade18a303e83af8e99fcdf7134675ba82}{}\label{fonctions_8c_ade18a303e83af8e99fcdf7134675ba82} 
+\index{fonctions.\+c@{fonctions.\+c}!initialiser\+\_\+joueur@{initialiser\+\_\+joueur}}
+\index{initialiser\+\_\+joueur@{initialiser\+\_\+joueur}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+joueur()}{initialiser\_joueur()}}
+{\footnotesize\ttfamily int initialiser\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a385484b82955bff9dc724959c91d5235}{}\label{fonctions_8c_a385484b82955bff9dc724959c91d5235} 
+\index{fonctions.\+c@{fonctions.\+c}!is\+\_\+case\+\_\+bateau@{is\+\_\+case\+\_\+bateau}}
+\index{is\+\_\+case\+\_\+bateau@{is\+\_\+case\+\_\+bateau}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{is\+\_\+case\+\_\+bateau()}{is\_case\_bateau()}}
+{\footnotesize\ttfamily int is\+\_\+case\+\_\+bateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a54d9432c05c745402aa41ab985458d55}{}\label{fonctions_8c_a54d9432c05c745402aa41ab985458d55} 
+\index{fonctions.\+c@{fonctions.\+c}!saisir\+\_\+bateaux@{saisir\+\_\+bateaux}}
+\index{saisir\+\_\+bateaux@{saisir\+\_\+bateaux}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{saisir\+\_\+bateaux()}{saisir\_bateaux()}}
+{\footnotesize\ttfamily void saisir\+\_\+bateaux (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a2481c4ea2f7ebc63b9be1912fa1654df}{}\label{fonctions_8c_a2481c4ea2f7ebc63b9be1912fa1654df} 
+\index{fonctions.\+c@{fonctions.\+c}!touche\+\_\+bateau@{touche\+\_\+bateau}}
+\index{touche\+\_\+bateau@{touche\+\_\+bateau}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{touche\+\_\+bateau()}{touche\_bateau()}}
+{\footnotesize\ttfamily int touche\+\_\+bateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_a8b63fc91845790d5bd3936e664a41e03}{}\label{fonctions_8c_a8b63fc91845790d5bd3936e664a41e03} 
+\index{fonctions.\+c@{fonctions.\+c}!verifier\+\_\+colonne@{verifier\+\_\+colonne}}
+\index{verifier\+\_\+colonne@{verifier\+\_\+colonne}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+colonne()}{verifier\_colonne()}}
+{\footnotesize\ttfamily int verifier\+\_\+colonne (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_abc27361f55ea6127b1d98dc538205470}{}\label{fonctions_8c_abc27361f55ea6127b1d98dc538205470} 
+\index{fonctions.\+c@{fonctions.\+c}!verifier\+\_\+lignes@{verifier\+\_\+lignes}}
+\index{verifier\+\_\+lignes@{verifier\+\_\+lignes}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+lignes()}{verifier\_lignes()}}
+{\footnotesize\ttfamily int verifier\+\_\+lignes (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_ad8cea070a02b5d2d4424e086f3433698}{}\label{fonctions_8c_ad8cea070a02b5d2d4424e086f3433698} 
+\index{fonctions.\+c@{fonctions.\+c}!verifier\+\_\+saisie\+\_\+bateaux@{verifier\+\_\+saisie\+\_\+bateaux}}
+\index{verifier\+\_\+saisie\+\_\+bateaux@{verifier\+\_\+saisie\+\_\+bateaux}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+saisie\+\_\+bateaux()}{verifier\_saisie\_bateaux()}}
+{\footnotesize\ttfamily int verifier\+\_\+saisie\+\_\+bateaux (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{int}]{s,  }\item[{int}]{taille,  }\item[{\hyperlink{structJoueur}{Joueur}}]{j }\end{DoxyParamCaption})}
+
+\hypertarget{fonctions_8c_acb05a764ee45789ec44dfd00b0d36b39}{}\label{fonctions_8c_acb05a764ee45789ec44dfd00b0d36b39} 
+\index{fonctions.\+c@{fonctions.\+c}!verifier\+\_\+sens@{verifier\+\_\+sens}}
+\index{verifier\+\_\+sens@{verifier\+\_\+sens}!fonctions.\+c@{fonctions.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+sens()}{verifier\_sens()}}
+{\footnotesize\ttfamily int verifier\+\_\+sens (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
