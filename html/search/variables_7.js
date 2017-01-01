@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resultat',['resultat',['../structCoup.html#ad1fc037348bc7e3e3f820cf0bacc14a4',1,'Coup']]]
+  ['sens',['sens',['../structBateau.html#a887a8ad2ee59ffd987eb5f9d117e83a2',1,'Bateau']]]
 ];

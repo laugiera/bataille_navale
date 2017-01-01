@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['initialiser_5fjoueur',['initialiser_joueur',['../fonctions_8c.html#ade18a303e83af8e99fcdf7134675ba82',1,'initialiser_joueur(Joueur *j):&#160;fonctions.c'],['../fonctions_8h.html#ade18a303e83af8e99fcdf7134675ba82',1,'initialiser_joueur(Joueur *j):&#160;fonctions.c']]],
-  ['is_5fcase_5fbateau',['is_case_bateau',['../fonctions_8c.html#a385484b82955bff9dc724959c91d5235',1,'is_case_bateau(int l, int c, Bateau *b):&#160;fonctions.c'],['../fonctions_8h.html#a385484b82955bff9dc724959c91d5235',1,'is_case_bateau(int l, int c, Bateau *b):&#160;fonctions.c']]]
+  ['f_5fpurge',['f_purge',['../init_8c.html#a010fdf7cb46b5e6ea23c5a3017b8d8eb',1,'f_purge(FILE *fp):&#160;init.c'],['../init_8h.html#a010fdf7cb46b5e6ea23c5a3017b8d8eb',1,'f_purge(FILE *fp):&#160;init.c']]],
+  ['free_5fjoueur',['free_joueur',['../init_8c.html#a352a3b7d939437bef1a8127b1ba88b75',1,'free_joueur(Joueur *j):&#160;init.c'],['../init_8h.html#a352a3b7d939437bef1a8127b1ba88b75',1,'free_joueur(Joueur *j):&#160;init.c']]]
 ];
