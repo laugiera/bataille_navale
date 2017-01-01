@@ -39,30 +39,60 @@ void game(void) {
 	welcome_screen();
 	rules_screen();
 	int IA = menu_screen();
+	Joueur joueurs[2];
+	int joueur_courant;
+
 	/*VS Joueur*/
 	if(IA == 1){
-		Joueur joueur1, joueur2;
-
-	    printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueur1);
+		printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
+	    initialiser_joueur(&joueurs[0]);
 	    system_message("Entrée pour continuer");
 		cls();
 	    printf ("\n============================[JOUEUR 2 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueur2);
+	    initialiser_joueur(&joueurs[1]);
 	    system_message("Entrée pour continuer");
 		cls();
 		printf ("\n============================[DEBUT DU JEU]===================================\n");
-		int start = rand()%2; /*0 ou 1*/
-		if(start == 0)
-			printf("C'est le Joueur %s qui commence ! \n",joueur1.name);
-		else
-			printf("C'est le Joueur %s qui commence ! \n",joueur2.name);
+		joueur_courant = (rand()%2); /*1 ou 0*/
 
-		free_joueur(&joueur1);
-		free_joueur(&joueur2);
+		printf("C'est le Joueur %s qui commence ! \n",joueurs[joueur_courant].name);
+
+		while(1) /*condition à changer*/
+		{
+			int l,c;
+			printf ("\n============================[A VOTRE TOUR %s!]===================================\n",joueurs[joueur_courant].name);
+			afficher_grille(joueurs[joueur_courant],1);
+			saisir_coup(&l,&c);
+
+			system_message("Entrée pour continuer");
+			cls();
+			if(joueur_courant == 1)
+				joueur_courant = 0;
+			else
+				joueur_courant = 1;
+		}
+
+		free_joueur(&joueurs[0]);
+		free_joueur(&joueurs[1]);
 	}
+
 	/*VS IA*/
 	else if (IA == 2){
 
 	}
+}
+
+void saisir_coup(int* l, int* c){
+	do{
+		printf("Saisir une ligne (A - %c):\n",'A'+NB_LIGNES-1);
+		(*l) = fgetc(stdin);
+		f_purge(stdin);
+		printf("Saisir une colonne (1-%d):\n",NB_COLONNES);
+		scanf("%d",c);
+		f_purge(stdin);
+	}while(verifier_lignes(*l)==0 || verifier_colonne(*c)==0);
+}
+
+int resultat_coup(int l, int c, Bateau * btx_adverses){
+	return 0;
 }
