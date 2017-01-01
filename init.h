@@ -13,7 +13,7 @@
 #define NB_LIGNES 10 
 #define NB_COLONNES 10 
 
-#define NB_BATEAUX 5
+#define NB_BATEAUX 2
 
 #define MAX_SAISIE 20
 #define BLOC_MALLOC 100
@@ -51,10 +51,12 @@ typedef struct Joueur{
 	int **historique; /*!< Matrice de jeu allouée dynamiquement. */
 } Joueur;
 
+void f_purge(FILE *fp);
 void cls(void);
 void system_message (char *message);
 void welcome_screen (void);
 void rules_screen (void);
+int menu_screen(void);
 void afficher_grille(Joueur jo, int etat);
 void afficher_joueur(Joueur j);
 void afficher_bateaux(Bateau *b);

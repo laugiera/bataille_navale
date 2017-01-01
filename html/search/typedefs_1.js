@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['coup',['Coup',['../fonctions_8h.html#a9b046a9e4d0e97c49b4d51e7aa42fd66',1,'fonctions.h']]]
+  ['joueur',['Joueur',['../init_8h.html#aa1c4db74604e23877fda17c87d483730',1,'init.h']]]
 ];

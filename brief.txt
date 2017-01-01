@@ -1,0 +1,45 @@
+COMMENTAIRES
+
+	POUR LA DOC 
+		-au début des fichiers
+			/**
+			 * @file      nom
+			 * @author    LAUGIER AA - REYES Laura - LANDRY-LINET Lou
+			 * @version   1.0
+			 * @date      23 Décembre 2016
+			 * @brief     Description
+			 */
+		-devant la def d'une structure
+			/**
+			 * @brief      Nom
+			 * @details   ~
+			 * @champs		description
+			 */
+		-devant une fonction
+			/**
+			 * @brief      description
+			 * @details    ~
+			 * @param    nom		contenu
+			 * @param    nom 		contenu
+			 * @return    type de retour
+			 */
+		-derrière un attribut /*!< commentaire*/
+
+	AUTRE : /*commentaire*/ Important = eviter les //commentaires car ils ne sont pas compatibles avec tous les compilateurs
+
+NOMAGE
+	Structure : commence par une maj 
+	fonction_nom : underscore, pas de maj
+
+TODO LIST 
+
+	-fonction saisir coup + vérifier la saisie
+	-fonction resultat coup
+	-le cas d'un bateau coulé :l'état du bateau doit être maj et l'affichage de la grille aussi (le bateau est représenté par des X et non plus par son id)
+	-le cas où tous les bateaux sont coulés <=> le joueur a gagné
+	-menu fin du jeu (voulez vous rejouer, etc)
+	-version GRAPHIKEU
+
+	-version minimale : mode IA
+	-version minimale : afficher des stats 
+

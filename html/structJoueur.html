@@ -66,20 +66,24 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="fonctions_8h_source.html">fonctions.h</a>&gt;</code></p>
+<p><a class="el" href="structJoueur.html" title="Joueur. ">Joueur</a>.  
+ <a href="structJoueur.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="init_8h_source.html">init.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab612f3b383ec2463e302d1f8ba5fc4fd"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJoueur.html#ab612f3b383ec2463e302d1f8ba5fc4fd">name</a> [<a class="el" href="fonctions_8h.html#a2277af00d169389a0db61a0dbefa2e05">MAX_SAISIE</a>]</td></tr>
+<tr class="memitem:ab612f3b383ec2463e302d1f8ba5fc4fd"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJoueur.html#ab612f3b383ec2463e302d1f8ba5fc4fd">name</a> [<a class="el" href="init_8h.html#a2277af00d169389a0db61a0dbefa2e05">MAX_SAISIE</a>]</td></tr>
 <tr class="separator:ab612f3b383ec2463e302d1f8ba5fc4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a950c3ca390a307cfd21d7095b4d5554e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structBateau.html">Bateau</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJoueur.html#a950c3ca390a307cfd21d7095b4d5554e">bateaux</a></td></tr>
 <tr class="separator:a950c3ca390a307cfd21d7095b4d5554e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76f3717b590da6e1dc3557fd6bdc0050"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structCoup.html">Coup</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJoueur.html#a76f3717b590da6e1dc3557fd6bdc0050">historique</a></td></tr>
-<tr class="separator:a76f3717b590da6e1dc3557fd6bdc0050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af20d1286a923e294405ced5f3c5484cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJoueur.html#af20d1286a923e294405ced5f3c5484cd">nb_coups</a></td></tr>
-<tr class="separator:af20d1286a923e294405ced5f3c5484cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a592804f8ad7d125fabdf06bbbffd60c2"><td class="memItemLeft" align="right" valign="top">int **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structJoueur.html#a592804f8ad7d125fabdf06bbbffd60c2">historique</a></td></tr>
+<tr class="separator:a592804f8ad7d125fabdf06bbbffd60c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="structJoueur.html" title="Joueur. ">Joueur</a>. </p>
+<p>: historique = grille de jeu (0 à NB_LIGNES-1 lignes, 1 à NB_COLONNES colonnes). La valeur vaut '.' à l'initialisation puis 'd' bateau.id (touché), ou 'o' (eau), 'X' (coulé) ATTENTION : La grille du joueur 1 fonctionne avec les bateaux du <a class="el" href="structJoueur.html" title="Joueur. ">Joueur</a> 2 et vice-versa ! </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a950c3ca390a307cfd21d7095b4d5554e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a950c3ca390a307cfd21d7095b4d5554e">&sect;&nbsp;</a></span>bateaux</h2>
 
@@ -91,20 +95,22 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Tableau de NB_BATEAUX bateaux allouée dynamiquement </p>
 
 </div>
 </div>
-<a id="a76f3717b590da6e1dc3557fd6bdc0050"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76f3717b590da6e1dc3557fd6bdc0050">&sect;&nbsp;</a></span>historique</h2>
+<a id="a592804f8ad7d125fabdf06bbbffd60c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a592804f8ad7d125fabdf06bbbffd60c2">&sect;&nbsp;</a></span>historique</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct <a class="el" href="structCoup.html">Coup</a>* Joueur::historique</td>
+          <td class="memname">int** Joueur::historique</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Matrice de jeu allouée dynamiquement. </p>
 
 </div>
 </div>
@@ -115,21 +121,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char Joueur::name[<a class="el" href="fonctions_8h.html#a2277af00d169389a0db61a0dbefa2e05">MAX_SAISIE</a>]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af20d1286a923e294405ced5f3c5484cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af20d1286a923e294405ced5f3c5484cd">&sect;&nbsp;</a></span>nb_coups</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Joueur::nb_coups</td>
+          <td class="memname">char Joueur::name[<a class="el" href="init_8h.html#a2277af00d169389a0db61a0dbefa2e05">MAX_SAISIE</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -137,7 +129,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="fonctions_8h_source.html">fonctions.h</a></li>
+<li><a class="el" href="init_8h_source.html">init.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

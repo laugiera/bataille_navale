@@ -12,6 +12,22 @@
 #include "init.h"
 
 /**
+ * @brief      Purge le buffer pour la saisie au clavier
+ * @param      stdin (dans notre cas)
+ * @return     void
+ */
+void f_purge(FILE *fp)
+{
+	if (fp != NULL)
+	{
+		int c;
+
+		while ((c = fgetc(fp)) != '\n' && c != EOF)
+		{
+		}
+	}
+}
+/**
  * @brief   Efface tout ce qu'il y a affiché à l'écran
  * @return    void
  */
@@ -84,10 +100,33 @@ void rules_screen (void){
 }
 
 /**
+ * @brief     Ecran de menu
+ * @return    1 (Joueur vs Ordinateur) or 2 (Joueur vs joueur)
+ */
+int menu_screen(void){
+	int mode = 0;
+	printf ("\n");
+    printf ("============================[MENU:]===================================\n");
+    printf (" |                                                                  |\n");
+	printf (" | Choisissez un mode :                                             |\n");
+	printf (" | 1. MODE JOUEUR VS JOUEUR                                       |\n");
+	printf (" | 2. MODE JOUEUR VS ORDINATEUR.  |\n");
+	printf ("==============================================================================\n\n");
+	do{
+		printf("Saisir le mode (1 ou 2) :\n");
+		scanf("%d",&mode);
+		f_purge(stdin);
+	}while(mode != 1 && mode != 2);
+	system_message("Entrée pour continuer");
+	cls();
+	return mode;
+}
+
+/**
  * @brief      Affiche la grille de jeu
  * @details    La grille et les bateaux de @a jo ('.' inconnu; 'o' eau; '%d' bateau; 'X' coulé)
  * @param    jo		Joueur correspondant à la grille
- * param      etat	Booléen : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
+ * @param      etat	Booléen : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
  * @return    void
  */
 void afficher_grille(Joueur jo, int etat){
@@ -147,22 +186,6 @@ void afficher_bateaux(Bateau *b){
 	}
 }
 
-/**
- * @brief      Purge le buffer pour la saisie au clavier
- * @param      stdin (dans notre cas)
- * @return     void
- */
-void f_purge(FILE *fp)
-{
-	if (fp != NULL)
-	{
-		int c;
-
-		while ((c = fgetc(fp)) != '\n' && c != EOF)
-		{
-		}
-	}
-}
 
 /**
  * @brief      Initialise le joueur
@@ -226,17 +249,17 @@ void free_joueur(Joueur *j){
  */
 void saisir_bateaux(Joueur *j){
 	printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
-	int tailles[NB_BATEAUX]={5,4,3,3,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+	int tailles[NB_BATEAUX]={5,4}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
 	int i,colonne,ligne,sens;
+	afficher_grille(*j,0);
 	for (i = 0; i < NB_BATEAUX; i++)
 	{
-		/*grille mise à jour */		
-		afficher_grille(*j,0);
+
 		(j->bateaux+i)->id=i+1; 
 		printf("Saisie du bateau %d, taille %d\n",i,tailles[i]);
 		do {
 			printf("ligne : ");
-			scanf("%c",(char*)&ligne);
+			ligne = fgetc(stdin);
 			f_purge(stdin);
 			printf("colonne : ");
 			scanf("%d",&colonne);
@@ -253,6 +276,8 @@ void saisir_bateaux(Joueur *j){
 		(j->bateaux+i)->ligne = ligne;
 		(j->bateaux+i)->colonne = colonne;
 		(j->bateaux+i)->sens = sens;
+		/*grille mise à jour */		
+		afficher_grille(*j,0);
 
 	}
 
@@ -338,7 +363,7 @@ int verifier_colonne(int s){
 /**
  * @brief      vérifie que le sens/orientation saisi est réalisable
  * @param      s, un entier pour le sens
- * @details    0 haut; 1 droite; 2 bas; 3 gauche; 
+ * @details    0 haut; 1 droite; 
  * @return     booléen
  */
 int verifier_sens(int s){

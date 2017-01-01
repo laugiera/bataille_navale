@@ -36,24 +36,33 @@
  */
 void game(void) {
 	srand(time(NULL));
-
 	welcome_screen();
 	rules_screen();
+	int IA = menu_screen();
+	/*VS Joueur*/
+	if(IA == 1){
+		Joueur joueur1, joueur2;
 
-	Joueur joueur1, joueur2;
+	    printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
+	    initialiser_joueur(&joueur1);
+	    system_message("Entrée pour continuer");
+		cls();
+	    printf ("\n============================[JOUEUR 2 - BIENVENUE !]===================================\n");
+	    initialiser_joueur(&joueur2);
+	    system_message("Entrée pour continuer");
+		cls();
+		printf ("\n============================[DEBUT DU JEU]===================================\n");
+		int start = rand()%2; /*0 ou 1*/
+		if(start == 0)
+			printf("C'est le Joueur %s qui commence ! \n",joueur1.name);
+		else
+			printf("C'est le Joueur %s qui commence ! \n",joueur2.name);
 
-    printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
-    system_message("Entrée pour continuer");
-    initialiser_joueur(&joueur1);
-	cls();
-    printf ("\n============================[JOUEUR 2 - BIENVENUE !]===================================\n");
-    system_message("Entrée pour continuer");
-    initialiser_joueur(&joueur2);
-	cls();
+		free_joueur(&joueur1);
+		free_joueur(&joueur2);
+	}
+	/*VS IA*/
+	else if (IA == 2){
 
-	int start = rand()%2; /*0 ou 1*/
-	printf("C'est le Joueur %d qui commence ! \n",start+1);
-
-	free_joueur(&joueur1);
-	free_joueur(&joueur2);
+	}
 }

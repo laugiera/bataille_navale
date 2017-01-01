@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['name',['name',['../structJoueur.html#ab612f3b383ec2463e302d1f8ba5fc4fd',1,'Joueur']]],
-  ['nb_5fbateaux',['NB_BATEAUX',['../fonctions_8h.html#aebf032a412647d9f6eaa8b4452e89ba9',1,'fonctions.h']]],
-  ['nb_5fcolonnes',['NB_COLONNES',['../fonctions_8h.html#abfa179ca04bf5c427a56beb8b26c0272',1,'fonctions.h']]],
-  ['nb_5fcoups',['nb_coups',['../structJoueur.html#af20d1286a923e294405ced5f3c5484cd',1,'Joueur']]],
-  ['nb_5fjoueurs',['NB_JOUEURS',['../fonctions_8h.html#afdb4f6f91f985d95ef85c525e9c6f3e8',1,'fonctions.h']]],
-  ['nb_5flignes',['NB_LIGNES',['../fonctions_8h.html#ad8edf09d2d914fdd5eae545ee2bd6ce9',1,'fonctions.h']]]
+  ['main',['main',['../main_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.c']]],
+  ['main_2ec',['main.c',['../main_8c.html',1,'']]],
+  ['max_5fsaisie',['MAX_SAISIE',['../init_8h.html#a2277af00d169389a0db61a0dbefa2e05',1,'init.h']]],
+  ['menu_5fscreen',['menu_screen',['../init_8c.html#a0b1b890c7a1747e8d6ac62d1ff9dd5cd',1,'menu_screen(void):&#160;init.c'],['../init_8h.html#a0b1b890c7a1747e8d6ac62d1ff9dd5cd',1,'menu_screen(void):&#160;init.c']]]
 ];

@@ -1,0 +1,408 @@
+\hypertarget{init_8c}{}\section{init.\+c File Reference}
+\label{init_8c}\index{init.\+c@{init.\+c}}
+
+
+Définis les structures et les méthodes du jeu.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}init.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{init_8c_a010fdf7cb46b5e6ea23c5a3017b8d8eb}{f\+\_\+purge} (F\+I\+LE $\ast$fp)
+\begin{DoxyCompactList}\small\item\em Purge le buffer pour la saisie au clavier. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_ae5f15506155750b79c8ceb1d9e86d34c}{cls} (void)
+\begin{DoxyCompactList}\small\item\em Efface tout ce qu\textquotesingle{}il y a affiché à l\textquotesingle{}écran. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a1ce2912663e48b734f603b4f15a1f3ab}{system\+\_\+message} (char $\ast$message)
+\begin{DoxyCompactList}\small\item\em Affiche un message à l\textquotesingle{}utilisateur et lui demande d\textquotesingle{}appuyer sur entrée param char $\ast$, le message a afficher. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a8b59c3330d191fbd79d661859bf00507}{welcome\+\_\+screen} (void)
+\begin{DoxyCompactList}\small\item\em Ecran de bienvenue. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a5a3e3a92277c4190abf099d320f3ad46}{rules\+\_\+screen} (void)
+\begin{DoxyCompactList}\small\item\em Ecran des règles. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a0b1b890c7a1747e8d6ac62d1ff9dd5cd}{menu\+\_\+screen} (void)
+\begin{DoxyCompactList}\small\item\em Ecran de menu. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_aef72594cbeb456f9153e4fa97f4c7801}{afficher\+\_\+grille} (\hyperlink{structJoueur}{Joueur} jo, int etat)
+\begin{DoxyCompactList}\small\item\em Affiche la grille de jeu. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a7783762af6aef6a5530a18255b3ed8e1}{afficher\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} j)
+\begin{DoxyCompactList}\small\item\em Affiche le joueur et sa grille de jeu. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_aabd6df5599bff60f4c2a9f7f60ea25b1}{afficher\+\_\+bateaux} (\hyperlink{structBateau}{Bateau} $\ast$b)
+\begin{DoxyCompactList}\small\item\em Affiche les bateaux d\textquotesingle{}un joueur. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_ade18a303e83af8e99fcdf7134675ba82}{initialiser\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\begin{DoxyCompactList}\small\item\em Initialise le joueur. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a352a3b7d939437bef1a8127b1ba88b75}{free\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\begin{DoxyCompactList}\small\item\em libère la mémoire allouée au joueur \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a54d9432c05c745402aa41ab985458d55}{saisir\+\_\+bateaux} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\begin{DoxyCompactList}\small\item\em le joueur saisit les emplacements de ses bateaux \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_ad8cea070a02b5d2d4424e086f3433698}{verifier\+\_\+saisie\+\_\+bateaux} (int l, int c, int s, int taille, \hyperlink{structJoueur}{Joueur} j)
+\begin{DoxyCompactList}\small\item\em vérifie le placement d\textquotesingle{}un bateau \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_abc27361f55ea6127b1d98dc538205470}{verifier\+\_\+lignes} (int s)
+\begin{DoxyCompactList}\small\item\em vérifie qu\textquotesingle{}une ligne saisie est conforme à la grille \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a8b63fc91845790d5bd3936e664a41e03}{verifier\+\_\+colonne} (int s)
+\begin{DoxyCompactList}\small\item\em vérifie qu\textquotesingle{}une colonne saisie est conforme à la grille \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_acb05a764ee45789ec44dfd00b0d36b39}{verifier\+\_\+sens} (int s)
+\begin{DoxyCompactList}\small\item\em vérifie que le sens/orientation saisi est réalisable \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a385484b82955bff9dc724959c91d5235}{is\+\_\+case\+\_\+bateau} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$b)
+\begin{DoxyCompactList}\small\item\em regarde si un bateau occupe la case donnée \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a8003ad8778e12bc3781b4a0e059ad8d2}{dans\+\_\+la\+\_\+grille} (int l, int c, int s, int taille)
+\begin{DoxyCompactList}\small\item\em regarde si un bateau sort de la grille \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a2481c4ea2f7ebc63b9be1912fa1654df}{touche\+\_\+bateau} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$b)
+\begin{DoxyCompactList}\small\item\em regarde si une case donnée est déjà occupée ou touche une case déjà occcupée par un bateau du joueur \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Définis les structures et les méthodes du jeu. 
+
+\begin{DoxyAuthor}{Author}
+L\+A\+U\+G\+I\+ER AA -\/ R\+E\+Y\+ES Laura -\/ L\+A\+N\+D\+R\+Y-\/\+L\+I\+N\+ET Lou 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+23 Décembre 2016
+\end{DoxyDate}
+$\sim$ 
+
+\subsection{Function Documentation}
+\hypertarget{init_8c_aabd6df5599bff60f4c2a9f7f60ea25b1}{}\label{init_8c_aabd6df5599bff60f4c2a9f7f60ea25b1} 
+\index{init.\+c@{init.\+c}!afficher\+\_\+bateaux@{afficher\+\_\+bateaux}}
+\index{afficher\+\_\+bateaux@{afficher\+\_\+bateaux}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{afficher\+\_\+bateaux()}{afficher\_bateaux()}}
+{\footnotesize\ttfamily void afficher\+\_\+bateaux (\begin{DoxyParamCaption}\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Affiche les bateaux d\textquotesingle{}un joueur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b,le} & tableau de Bateaux du joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_aef72594cbeb456f9153e4fa97f4c7801}{}\label{init_8c_aef72594cbeb456f9153e4fa97f4c7801} 
+\index{init.\+c@{init.\+c}!afficher\+\_\+grille@{afficher\+\_\+grille}}
+\index{afficher\+\_\+grille@{afficher\+\_\+grille}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{afficher\+\_\+grille()}{afficher\_grille()}}
+{\footnotesize\ttfamily void afficher\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur}}]{jo,  }\item[{int}]{etat }\end{DoxyParamCaption})}
+
+
+
+Affiche la grille de jeu. 
+
+La grille et les bateaux de {\itshape jo} (\textquotesingle{}.\textquotesingle{} inconnu; \textquotesingle{}o\textquotesingle{} eau; \textquotesingle{}d\textquotesingle{} bateau; \textquotesingle{}X\textquotesingle{} coulé) 
+\begin{DoxyParams}{Parameters}
+{\em jo} & \hyperlink{structJoueur}{Joueur} correspondant à la grille param etat Booléen \+: 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_a7783762af6aef6a5530a18255b3ed8e1}{}\label{init_8c_a7783762af6aef6a5530a18255b3ed8e1} 
+\index{init.\+c@{init.\+c}!afficher\+\_\+joueur@{afficher\+\_\+joueur}}
+\index{afficher\+\_\+joueur@{afficher\+\_\+joueur}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{afficher\+\_\+joueur()}{afficher\_joueur()}}
+{\footnotesize\ttfamily void afficher\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur}}]{j }\end{DoxyParamCaption})}
+
+
+
+Affiche le joueur et sa grille de jeu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & \hyperlink{structJoueur}{Joueur} correspondant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_ae5f15506155750b79c8ceb1d9e86d34c}{}\label{init_8c_ae5f15506155750b79c8ceb1d9e86d34c} 
+\index{init.\+c@{init.\+c}!cls@{cls}}
+\index{cls@{cls}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{cls()}{cls()}}
+{\footnotesize\ttfamily void cls (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Efface tout ce qu\textquotesingle{}il y a affiché à l\textquotesingle{}écran. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_a8003ad8778e12bc3781b4a0e059ad8d2}{}\label{init_8c_a8003ad8778e12bc3781b4a0e059ad8d2} 
+\index{init.\+c@{init.\+c}!dans\+\_\+la\+\_\+grille@{dans\+\_\+la\+\_\+grille}}
+\index{dans\+\_\+la\+\_\+grille@{dans\+\_\+la\+\_\+grille}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{dans\+\_\+la\+\_\+grille()}{dans\_la\_grille()}}
+{\footnotesize\ttfamily int dans\+\_\+la\+\_\+grille (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{int}]{s,  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+regarde si un bateau sort de la grille 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier pour la ligne \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em s,un} & entier pour l\textquotesingle{}orientation \\
+\hline
+{\em taille,un} & entier pour la taille du bateau concerné \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booléen, F\+A\+L\+SE si ça sort de la grille 
+\end{DoxyReturn}
+\hypertarget{init_8c_a010fdf7cb46b5e6ea23c5a3017b8d8eb}{}\label{init_8c_a010fdf7cb46b5e6ea23c5a3017b8d8eb} 
+\index{init.\+c@{init.\+c}!f\+\_\+purge@{f\+\_\+purge}}
+\index{f\+\_\+purge@{f\+\_\+purge}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{f\+\_\+purge()}{f\_purge()}}
+{\footnotesize\ttfamily void f\+\_\+purge (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+Purge le buffer pour la saisie au clavier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stdin} & (dans notre cas) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_a352a3b7d939437bef1a8127b1ba88b75}{}\label{init_8c_a352a3b7d939437bef1a8127b1ba88b75} 
+\index{init.\+c@{init.\+c}!free\+\_\+joueur@{free\+\_\+joueur}}
+\index{free\+\_\+joueur@{free\+\_\+joueur}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{free\+\_\+joueur()}{free\_joueur()}}
+{\footnotesize\ttfamily void free\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+
+
+libère la mémoire allouée au joueur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j,le} & joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_ade18a303e83af8e99fcdf7134675ba82}{}\label{init_8c_ade18a303e83af8e99fcdf7134675ba82} 
+\index{init.\+c@{init.\+c}!initialiser\+\_\+joueur@{initialiser\+\_\+joueur}}
+\index{initialiser\+\_\+joueur@{initialiser\+\_\+joueur}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+joueur()}{initialiser\_joueur()}}
+{\footnotesize\ttfamily int initialiser\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+
+
+Initialise le joueur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j,le} & joueur\\
+\hline
+\end{DoxyParams}
+Le joueur saisit son nom. L\textquotesingle{}historique est alloué est initialisé à O. Les bateaux sont alloués puis saisis. \begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE si les malloc fail, E\+X\+I\+T\+\_\+\+S\+U\+C\+E\+SS sinon 
+\end{DoxyReturn}
+\hypertarget{init_8c_a385484b82955bff9dc724959c91d5235}{}\label{init_8c_a385484b82955bff9dc724959c91d5235} 
+\index{init.\+c@{init.\+c}!is\+\_\+case\+\_\+bateau@{is\+\_\+case\+\_\+bateau}}
+\index{is\+\_\+case\+\_\+bateau@{is\+\_\+case\+\_\+bateau}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{is\+\_\+case\+\_\+bateau()}{is\_case\_bateau()}}
+{\footnotesize\ttfamily int is\+\_\+case\+\_\+bateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+regarde si un bateau occupe la case donnée 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier de 0 à N\+B\+\_\+\+L\+I\+G\+N\+E\+S-\/1 pour la ligne (P\+AS LE C\+O\+DE A\+S\+C\+II DE LA L\+E\+T\+T\+RE) \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em b,tableau} & de bateaux du joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 si la case est libre, 0 s\textquotesingle{}il n\textquotesingle{}y a aucun bateau, bateau.\+id sinon 
+\end{DoxyReturn}
+\hypertarget{init_8c_a0b1b890c7a1747e8d6ac62d1ff9dd5cd}{}\label{init_8c_a0b1b890c7a1747e8d6ac62d1ff9dd5cd} 
+\index{init.\+c@{init.\+c}!menu\+\_\+screen@{menu\+\_\+screen}}
+\index{menu\+\_\+screen@{menu\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{menu\+\_\+screen()}{menu\_screen()}}
+{\footnotesize\ttfamily int menu\+\_\+screen (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ecran de menu. 
+
+\begin{DoxyReturn}{Returns}
+1 (\hyperlink{structJoueur}{Joueur} vs Ordinateur) or 2 (\hyperlink{structJoueur}{Joueur} vs joueur) 
+\end{DoxyReturn}
+\hypertarget{init_8c_a5a3e3a92277c4190abf099d320f3ad46}{}\label{init_8c_a5a3e3a92277c4190abf099d320f3ad46} 
+\index{init.\+c@{init.\+c}!rules\+\_\+screen@{rules\+\_\+screen}}
+\index{rules\+\_\+screen@{rules\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{rules\+\_\+screen()}{rules\_screen()}}
+{\footnotesize\ttfamily void rules\+\_\+screen (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ecran des règles. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_a54d9432c05c745402aa41ab985458d55}{}\label{init_8c_a54d9432c05c745402aa41ab985458d55} 
+\index{init.\+c@{init.\+c}!saisir\+\_\+bateaux@{saisir\+\_\+bateaux}}
+\index{saisir\+\_\+bateaux@{saisir\+\_\+bateaux}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{saisir\+\_\+bateaux()}{saisir\_bateaux()}}
+{\footnotesize\ttfamily void saisir\+\_\+bateaux (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+
+
+le joueur saisit les emplacements de ses bateaux 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j,le} & joueur\\
+\hline
+\end{DoxyParams}
+le joueur saisit une case, un sens d\textquotesingle{}orientation et le jeu vérifie la saisie. Si la saisie est bonne, le bateau est initialisé et la grille maj affichée \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+$<$ Règles \+: 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2 \hypertarget{init_8c_a1ce2912663e48b734f603b4f15a1f3ab}{}\label{init_8c_a1ce2912663e48b734f603b4f15a1f3ab} 
+\index{init.\+c@{init.\+c}!system\+\_\+message@{system\+\_\+message}}
+\index{system\+\_\+message@{system\+\_\+message}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{system\+\_\+message()}{system\_message()}}
+{\footnotesize\ttfamily void system\+\_\+message (\begin{DoxyParamCaption}\item[{char $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Affiche un message à l\textquotesingle{}utilisateur et lui demande d\textquotesingle{}appuyer sur entrée param char $\ast$, le message a afficher. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_a2481c4ea2f7ebc63b9be1912fa1654df}{}\label{init_8c_a2481c4ea2f7ebc63b9be1912fa1654df} 
+\index{init.\+c@{init.\+c}!touche\+\_\+bateau@{touche\+\_\+bateau}}
+\index{touche\+\_\+bateau@{touche\+\_\+bateau}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{touche\+\_\+bateau()}{touche\_bateau()}}
+{\footnotesize\ttfamily int touche\+\_\+bateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+regarde si une case donnée est déjà occupée ou touche une case déjà occcupée par un bateau du joueur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier pour la ligne (correspondant à l\textquotesingle{}index de la ligne \+: 0 à N\+B\+\_\+\+L\+I\+G\+N\+E-\/1, pas au code A\+S\+C\+II) \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em b,tableau} & de bateaux du joueur\\
+\hline
+\end{DoxyParams}
+la fonction regarde toutes les cases mitoyennes à la case donnée et vérifie si ce sont des cases occupées ou non \begin{DoxyReturn}{Returns}
+booléen 
+\end{DoxyReturn}
+\hypertarget{init_8c_a8b63fc91845790d5bd3936e664a41e03}{}\label{init_8c_a8b63fc91845790d5bd3936e664a41e03} 
+\index{init.\+c@{init.\+c}!verifier\+\_\+colonne@{verifier\+\_\+colonne}}
+\index{verifier\+\_\+colonne@{verifier\+\_\+colonne}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+colonne()}{verifier\_colonne()}}
+{\footnotesize\ttfamily int verifier\+\_\+colonne (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+
+
+vérifie qu\textquotesingle{}une colonne saisie est conforme à la grille 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s,un} & entier pour la colonne\\
+\hline
+\end{DoxyParams}
+la colonne est entre 1 et N\+B\+\_\+\+C\+O\+L\+O\+N\+N\+ES \begin{DoxyReturn}{Returns}
+booléen 
+\end{DoxyReturn}
+\hypertarget{init_8c_abc27361f55ea6127b1d98dc538205470}{}\label{init_8c_abc27361f55ea6127b1d98dc538205470} 
+\index{init.\+c@{init.\+c}!verifier\+\_\+lignes@{verifier\+\_\+lignes}}
+\index{verifier\+\_\+lignes@{verifier\+\_\+lignes}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+lignes()}{verifier\_lignes()}}
+{\footnotesize\ttfamily int verifier\+\_\+lignes (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+
+
+vérifie qu\textquotesingle{}une ligne saisie est conforme à la grille 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s,un} & entier pour la ligne\\
+\hline
+\end{DoxyParams}
+la ligne est entre \textquotesingle{}A\textquotesingle{} et \textquotesingle{}A\textquotesingle{}+\+N\+B\+\_\+\+L\+I\+G\+N\+ES \begin{DoxyReturn}{Returns}
+booléen 
+\end{DoxyReturn}
+\hypertarget{init_8c_ad8cea070a02b5d2d4424e086f3433698}{}\label{init_8c_ad8cea070a02b5d2d4424e086f3433698} 
+\index{init.\+c@{init.\+c}!verifier\+\_\+saisie\+\_\+bateaux@{verifier\+\_\+saisie\+\_\+bateaux}}
+\index{verifier\+\_\+saisie\+\_\+bateaux@{verifier\+\_\+saisie\+\_\+bateaux}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+saisie\+\_\+bateaux()}{verifier\_saisie\_bateaux()}}
+{\footnotesize\ttfamily int verifier\+\_\+saisie\+\_\+bateaux (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{int}]{s,  }\item[{int}]{taille,  }\item[{\hyperlink{structJoueur}{Joueur}}]{j }\end{DoxyParamCaption})}
+
+
+
+vérifie le placement d\textquotesingle{}un bateau 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier pour la ligne \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em s,un} & entier pour l\textquotesingle{}orientation \\
+\hline
+{\em taille,un} & entier pour la taille du bateau concerné \\
+\hline
+{\em j,le} & joueur\\
+\hline
+\end{DoxyParams}
+Pour qu\textquotesingle{}un placement soit valide, il faut que la saisie soit correcte, conforme à la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu\textquotesingle{}elle ne touche pas un autre bateau. \begin{DoxyReturn}{Returns}
+booléen. F\+A\+L\+Se si mauvais placement, T\+R\+UE sinon 
+\end{DoxyReturn}
+\hypertarget{init_8c_acb05a764ee45789ec44dfd00b0d36b39}{}\label{init_8c_acb05a764ee45789ec44dfd00b0d36b39} 
+\index{init.\+c@{init.\+c}!verifier\+\_\+sens@{verifier\+\_\+sens}}
+\index{verifier\+\_\+sens@{verifier\+\_\+sens}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+sens()}{verifier\_sens()}}
+{\footnotesize\ttfamily int verifier\+\_\+sens (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+
+
+vérifie que le sens/orientation saisi est réalisable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s,un} & entier pour le sens\\
+\hline
+\end{DoxyParams}
+0 haut; 1 droite; \begin{DoxyReturn}{Returns}
+booléen 
+\end{DoxyReturn}
+\hypertarget{init_8c_a8b59c3330d191fbd79d661859bf00507}{}\label{init_8c_a8b59c3330d191fbd79d661859bf00507} 
+\index{init.\+c@{init.\+c}!welcome\+\_\+screen@{welcome\+\_\+screen}}
+\index{welcome\+\_\+screen@{welcome\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{welcome\+\_\+screen()}{welcome\_screen()}}
+{\footnotesize\ttfamily void welcome\+\_\+screen (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ecran de bienvenue. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

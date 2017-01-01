@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['taille',['taille',['../structBateau.html#a1dd818ea44eed67f756400eaac344a95',1,'Bateau']]],
-  ['touche_5fbateau',['touche_bateau',['../fonctions_8c.html#a2481c4ea2f7ebc63b9be1912fa1654df',1,'touche_bateau(int l, int c, Bateau *b):&#160;fonctions.c'],['../fonctions_8h.html#a2481c4ea2f7ebc63b9be1912fa1654df',1,'touche_bateau(int l, int c, Bateau *b):&#160;fonctions.c']]]
+  ['saisir_5fbateaux',['saisir_bateaux',['../init_8c.html#a54d9432c05c745402aa41ab985458d55',1,'saisir_bateaux(Joueur *j):&#160;init.c'],['../init_8h.html#a54d9432c05c745402aa41ab985458d55',1,'saisir_bateaux(Joueur *j):&#160;init.c']]],
+  ['sens',['sens',['../structBateau.html#a887a8ad2ee59ffd987eb5f9d117e83a2',1,'Bateau']]],
+  ['system_5fmessage',['system_message',['../init_8c.html#a1ce2912663e48b734f603b4f15a1f3ab',1,'system_message(char *message):&#160;init.c'],['../init_8h.html#a1ce2912663e48b734f603b4f15a1f3ab',1,'system_message(char *message):&#160;init.c']]]
 ];

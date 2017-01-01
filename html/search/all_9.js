@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ligne',['ligne',['../structBateau.html#ae8d7a76573b9e27c1e72a15832b9d6f3',1,'Bateau::ligne()'],['../structCoup.html#a742fec4d6f2e479b396c8e1570e58840',1,'Coup::ligne()']]]
+  ['joueur',['Joueur',['../structJoueur.html',1,'Joueur'],['../init_8h.html#aa1c4db74604e23877fda17c87d483730',1,'Joueur():&#160;init.h']]]
 ];
