@@ -1,11 +1,14 @@
 # makefile de base correspondant a l'exercice 2, TP8
 
 
-mon_executable: main.o fonctions.o
-		gcc -o mon_executable main.o fonctions.o
+battleship: main.o init.o game.o
+		gcc -o battleship main.o init.o game.o
 
-monmain.o: main.c fonctions.h
+main.o: main.c init.h game.h
 	gcc -o main.o -c main.c -Wall -ansi
 
-mesfonctions.o: fonctions.c fonctions.h
-	     gcc -o fonctions.o -c fonctions.c -Wall -ansi
+init.o: init.c init.h
+	     gcc -o init.o -c init.c -Wall -ansi
+
+game.o: game.c game.h
+	     gcc -o game.o -c game.c -Wall -ansi
