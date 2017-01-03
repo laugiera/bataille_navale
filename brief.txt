@@ -33,8 +33,8 @@ NOMAGE
 
 TODO LIST 
 
-	-fonction saisir coup + vérifier la saisie
-	-fonction resultat coup
+	-fonction saisir coup + vérifier la saisie = DONE
+	-fonction resultat coup = DONE
 	-le cas d'un bateau coulé :l'état du bateau doit être maj et l'affichage de la grille aussi (le bateau est représenté par des X et non plus par son id)
 	-le cas où tous les bateaux sont coulés <=> le joueur a gagné
 	-menu fin du jeu (voulez vous rejouer, etc)

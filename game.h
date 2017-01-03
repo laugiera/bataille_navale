@@ -11,6 +11,6 @@
 void game(void);
 void saisir_coup(int* l, int* c);
 int resultat_coup(int l, int c, Bateau * btx_adverses);
-
+int is_coule(int **historique, Bateau * b);
 
 #endif

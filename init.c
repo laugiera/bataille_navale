@@ -375,7 +375,7 @@ int verifier_sens(int s){
  * @param      l, un entier de 0 à NB_LIGNES-1 pour la ligne (PAS LE CODE ASCII DE LA LETTRE)
  * @param      c, un entier pour la colonne
  * @param      b, tableau de bateaux du joueur
- * @return     -1 si la case est libre, 0 s'il n'y a aucun bateau, bateau.id sinon
+ * @return     -1 si la case est libre, 0 s'il n'y a aucun bateau placé sur la grille (initialisation), bateau.id sinon
  */
 int is_case_bateau(int l, int c, Bateau *b){
 	int i, resultat = -1;
