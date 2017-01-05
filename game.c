@@ -9,29 +9,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h> 
+#include <time.h>
 #include "init.h"
 #include "game.h"
 
 
 /**
  * @brief      Boucle de jeu principale
- * @details    
+ * @details
  algo :
-	initialisation du jeu : 
-		->saisir les joueurs et leurs bateaux 
+	initialisation du jeu :
+		->saisir les joueurs et leurs bateaux
 		->decider qui commence (aleatoire)
 	jeu :
 		->afficher la grille de jeu du joueur qui commence
 		->saisir choix de la case
 		->vérifier saisie
 			>> si mauvaise saisie : retour à l'étape du dessus
-		->afficher le resultat du coup 
+		->afficher le resultat du coup
 		->mettre à jour la grille de jeu
 		->vérifier si le joueur n'a pas gagné
 			>> si le joueur a gagné : *fin de la boucle et du jeu
 		->passer au joueur suivant
-		->again and again 
+		->again and again
  * @return    void
  */
 void game(void) {
@@ -40,27 +40,28 @@ void game(void) {
 	rules_screen();
 	int IA = menu_screen();
 	Joueur joueurs[2];
+	int plmnt = menu_screenPlacemnt();
 	Bateau * btx_adverses;
 	int joueur_courant, res_coup, l, c;
 
 	/*VS Joueur*/
 	if(IA == 1){
-		printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueurs[0]);
-	    system_message("Entrée pour continuer");
+		printf ("\n==========================[JOUEUR 1 - BIENVENUE !]=============================\n\n");
+	    initialiser_joueur(&joueurs[0], plmnt);
+	    system_message("                      Faites ENTRER pour continuer");
 		cls();
-	    printf ("\n============================[JOUEUR 2 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueurs[1]);
-	    system_message("Entrée pour continuer");
+	    printf ("\n==========================[JOUEUR 2 - BIENVENUE !]=============================\n\n");
+	    initialiser_joueur(&joueurs[1], plmnt);
+	    system_message("                      Faites ENTRER pour continuer");
 		cls();
-		printf ("\n============================[DEBUT DU JEU]===================================\n");
+		printf ("\n============================[DEBUT DU JEU]===================================\n\n");
 		joueur_courant = (rand()%2); /*1 ou 0*/
 
 		printf("C'est le Joueur %s qui commence ! \n",joueurs[joueur_courant].name);
 
 		while(1) /*condition à changer*/
 		{
-			printf ("\n============================[A VOTRE TOUR %s!]===================================\n",joueurs[joueur_courant].name);
+			printf ("\n=========================[A VOTRE TOUR %s!]==============================\n",joueurs[joueur_courant].name);
 			/*saisie de la case*/
 			afficher_grille(joueurs[joueur_courant],1);
 			saisir_coup(&l,&c);
@@ -73,7 +74,7 @@ void game(void) {
 			/*on met à jour la grille de jeu*/
 			joueurs[joueur_courant].historique[l-'A'][c] = res_coup;
 			afficher_grille(joueurs[joueur_courant],1);
-			system_message("Entrée pour continuer");
+			system_message("                      Faites ENTRER pour continuer");
 			cls();
 			/*on passe au joueur adverse*/
 			if(joueur_courant == 1)
@@ -134,7 +135,7 @@ int resultat_coup(int l, int c, Bateau * btx_adverses){
  * @brief      Verifie si le bateau donné est coulé ou non
  * @param      int** historique	la grille de jeu du joueur
  * @param	   Bateau* le bateau
- * @details    La fonction parcourt la matrice de jeu et compte le nombre d'occurence de l'id du bateau. 
+ * @details    La fonction parcourt la matrice de jeu et compte le nombre d'occurence de l'id du bateau.
  * Si le nombre d'occurence = à la taillle du bateau alors il est coulé.
  * Si le bateau est coulé, son état est actualisé à false et la grille de jeu mise à jour
  * @return     boolean	true si coulé, false sinon
@@ -158,9 +159,9 @@ int is_coule(int **historique, Bateau * b){
 				if(historique[i][k]==b->id+'0')
 					historique[i][k]='X';
 			}
-		}		
-		return 1;	
+		}
+		return 1;
 	}
-	return 0;	
+	return 0;
 }
 
