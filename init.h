@@ -10,8 +10,8 @@
 
 /* CONSTANT MACROS */
 
-#define NB_LIGNES 10 
-#define NB_COLONNES 10 
+#define NB_LIGNES 10
+#define NB_COLONNES 10
 
 #define NB_BATEAUX 2
 
@@ -26,7 +26,7 @@
 
 /**
  * @brief      Bateau du joueur
- * @details   
+ * @details
  */
 typedef struct Bateau{
 	int id; /*!< Commence à 1*/
@@ -39,8 +39,8 @@ typedef struct Bateau{
 
 /**
  * @brief      Joueur
- * @details   
- * @champs : historique = grille de jeu (0 à NB_LIGNES-1 lignes, 1 à NB_COLONNES colonnes). 
+ * @details
+ * @champs : historique = grille de jeu (0 à NB_LIGNES-1 lignes, 1 à NB_COLONNES colonnes).
  * La valeur vaut '.' à l'initialisation
  * puis '%d' bateau.id (touché), ou 'o' (eau), 'X' (coulé)
  * ATTENTION : La grille du joueur 1 fonctionne avec les bateaux du Joueur 2 et vice-versa !
@@ -57,12 +57,13 @@ void system_message (char *message);
 void welcome_screen (void);
 void rules_screen (void);
 int menu_screen(void);
+int menu_screenPlacemnt(void);
 void afficher_grille(Joueur jo, int etat);
 void afficher_joueur(Joueur j);
 void afficher_bateaux(Bateau *b);
-int initialiser_joueur(Joueur *j);
+int initialiser_joueur(Joueur *j, int plmt);
 void free_joueur(Joueur *j);
-void saisir_bateaux(Joueur *j);
+void saisir_bateaux(Joueur *j, int plmnt);
 int verifier_saisie_bateaux(int l, int c, int s, int taille, Joueur j);
 int verifier_lignes(int s);
 int verifier_colonne(int s);
