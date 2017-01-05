@@ -52,8 +52,8 @@ void system_message (char *message) {
  * @return    void
  */
 void welcome_screen (void) {
-    printf ("\n\n");
-    printf ("=============================================================================\n");
+        printf ("\n\n");
+        printf ("=============================================================================\n");
 	printf ("  = XXXXX   XXXX  XXXXXX XXXXXX XX     XXXXXX      XXXXX XX  XX XX XXXX   =\n");
 	printf ("  = XX  XX XX  XX   XX     XX   XX     XX         XX     XX  XX XX XX  XX =\n");
 	printf ("  = XXXXX  XX  XX   XX     XX   XX     XXXX  ====  XXXX  XXXXXX XX XXXX   =\n");
@@ -70,7 +70,7 @@ void welcome_screen (void) {
 	printf ("\n\n");
 	printf("**** VIENS TESTER TES APTITUDES JEUNE ELU PADAWAN DU ROYAUME DES COOCKIES ****\n\n");
 	printf ("\n\n");
-	system_message("Entrée pour continuer");
+	system_message("                      Faites ENTRER pour continuer");
 	cls();
 }
 
@@ -79,9 +79,9 @@ void welcome_screen (void) {
  * @return    void
  */
 void rules_screen (void){
-    printf ("\n");
-    printf ("============================[REGLES DU JEU:]===================================\n");
-    printf (" |                                                                           |\n");
+        printf ("\n");
+        printf ("============================[REGLES DU JEU:]===================================\n");
+        printf (" |                                                                           |\n");
 	printf (" | 1. C'est un jeu avec deux joueurs.                                        |\n");
 	printf (" | 2. Vous etes le Joueur 1 et le Joueur 2 est un ami ou bien l'ordinateur.  |\n");
 	printf (" | 3. Les bateaux seront places manuellement ou aleatoirement.               |\n");
@@ -93,9 +93,9 @@ void rules_screen (void){
 	printf (" | 6. Le jeu commence, chaque joueur doit tenter de deviner l'emplacement    |\n");
 	printf (" |   des navires adverses sur le plateau;                                    |\n");
 	printf (" | 7. Le premier joueur qui a deviney l'emplacement de tous les navires      |\n");
-    printf (" |   adverses gagne.                                                         |\n");
+        printf (" |   adverses gagne.                                                         |\n");
 	printf ("==============================================================================\n\n");
-	system_message("Entrée pour continuer");
+	system_message("                      Faites ENTRER pour continuer");
 	cls();
 }
 
@@ -106,18 +106,18 @@ void rules_screen (void){
 int menu_screen(void){
 	int mode = 0;
 	printf ("\n");
-    printf ("============================[MENU:]===================================\n");
-    printf (" |                                                                  |\n");
-	printf (" | Choisissez un mode :                                             |\n");
-	printf (" | 1. MODE JOUEUR VS JOUEUR                                       |\n");
-	printf (" | 2. MODE JOUEUR VS ORDINATEUR.  |\n");
-	printf ("==============================================================================\n\n");
+        printf ("============================[MENU:]===================================\n");
+        printf (" |                                                                   |\n");
+	printf (" | Choisissez un mode :                                              |\n");
+	printf (" | 1. MODE JOUEUR VS JOUEUR                                          |\n");
+	printf (" | 2. MODE JOUEUR VS ORDINATEUR.                                     |\n");
+	printf ("======================================================================\n\n");
 	do{
 		printf("Saisir le mode (1 ou 2) :\n");
 		scanf("%d",&mode);
 		f_purge(stdin);
 	}while(mode != 1 && mode != 2);
-	system_message("Entrée pour continuer");
+	system_message("                      Faites ENTRER pour continuer");
 	cls();
 	return mode;
 }
@@ -129,27 +129,27 @@ int menu_screen(void){
  * @param      etat	Booléen : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
  * @return    void
  */
-void afficher_grille(Joueur jo, int etat){
+void afficher_grille(Joueur jo, int etat){ //modifier chiffre colonne
 	int i,j,k,lettre='A';
 	printf("   |");
-	for (k = 1; k <= NB_COLONNES; k++)
+	for (k = 0; k < NB_COLONNES; k++)
 		printf(" %d |",k );
 	printf("\n");
 	for (i = 0; i < NB_LIGNES; i++)
 	{
 		printf(" %c |",lettre);
 		lettre++;
-		for (j = 1; j <= NB_COLONNES; j++)
+		for (j = 0; j < NB_COLONNES; j++)
 		{
 			if(etat == 1) /*affichage grille de jeu*/
 				printf(" %c |",jo.historique[i][j] );
 			else if(etat == 0) /*affichage placement bateaux du joueur*/
 			{
-			  int case_b = is_case_bateau(i,j,jo.bateaux); 
+			  int case_b = is_case_bateau(i,j,jo.bateaux);
 		      if(case_b!= -1) /*si case de bateau */
-		        printf(" %d |",case_b ); 
+		        printf(" %d |",case_b );
 		      else  /*sinon */
-		        printf(" . |"); 
+		        printf(" . |");
 			}
 
 		}
@@ -159,7 +159,7 @@ void afficher_grille(Joueur jo, int etat){
 
 /**
  * @brief      Affiche le joueur et sa grille de jeu
- * @param    j		Joueur correspondant 
+ * @param    j		Joueur correspondant
  * @return    void
  */
 void afficher_joueur(Joueur j){
@@ -213,11 +213,11 @@ int initialiser_joueur(Joueur *j){
 	/*historique - initialisation*/
 	for (i = 0; i < NB_LIGNES; i++)
 	{
-		for (k = 1; k <= NB_COLONNES; k++)
+		for (k = 0; k < NB_COLONNES; k++)
 		{
-			j->historique[i][k]='.'; 
+			j->historique[i][k]='.';
 		}
-	}	
+	}
 	/*bateaux*/
 	j->bateaux = malloc(NB_BATEAUX * sizeof(Bateau));
 	if(j->bateaux == NULL)
@@ -236,7 +236,7 @@ void free_joueur(Joueur *j){
 	free(j->bateaux);
 	for (i = 0; i < NB_LIGNES; i++)
 	{
-		free(j->historique[i]);		
+		free(j->historique[i]);
 	}
 	free(j->historique);
 }
@@ -255,7 +255,7 @@ void saisir_bateaux(Joueur *j){
 	for (i = 0; i < NB_BATEAUX; i++)
 	{
 
-		(j->bateaux+i)->id=i+1; 
+		(j->bateaux+i)->id=i+1;
 		printf("Saisie du bateau %d, taille %d\n",i,tailles[i]);
 		do {
 			printf("ligne : ");
@@ -276,7 +276,7 @@ void saisir_bateaux(Joueur *j){
 		(j->bateaux+i)->ligne = ligne;
 		(j->bateaux+i)->colonne = colonne;
 		(j->bateaux+i)->sens = sens;
-		/*grille mise à jour */		
+		/*grille mise à jour */
 		afficher_grille(*j,0);
 
 	}
@@ -297,10 +297,10 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 
 	/* l_index : index de la ligne dans la matrice de la grille, l est le code ASCII de la ligne*/
 	int l_index = l - 'A' ;
-	int i; 
+	int i;
 
 	/*saisie correcte */
-	if(verifier_lignes(l)==0 || 
+	if(verifier_lignes(l)==0 ||
 		verifier_colonne(c)==0 || verifier_sens(s)==0){
 		printf("Erreur de saisie - \n");
 		return 0;
@@ -322,7 +322,7 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 				printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
 				return 0;
 			}
-		
+
 		}
 	}
 	/*parcourir vers la droite*/
@@ -332,17 +332,17 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 				printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
 				return 0;
 			}
-		
+
 		}
 	}
-			
+
 	return (1);
 
 }
 
 /**
  * @brief      vérifie qu'une ligne saisie est conforme à la grille
- * @param      s, un entier pour la ligne 
+ * @param      s, un entier pour la ligne
  * @details    la ligne est entre 'A' et 'A'+NB_LIGNES
  * @return     booléen
  */
@@ -352,18 +352,18 @@ int verifier_lignes(int  s){
 
 /**
  * @brief      vérifie qu'une colonne saisie est conforme à la grille
- * @param      s, un entier pour la colonne 
+ * @param      s, un entier pour la colonne
  * @details    la colonne est entre 1 et NB_COLONNES
  * @return     booléen
  */
 int verifier_colonne(int s){
-	return (s >= 1 && s <= NB_COLONNES);
+	return (s >= 0 && s < NB_COLONNES);
 }
 
 /**
  * @brief      vérifie que le sens/orientation saisi est réalisable
  * @param      s, un entier pour le sens
- * @details    0 haut; 1 droite; 
+ * @details    0 haut; 1 droite;
  * @return     booléen
  */
 int verifier_sens(int s){
@@ -380,23 +380,23 @@ int verifier_sens(int s){
 int is_case_bateau(int l, int c, Bateau *b){
 	int i, resultat = -1;
 	for (i = 0; i < NB_BATEAUX; i++)
-	{	
+	{
 		/*premiere case*/
 		if((b+i)->ligne == 'A'+l && (b+i)->colonne == c) {
 			resultat = (b+i)->id;
 		}
 
-		/*case en bas*/	
-		else if ((b+i)->sens == 0 && 
-			(b+i)->colonne == c && 
+		/*case en bas*/
+		else if ((b+i)->sens == 0 &&
+			(b+i)->colonne == c &&
 			'A'+l>(b+i)->ligne &&
 			'A'+l<=(b+i)->ligne+((b+i)->taille-1)) {
 			resultat = (b+i)->id;
 		}
 
 		/*case à droite*/
-		else if ((b+i)->sens == 1 && 
-			(b+i)->ligne == 'A'+l && 
+		else if ((b+i)->sens == 1 &&
+			(b+i)->ligne == 'A'+l &&
 			c > (b+i)->colonne &&
 			c <=(b+i)->colonne+((b+i)->taille-1)) {
 			resultat = (b+i)->id;
@@ -423,7 +423,7 @@ int dans_la_grille(int l, int c, int s,int taille){
 		return 1;
 	}
 	/*case à droite*/
-	else if (s == 1 && c+taille <= NB_COLONNES+1)
+	else if (s == 1 && c+taille < NB_COLONNES+1)
 		return 1;
 	return 0;
 }
@@ -456,6 +456,6 @@ int touche_bateau(int l, int c, Bateau *b){
 		is_case_bateau(l-1, c-1, b)!=-1 ||
 		is_case_bateau(l-1, c+1, b)!=-1 ||
 		is_case_bateau(l+1, c-1, b)!=-1 ||
-		is_case_bateau(l+1, c+1, b)!=-1 
+		is_case_bateau(l+1, c+1, b)!=-1
 		);
 }
