@@ -106,11 +106,11 @@ void rules_screen (void){
 int menu_screen(void){
 	int mode = 0;
 	printf ("\n");
-    printf ("============================[MENU:]===================================\n");
-    printf (" |                                                                  |\n");
-	printf (" | Choisissez un mode :                                             |\n");
-	printf (" | 1. MODE JOUEUR VS JOUEUR                                       |\n");
-	printf (" | 2. MODE JOUEUR VS ORDINATEUR.  |\n");
+    printf ("============================[MENU:]===========================================\n");
+    printf (" |                                                                          |\n");
+	printf (" | Choisissez un mode :                                                     |\n");
+	printf (" | 1. MODE JOUEUR VS JOUEUR                                                 |\n");
+	printf (" | 2. MODE JOUEUR VS ORDINATEUR.                                            |\n");
 	printf ("==============================================================================\n\n");
 	do{
 		printf("Saisir le mode (1 ou 2) :\n");
@@ -131,7 +131,7 @@ int menu_screen(void){
  */
 void afficher_grille(Joueur jo, int etat){
 	int i,j,k,lettre='A';
-	printf("   |");
+	printf("\n\n   |");
 	for (k = 1; k <= NB_COLONNES; k++)
 		printf(" %d |",k );
 	printf("\n");
@@ -249,7 +249,7 @@ void free_joueur(Joueur *j){
  */
 void saisir_bateaux(Joueur *j){
 	printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
-	int tailles[NB_BATEAUX]={5,4}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+	int tailles[NB_BATEAUX]={2,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
 	int i,colonne,ligne,sens;
 	afficher_grille(*j,0);
 	for (i = 0; i < NB_BATEAUX; i++)
@@ -375,7 +375,7 @@ int verifier_sens(int s){
  * @param      l, un entier de 0 à NB_LIGNES-1 pour la ligne (PAS LE CODE ASCII DE LA LETTRE)
  * @param      c, un entier pour la colonne
  * @param      b, tableau de bateaux du joueur
- * @return     -1 si la case est libre, 0 s'il n'y a aucun bateau, bateau.id sinon
+ * @return     -1 si la case est libre, 0 s'il n'y a aucun bateau placé sur la grille (initialisation), bateau.id sinon
  */
 int is_case_bateau(int l, int c, Bateau *b){
 	int i, resultat = -1;
