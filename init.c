@@ -402,8 +402,6 @@ int is_case_bateau(int l, int c, Bateau *b){
 			resultat = (b+i)->id;
 		}
 	}
-	if(b->id==0)
-		resultat = 0;
 	return resultat;
 }
 
