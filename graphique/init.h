@@ -11,7 +11,7 @@
 /* CONSTANT MACROS */
 #define LARGEUR_F	1024
 #define HAUTEUR_F	800
-#define LARGEUR_BUTTON	200
+#define LARGEUR_BUTTON	300
 #define HAUTEUR_BUTTON	100
 #define TAILLE_CELL	50
 
@@ -54,10 +54,12 @@ typedef struct Joueur{
 } Joueur;
 
 int get_grid_index(int x_position, int y_position, int *index_row, int *index_cols);
-void welcome_screen(SDL_Surface * ecran, Uint32 colors[]);
+int welcome_screen(SDL_Surface * ecran, Uint32 colors[]);
 void rules_screen(SDL_Surface * ecran);
-void game_screen(SDL_Surface * ecran);
-void stroke_screen(SDL_Surface * ecran);
-void pause(SDL_Surface *ecran);
+void game_screen(SDL_Surface * ecran, Uint32 colors[]);
+void stroke_screen(SDL_Surface * ecran, int cols, int rows);
+int pause_welcome_screen(SDL_Surface *ecran);
+void pause_simple_screen(SDL_Surface *ecran);
+int pause_game(SDL_Surface *ecran, int* ind_cols, int* ind_rows);
 
 #endif
