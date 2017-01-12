@@ -9,6 +9,11 @@
 #define INIT_H_
 
 /* CONSTANT MACROS */
+#define LARGEUR_F	1024
+#define HAUTEUR_F	800
+#define LARGEUR_BUTTON	200
+#define HAUTEUR_BUTTON	100
+#define TAILLE_CELL	50
 
 #define NB_LIGNES 10 
 #define NB_COLONNES 10 
@@ -18,11 +23,6 @@
 #define MAX_SAISIE 20
 #define BLOC_MALLOC 100
 
-#if defined WIN32
-#define CLEAN_SCREEN "CLS"
-#elif defined __linux
-#define CLEAN_SCREEN "clear"
-#endif
 
 /**
  * @brief      Bateau du joueur
@@ -35,6 +35,8 @@ typedef struct Bateau{
 	int taille;
 	int sens; /*!< 0 vertical; 1 horizontal; */
 	int etat; /*!< 1(true) en vie; 0(false) coulééééé; */
+	int row_position; /*!< position en pixels sur la grille de jeu */
+	int col_position; /*!< position en pixels sur la grille de jeu */
 } Bateau;
 
 /**
@@ -51,24 +53,11 @@ typedef struct Joueur{
 	int **historique; /*!< Matrice de jeu allouée dynamiquement. */
 } Joueur;
 
-void f_purge(FILE *fp);
-void cls(void);
-void system_message (char *message);
-void welcome_screen (void);
-void rules_screen (void);
-int menu_screen(void);
-void afficher_grille(Joueur jo, int etat);
-void afficher_joueur(Joueur j);
-void afficher_bateaux(Bateau *b);
-int initialiser_joueur(Joueur *j);
-void free_joueur(Joueur *j);
-void saisir_bateaux(Joueur *j);
-int verifier_saisie_bateaux(int l, int c, int s, int taille, Joueur j);
-int verifier_lignes(int s);
-int verifier_colonne(int s);
-int verifier_sens(int s);
-int is_case_bateau(int l, int c, Bateau *b);
-int dans_la_grille(int l, int c, int s,int taille);
-int touche_bateau(int l, int c, Bateau *b);
+int get_grid_index(int x_position, int y_position, int *index_row, int *index_cols);
+void welcome_screen(SDL_Surface * ecran, Uint32 colors[]);
+void rules_screen(SDL_Surface * ecran);
+void game_screen(SDL_Surface * ecran);
+void stroke_screen(SDL_Surface * ecran);
+void pause(SDL_Surface *ecran);
 
 #endif
