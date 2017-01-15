@@ -25,6 +25,11 @@ int main( int argc, char *argv[] ){
 	SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR_F, HAUTEUR_F, 32, SDL_HWSURFACE);
 	SDL_WM_SetCaption("StarWars Battleship !", NULL);
 
+	if (ecran == NULL) {
+        fprintf(stderr, "Erreur de chargement vidéo");
+        exit(EXIT_FAILURE);
+    }
+
 	/*COULEURS*/
 	Uint32 bleuFonce = SDL_MapRGB(ecran->format, 31, 97, 97);
 	Uint32 bleu = SDL_MapRGB(ecran->format, 91, 198, 198);
@@ -51,6 +56,7 @@ int main( int argc, char *argv[] ){
 		{
 			rules_screen(ecran);
 			choix = 0;
+			
 		}
 	}while(choix != -1);
 

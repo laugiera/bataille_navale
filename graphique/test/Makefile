@@ -8,7 +8,7 @@ ifeq ($(strip $(shell uname -s)),Darwin)
 endif
 
 battleshipMac: main.o init.o /Library/Frameworks/SDL.framework/Headers/SDLmain.m
-	gcc -o test_battle main.o init.o /Library/Frameworks/SDL.framework/Headers/SDLmain.m -framework SDL -framework Cocoa -lSDL_TTF 
+	gcc -o test_battle main.o init.o /Library/Frameworks/SDL.framework/Headers/SDLmain.m -framework SDL -framework Cocoa -lSDL_TTF -lSDL_image
 	#gcc ${LDFLAGS} -o $@ $^
 
 main.o: test_graphique.c test_fct.h /Library/Frameworks/SDL.framework/Headers/SDLmain.m

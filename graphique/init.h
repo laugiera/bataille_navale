@@ -61,5 +61,6 @@ void stroke_screen(SDL_Surface * ecran, int cols, int rows);
 int pause_welcome_screen(SDL_Surface *ecran);
 void pause_simple_screen(SDL_Surface *ecran);
 int pause_game(SDL_Surface *ecran, int* ind_cols, int* ind_rows);
+void pause_pourTest();
 
 #endif

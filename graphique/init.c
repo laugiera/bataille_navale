@@ -53,19 +53,37 @@ int get_grid_index(int x_position, int y_position, int *index_row, int *index_co
  * @param      Uint32 colors[]	les couleurs définies dans le main
  * @return     int choix de l'écran qui suivra
  */
-int welcome_screen(SDL_Surface * ecran, Uint32 colors[]){
+int welcome_screen(SDL_Surface *ecran, Uint32 colors[]){
 
+	printf("Welcome screen\n");
 	SDL_Rect position;
 	position.x=0;
 	position.y=0;
-
+	/*
 	SDL_Surface *background = IMG_Load("img/fondACCUEIL.png");
 	SDL_Surface *modeJoVsJO = IMG_Load("img/multi.png");
 	SDL_Surface *modeIA = IMG_Load("img/solo.png");
 	SDL_Surface *rules = IMG_Load("img/rules.png");
+	*/
+	/*RGB SURFACES pour que Lou puisse faire des trucs*/
+	SDL_Surface *background = SDL_CreateRGBSurface(SDL_HWSURFACE, LARGEUR_F, HAUTEUR_F, 32, 0, 0, 0, 0);
+	SDL_Surface *modeJoVsJO = SDL_CreateRGBSurface(SDL_HWSURFACE, LARGEUR_BUTTON, HAUTEUR_BUTTON, 32, 0, 0, 0, 0);
+	SDL_Surface *modeIA = SDL_CreateRGBSurface(SDL_HWSURFACE, LARGEUR_BUTTON, HAUTEUR_BUTTON, 32, 0, 0, 0, 0);
+	SDL_Surface *rules = SDL_CreateRGBSurface(SDL_HWSURFACE, LARGEUR_BUTTON, HAUTEUR_BUTTON, 32, 0, 0, 0, 0);
+	SDL_FillRect(background, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
+	SDL_FillRect(modeJoVsJO, NULL, SDL_MapRGB(ecran->format, 100, 70, 200));
+	SDL_FillRect(modeIA, NULL, SDL_MapRGB(ecran->format, 100, 70, 200));
+	SDL_FillRect(rules, NULL, SDL_MapRGB(ecran->format, 100, 70, 200));
+	/*FIN DES SURFACES (commenter pour travailler avec imgs*/
 
+	/*alors visiblement j'ai une sorte de bug qui fait fait que tant qu'on a jamais fait de pause_welcome_screen il vaut pas afficher le welcome screen
+	-chercher ce qui fait le déclic ds la fct 
+	*/
+	pause_welcome_screen(ecran);
+
+
+	printf("fin premier pause\n");
 	SDL_BlitSurface(background,NULL,ecran,&position);
-	
 	position.x=(LARGEUR_F/2)-(LARGEUR_BUTTON/2);
 	position.y=300;
 	SDL_BlitSurface(modeIA, NULL, ecran, &position);
@@ -77,12 +95,11 @@ int welcome_screen(SDL_Surface * ecran, Uint32 colors[]){
 	SDL_Flip(ecran); 
 	/*on attend que le joueur clique sur un des trois boutons*/															
 	int choix = pause_welcome_screen(ecran);
-
 	SDL_FreeSurface(background);
 	SDL_FreeSurface(modeIA);
 	SDL_FreeSurface(modeJoVsJO);
 	SDL_FreeSurface(rules);
-
+	printf("choix : %d\n", choix);
 	return choix;
 }
 /**
@@ -92,12 +109,20 @@ int welcome_screen(SDL_Surface * ecran, Uint32 colors[]){
  * @return     void
  */
 void rules_screen(SDL_Surface * ecran){
+	printf("rules screen\n");
 	SDL_Rect position;
 	position.x=0;
 	position.y=0;
-
+	/* IMAGES pour le reste du monde
 	SDL_Surface *background = IMG_Load("img/fondACCUEIL.png");
 	SDL_Surface *retour = IMG_Load("img/multi.png");
+	*/
+	/*SURFACES pour Lou*/
+	SDL_Surface *background = SDL_CreateRGBSurface(SDL_HWSURFACE, LARGEUR_F, HAUTEUR_F, 32, 0, 0, 0, 0);
+	SDL_Surface *retour = SDL_CreateRGBSurface(SDL_HWSURFACE, LARGEUR_BUTTON, HAUTEUR_BUTTON, 32, 0, 0, 0, 0);
+	SDL_FillRect(background, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
+	SDL_FillRect(retour, NULL, SDL_MapRGB(ecran->format, 100, 70, 200));
+	/*Fin des surfaces*/
 
 	SDL_BlitSurface(background,NULL,ecran,&position);
 	
@@ -105,12 +130,11 @@ void rules_screen(SDL_Surface * ecran){
 	position.y=30;
 	SDL_BlitSurface(retour, NULL, ecran, &position);
 
-	SDL_Flip(ecran); 															
+	SDL_Flip(ecran); 													
 	pause_simple_screen(ecran);
 
 	SDL_FreeSurface(background);
 	SDL_FreeSurface(retour);
-
 
 }
 /**
@@ -385,4 +409,20 @@ int pause_game(SDL_Surface *ecran, int* ind_cols, int* ind_rows){
 		}
 	}
 	return choix;
+}
+
+void pause_pourTest()
+{
+    int continuer = 1;
+    SDL_Event event;
+ 
+    while (continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+        }
+    }
 }
