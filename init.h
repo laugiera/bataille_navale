@@ -22,6 +22,8 @@
 #define CLEAN_SCREEN "CLS"
 #elif defined __linux
 #define CLEAN_SCREEN "clear"
+#elif defined __APPLE__
+#define CLEAN_SCREEN "clear"
 #endif
 
 /**
@@ -35,6 +37,7 @@ typedef struct Bateau{
 	int taille;
 	int sens; /*!< 0 vertical; 1 horizontal; */
 	int etat; /*!< 1(true) en vie; 0(false) coulééééé; */
+	int nbTouche;
 } Bateau;
 
 /**

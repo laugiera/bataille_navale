@@ -155,10 +155,14 @@ int menu_screenPlacemnt(void){
  * @param      etat	Booléen : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
  * @return    void
  */
-void afficher_grille(Joueur jo, int etat){ //modifier chiffre colonne
+void afficher_grille(Joueur jo, int etat){ /*modifier chiffre colonne*/
 	int i,j,k,lettre='A';
+	/*
 	printf("\n\n   |");
 	for (k = 1; k <= NB_COLONNES; k++)
+	*/
+	printf("\n\n   |");
+	for (k = 0; k < NB_COLONNES; k++)
 		printf(" %d |",k );
 	printf("\n");
 	for (i = 0; i < NB_LIGNES; i++)
@@ -278,7 +282,7 @@ void free_joueur(Joueur *j){
 void saisir_bateaux(Joueur *j, int plmnt){
 
             srand(time(NULL));
-            int tailles[NB_BATEAUX]={5,4}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+            int tailles[NB_BATEAUX]={2,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
             int i,colonne,ligne,sens;
     if (plmnt==1){
                 printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
@@ -303,6 +307,7 @@ void saisir_bateaux(Joueur *j, int plmnt){
 
                 /*initialisation bateau*/
                 (j->bateaux+i)->taille=tailles[i];
+                (j->bateaux+i)->nbTouche = 0;
                 (j->bateaux+i)->etat = 1;
                 (j->bateaux+i)->ligne = ligne;
                 (j->bateaux+i)->colonne = colonne;
@@ -310,8 +315,8 @@ void saisir_bateaux(Joueur *j, int plmnt){
                 /*grille mise à jour */
                 afficher_grille(*j,0);
 
-            } //Fin for
-        }//Fin if
+            }
+        }
     else
     {
 
@@ -348,6 +353,7 @@ void saisir_bateaux(Joueur *j, int plmnt){
 
                 /*initialisation bateau*/
                 (j->bateaux+i)->taille=tailles[i];
+                (j->bateaux+i)->nbTouche = 0;
                 (j->bateaux+i)->etat = 1;
                 (j->bateaux+i)->ligne = ligne;
                 (j->bateaux+i)->colonne = colonne;
@@ -355,7 +361,7 @@ void saisir_bateaux(Joueur *j, int plmnt){
                 /*grille mise à jour */
                 afficher_grille(*j,0);
 
-            } //Fin for
+            }
     }
 
 }

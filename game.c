@@ -47,6 +47,7 @@ void game(void) {
 	int plmnt = menu_screenPlacemnt();
 	Bateau * btx_adverses;
 	int joueur_courant, res_coup, l, c;
+	int jouer = 1;
 
 	/*MODE VS Joueur*/
 	if(IA == 1){
@@ -163,15 +164,19 @@ int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
 			i++;
 		}
 		Bateau * bateau_touche = btx_adverses+i;
+		bateau_touche->nbTouche ++;
 		if(is_coule(historique,bateau_touche))
 		{
 			printf("\nRESULTAT : COULEYYY ! Bateau %d \n",res );
 			return 'X';
 		}
 		else
-			printf("\nRESULTAT : TOUCHEYY ! Bateau %d \n",res );
+			/*printf("\nRESULTAT : TOUCHEYY ! Bateau %d \n",res );
+			faut pas dire quel bateau est touché non?*/
+			printf("\nRESULTAT : TOUCHEYY !\n");
+			return '+';
 	}
-	return res+'0';
+	/*return res+'0';*/
 }
 
 /**
@@ -184,28 +189,22 @@ int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
  * @return     boolean	true si coulé, false sinon
  */
 int is_coule(int **historique, Bateau * b){
-	int i,k, nb =1;
-	for (i = 0; i < NB_LIGNES; i++)
-	{
-		for (k = 1; k <= NB_COLONNES; k++)
-		{
-			if(historique[i][k]==b->id+'0')
-				nb++;
-		}
-	}
-	if(nb == b->taille){
+	int i,k,l;
+	l = b->ligne - 'A';
+	if(b->nbTouche == b->taille) {
 		b->etat = 0;
-		for (i = 0; i < NB_LIGNES; i++)
-		{
-			for (k = 1; k <= NB_COLONNES; k++)
-			{
-				if(historique[i][k]==b->id+'0')
-					historique[i][k]='X';
+		if (b->sens == 0) {
+			for(i=0; i<b->taille; i++) {
+				historique[l+i][b->colonne]='X';
 			}
-		}		
-		return 1;	
+		} else {
+			for(i=0; i<b->taille; i++) {
+				historique[l][b->colonne+i]='X';
+			}
+		}	
+		return 1;
 	}
-	return 0;	
+	return 0;
 }
 
 /**
