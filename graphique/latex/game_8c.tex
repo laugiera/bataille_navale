@@ -1,0 +1,143 @@
+\hypertarget{game_8c}{}\section{game.\+c File Reference}
+\label{game_8c}\index{game.\+c@{game.\+c}}
+
+
+Fonctions nécessaires à l\textquotesingle{}algo du jeu.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}init.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{game_8c_a11e18b239daaa7a5f457df1c72cfb30f}{game} (int solo, S\+D\+L\+\_\+\+Surface $\ast$ecran, Uint32 colors\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Boucle de jeu principale. \end{DoxyCompactList}\item 
+int \hyperlink{game_8c_ae21fb3287ccdf833ee78281a2b9df4e2}{deja\+\_\+joue} (int l, int c, int $\ast$$\ast$historique)
+\begin{DoxyCompactList}\small\item\em cherche si un coup a déjà été joué \end{DoxyCompactList}\item 
+int \hyperlink{game_8c_a16c13ba36bc87e153d3d48699d2945b5}{resultat\+\_\+coup} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$btx\+\_\+adverses, int $\ast$$\ast$historique)
+\begin{DoxyCompactList}\small\item\em donne le résultat d\textquotesingle{}un coup joué (à l\textquotesingle{}eau, touché ou coulé) et l\textquotesingle{}affiche. \end{DoxyCompactList}\item 
+int \hyperlink{game_8c_acde7ccd48535578db18282786b44c02c}{is\+\_\+coule} (int $\ast$$\ast$historique, \hyperlink{structBateau}{Bateau} $\ast$b)
+\begin{DoxyCompactList}\small\item\em Verifie si le bateau donné est coulé ou non. \end{DoxyCompactList}\item 
+int \hyperlink{game_8c_a22b47672ce92119fa49ee528c8474f64}{gagne} (\hyperlink{structBateau}{Bateau} $\ast$btx\+\_\+adverses)
+\begin{DoxyCompactList}\small\item\em cherche si le joueur a gagne ou non \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fonctions nécessaires à l\textquotesingle{}algo du jeu. 
+
+\begin{DoxyAuthor}{Author}
+L\+A\+U\+G\+I\+ER AA -\/ R\+E\+Y\+ES Laura -\/ L\+A\+N\+D\+R\+Y-\/\+L\+I\+N\+ET Lou 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+23 Décembre 2016
+\end{DoxyDate}
+$\sim$ 
+
+\subsection{Function Documentation}
+\hypertarget{game_8c_ae21fb3287ccdf833ee78281a2b9df4e2}{}\label{game_8c_ae21fb3287ccdf833ee78281a2b9df4e2} 
+\index{game.\+c@{game.\+c}!deja\+\_\+joue@{deja\+\_\+joue}}
+\index{deja\+\_\+joue@{deja\+\_\+joue}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{deja\+\_\+joue()}{deja\_joue()}}
+{\footnotesize\ttfamily int deja\+\_\+joue (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{int $\ast$$\ast$}]{historique }\end{DoxyParamCaption})}
+
+
+
+cherche si un coup a déjà été joué 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & le charactère de la ligne \\
+\hline
+{\em c} & l\textquotesingle{}entier de la colonne \\
+\hline
+{\em int} & $\ast$$\ast$ grille de jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean, vrai si déjà joué, faux sinon 
+\end{DoxyReturn}
+\hypertarget{game_8c_a22b47672ce92119fa49ee528c8474f64}{}\label{game_8c_a22b47672ce92119fa49ee528c8474f64} 
+\index{game.\+c@{game.\+c}!gagne@{gagne}}
+\index{gagne@{gagne}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{gagne()}{gagne()}}
+{\footnotesize\ttfamily int gagne (\begin{DoxyParamCaption}\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{btx\+\_\+adverses }\end{DoxyParamCaption})}
+
+
+
+cherche si le joueur a gagne ou non 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Bateau$\ast$} & les bateaux adverses\\
+\hline
+\end{DoxyParams}
+Pour que le joueur gagne, il faut que l\textquotesingle{}état de tous les btx adverses soient à 0 (coulés) \begin{DoxyReturn}{Returns}
+boolean true si gagné, false sinon 
+\end{DoxyReturn}
+\hypertarget{game_8c_a11e18b239daaa7a5f457df1c72cfb30f}{}\label{game_8c_a11e18b239daaa7a5f457df1c72cfb30f} 
+\index{game.\+c@{game.\+c}!game@{game}}
+\index{game@{game}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game()}{game()}}
+{\footnotesize\ttfamily void game (\begin{DoxyParamCaption}\item[{int}]{solo,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran,  }\item[{Uint32}]{colors\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Boucle de jeu principale. 
+
+algo \+: initialisation du jeu \+: -\/$>$saisir les joueurs et leurs bateaux -\/$>$decider qui commence (aleatoire) jeu \+: -\/$>$afficher la grille de jeu du joueur qui commence -\/$>$saisir choix de la case -\/$>$vérifier saisie $>$$>$ si mauvaise saisie \+: retour à l\textquotesingle{}étape du dessus -\/$>$afficher le resultat du coup -\/$>$mettre à jour la grille de jeu -\/$>$vérifier si le joueur n\textquotesingle{}a pas gagné $>$$>$ si le joueur a gagné \+: $\ast$fin de la boucle et du jeu -\/$>$passer au joueur suivant -\/$>$again and again \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{game_8c_acde7ccd48535578db18282786b44c02c}{}\label{game_8c_acde7ccd48535578db18282786b44c02c} 
+\index{game.\+c@{game.\+c}!is\+\_\+coule@{is\+\_\+coule}}
+\index{is\+\_\+coule@{is\+\_\+coule}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{is\+\_\+coule()}{is\_coule()}}
+{\footnotesize\ttfamily int is\+\_\+coule (\begin{DoxyParamCaption}\item[{int $\ast$$\ast$}]{historique,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Verifie si le bateau donné est coulé ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int$\ast$$\ast$} & historique la grille de jeu du joueur \\
+\hline
+{\em Bateau$\ast$} & le bateau\\
+\hline
+\end{DoxyParams}
+La fonction parcourt la matrice de jeu et compte le nombre d\textquotesingle{}occurence de l\textquotesingle{}id du bateau. Si le nombre d\textquotesingle{}occurence = à la taillle du bateau alors il est coulé. Si le bateau est coulé, son état est actualisé à false et la grille de jeu mise à jour \begin{DoxyReturn}{Returns}
+boolean true si coulé, false sinon 
+\end{DoxyReturn}
+\hypertarget{game_8c_a16c13ba36bc87e153d3d48699d2945b5}{}\label{game_8c_a16c13ba36bc87e153d3d48699d2945b5} 
+\index{game.\+c@{game.\+c}!resultat\+\_\+coup@{resultat\+\_\+coup}}
+\index{resultat\+\_\+coup@{resultat\+\_\+coup}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{resultat\+\_\+coup()}{resultat\_coup()}}
+{\footnotesize\ttfamily int resultat\+\_\+coup (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{btx\+\_\+adverses,  }\item[{int $\ast$$\ast$}]{historique }\end{DoxyParamCaption})}
+
+
+
+donne le résultat d\textquotesingle{}un coup joué (à l\textquotesingle{}eau, touché ou coulé) et l\textquotesingle{}affiche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & le charactère de la ligne \\
+\hline
+{\em c} & l\textquotesingle{}entier de la colonne \\
+\hline
+{\em \hyperlink{structBateau}{Bateau}} & $\ast$ btx\+\_\+adverses \\
+\hline
+{\em int} & $\ast$$\ast$ grille de jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int (valeur A\+S\+C\+II du char \textquotesingle{}o\textquotesingle{} ou de l\textquotesingle{}id du bateau) 
+\end{DoxyReturn}

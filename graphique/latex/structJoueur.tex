@@ -1,0 +1,51 @@
+\hypertarget{structJoueur}{}\section{Joueur Struct Reference}
+\label{structJoueur}\index{Joueur@{Joueur}}
+
+
+\hyperlink{structJoueur}{Joueur}.  
+
+
+
+
+{\ttfamily \#include $<$init.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{structJoueur_ab612f3b383ec2463e302d1f8ba5fc4fd}{name} \mbox{[}\hyperlink{init_8h_a2277af00d169389a0db61a0dbefa2e05}{M\+A\+X\+\_\+\+S\+A\+I\+S\+IE}\mbox{]}
+\item 
+struct \hyperlink{structBateau}{Bateau} $\ast$ \hyperlink{structJoueur_a950c3ca390a307cfd21d7095b4d5554e}{bateaux}
+\item 
+int $\ast$$\ast$ \hyperlink{structJoueur_a592804f8ad7d125fabdf06bbbffd60c2}{historique}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{structJoueur}{Joueur}. 
+
+\+: historique = grille de jeu (0 à N\+B\+\_\+\+L\+I\+G\+N\+E\+S-\/1 lignes, 0 à N\+B\+\_\+\+C\+O\+L\+O\+N\+N\+E\+S-\/1 colonnes). La valeur vaut \textquotesingle{}.\textquotesingle{} à l\textquotesingle{}initialisation puis \textquotesingle{}d\textquotesingle{} bateau.\+id (touché), ou \textquotesingle{}o\textquotesingle{} (eau), \textquotesingle{}X\textquotesingle{} (coulé) A\+T\+T\+E\+N\+T\+I\+ON \+: La grille du joueur 1 fonctionne avec les bateaux du \hyperlink{structJoueur}{Joueur} 2 et vice-\/versa ! 
+
+\subsection{Member Data Documentation}
+\hypertarget{structJoueur_a950c3ca390a307cfd21d7095b4d5554e}{}\label{structJoueur_a950c3ca390a307cfd21d7095b4d5554e} 
+\index{Joueur@{Joueur}!bateaux@{bateaux}}
+\index{bateaux@{bateaux}!Joueur@{Joueur}}
+\subsubsection{\texorpdfstring{bateaux}{bateaux}}
+{\footnotesize\ttfamily struct \hyperlink{structBateau}{Bateau}$\ast$ Joueur\+::bateaux}
+
+Tableau de N\+B\+\_\+\+B\+A\+T\+E\+A\+UX bateaux allouée dynamiquement \hypertarget{structJoueur_a592804f8ad7d125fabdf06bbbffd60c2}{}\label{structJoueur_a592804f8ad7d125fabdf06bbbffd60c2} 
+\index{Joueur@{Joueur}!historique@{historique}}
+\index{historique@{historique}!Joueur@{Joueur}}
+\subsubsection{\texorpdfstring{historique}{historique}}
+{\footnotesize\ttfamily int$\ast$$\ast$ Joueur\+::historique}
+
+Matrice de jeu allouée dynamiquement. \hypertarget{structJoueur_ab612f3b383ec2463e302d1f8ba5fc4fd}{}\label{structJoueur_ab612f3b383ec2463e302d1f8ba5fc4fd} 
+\index{Joueur@{Joueur}!name@{name}}
+\index{name@{name}!Joueur@{Joueur}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily char Joueur\+::name\mbox{[}\hyperlink{init_8h_a2277af00d169389a0db61a0dbefa2e05}{M\+A\+X\+\_\+\+S\+A\+I\+S\+IE}\mbox{]}}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{init_8h}{init.\+h}\end{DoxyCompactItemize}

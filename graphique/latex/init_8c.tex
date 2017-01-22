@@ -1,0 +1,388 @@
+\hypertarget{init_8c}{}\section{init.\+c File Reference}
+\label{init_8c}\index{init.\+c@{init.\+c}}
+
+
+Définis les structures et les méthodes du jeu.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}init.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{init_8c_abb6490ca8a627191d1bbcb87008bb8a3}{get\+\_\+grid\+\_\+index} (int x\+\_\+position, int y\+\_\+position, int $\ast$index\+\_\+row, int $\ast$index\+\_\+cols)
+\begin{DoxyCompactList}\small\item\em retourne l\textquotesingle{}index d\textquotesingle{}une case cliquée dans la grille de jeu \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a43a3066474a651dafe7da90e41998f78}{welcome\+\_\+screen} (S\+D\+L\+\_\+\+Surface $\ast$ecran, Uint32 colors\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em écran d\textquotesingle{}accueil avec trois boutons \+: mode solo (IA) $\vert$ mode multi (2 joueurs) $\vert$ rules. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a5bf35c36438d94fe1dc2bd1d3cc29ce8}{rules\+\_\+screen} (S\+D\+L\+\_\+\+Surface $\ast$ecran)
+\begin{DoxyCompactList}\small\item\em Ecran qui affiche les règles. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a7c6d84a4d5e8255db70f0131ca2bf717}{game\+\_\+screen} (S\+D\+L\+\_\+\+Surface $\ast$ecran, Uint32 colors\mbox{[}$\,$\mbox{]}, char $\ast$title, char $\ast$error, char $\ast$sens\+\_\+txt, int $\ast$ligne, int $\ast$col, \hyperlink{structJoueur}{Joueur} $\ast$jo, int placement)
+\begin{DoxyCompactList}\small\item\em Ecran de jeu. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a7793340605544fa6ee619ca6c5f67f13}{simple\+\_\+screen} (S\+D\+L\+\_\+\+Surface $\ast$ecran, char $\ast$chaine)
+\begin{DoxyCompactList}\small\item\em Ecran qui affiche une chaine donnée. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a2e4733c792c96bd06e123909392121c8}{pause\+\_\+welcome\+\_\+screen} (S\+D\+L\+\_\+\+Surface $\ast$ecran)
+\begin{DoxyCompactList}\small\item\em Gestion des events sur l\textquotesingle{}ecran d\textquotesingle{}accueil. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_ab212272e1815e5912277a8637ffa925f}{pause\+\_\+simple\+\_\+screen} (S\+D\+L\+\_\+\+Surface $\ast$ecran)
+\begin{DoxyCompactList}\small\item\em Gestion des events sur l\textquotesingle{}écran des règles et celui des coups joués. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_ad5115a83570d5896e9d99762ec386416}{pause\+\_\+game} (S\+D\+L\+\_\+\+Surface $\ast$ecran, int $\ast$ind\+\_\+rows, int $\ast$ind\+\_\+cols)
+\begin{DoxyCompactList}\small\item\em Gestion des events sur l\textquotesingle{}écran de jeu. \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_ade18a303e83af8e99fcdf7134675ba82}{initialiser\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\begin{DoxyCompactList}\small\item\em Initialise le joueur. \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_a352a3b7d939437bef1a8127b1ba88b75}{free\+\_\+joueur} (\hyperlink{structJoueur}{Joueur} $\ast$j)
+\begin{DoxyCompactList}\small\item\em libère la mémoire allouée au joueur \end{DoxyCompactList}\item 
+void \hyperlink{init_8c_ab497aa0ad8946951ee43825906296399}{saisir\+\_\+bateaux} (\hyperlink{structJoueur}{Joueur} $\ast$j, S\+D\+L\+\_\+\+Surface $\ast$ecran, Uint32 colors\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em le joueur saisit les emplacements de ses bateaux \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a6bb2a99f97b5db7480d30eb5b361b77d}{verifier\+\_\+saisie\+\_\+bateaux} (char error\mbox{[}$\,$\mbox{]}, int l, int c, int s, int taille, \hyperlink{structJoueur}{Joueur} j)
+\begin{DoxyCompactList}\small\item\em vérifie le placement d\textquotesingle{}un bateau \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a385484b82955bff9dc724959c91d5235}{is\+\_\+case\+\_\+bateau} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$b)
+\begin{DoxyCompactList}\small\item\em regarde si un bateau occupe la case donnée \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a8003ad8778e12bc3781b4a0e059ad8d2}{dans\+\_\+la\+\_\+grille} (int l, int c, int s, int taille)
+\begin{DoxyCompactList}\small\item\em regarde si un bateau sort de la grille \end{DoxyCompactList}\item 
+int \hyperlink{init_8c_a2481c4ea2f7ebc63b9be1912fa1654df}{touche\+\_\+bateau} (int l, int c, \hyperlink{structBateau}{Bateau} $\ast$b)
+\begin{DoxyCompactList}\small\item\em regarde si une case donnée est déjà occupée ou touche une case déjà occcupée par un bateau du joueur \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Définis les structures et les méthodes du jeu. 
+
+\begin{DoxyAuthor}{Author}
+L\+A\+U\+G\+I\+ER AA -\/ R\+E\+Y\+ES Laura -\/ L\+A\+N\+D\+R\+Y-\/\+L\+I\+N\+ET Lou 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+23 Décembre 2016
+\end{DoxyDate}
+$\sim$ 
+
+\subsection{Function Documentation}
+\hypertarget{init_8c_a8003ad8778e12bc3781b4a0e059ad8d2}{}\label{init_8c_a8003ad8778e12bc3781b4a0e059ad8d2} 
+\index{init.\+c@{init.\+c}!dans\+\_\+la\+\_\+grille@{dans\+\_\+la\+\_\+grille}}
+\index{dans\+\_\+la\+\_\+grille@{dans\+\_\+la\+\_\+grille}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{dans\+\_\+la\+\_\+grille()}{dans\_la\_grille()}}
+{\footnotesize\ttfamily int dans\+\_\+la\+\_\+grille (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{int}]{s,  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+regarde si un bateau sort de la grille 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier pour la ligne \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em s,un} & entier pour l\textquotesingle{}orientation \\
+\hline
+{\em taille,un} & entier pour la taille du bateau concerné \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booléen, F\+A\+L\+SE si ça sort de la grille 
+\end{DoxyReturn}
+\hypertarget{init_8c_a352a3b7d939437bef1a8127b1ba88b75}{}\label{init_8c_a352a3b7d939437bef1a8127b1ba88b75} 
+\index{init.\+c@{init.\+c}!free\+\_\+joueur@{free\+\_\+joueur}}
+\index{free\+\_\+joueur@{free\+\_\+joueur}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{free\+\_\+joueur()}{free\_joueur()}}
+{\footnotesize\ttfamily void free\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+
+
+libère la mémoire allouée au joueur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j,le} & joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_a7c6d84a4d5e8255db70f0131ca2bf717}{}\label{init_8c_a7c6d84a4d5e8255db70f0131ca2bf717} 
+\index{init.\+c@{init.\+c}!game\+\_\+screen@{game\+\_\+screen}}
+\index{game\+\_\+screen@{game\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{game\+\_\+screen()}{game\_screen()}}
+{\footnotesize\ttfamily int game\+\_\+screen (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran,  }\item[{Uint32}]{colors\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$}]{title,  }\item[{char $\ast$}]{error,  }\item[{char $\ast$}]{sens\+\_\+txt,  }\item[{int $\ast$}]{ligne,  }\item[{int $\ast$}]{col,  }\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{jo,  }\item[{int}]{placement }\end{DoxyParamCaption})}
+
+
+
+Ecran de jeu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ ecran \\
+\hline
+{\em Uint32} & colors\mbox{[}\mbox{]} \\
+\hline
+{\em char} & $\ast$titre texte qui décrit l\textquotesingle{}action attendue par le joueur \\
+\hline
+{\em char} & $\ast$error texte qui affiche une error s\textquotesingle{}il y en a besoin \\
+\hline
+{\em char} & $\ast$sens\+\_\+txt texte qui permet d\textquotesingle{}indiquer le sens de placement des bateaux \\
+\hline
+{\em int} & $\ast$ligne l\textquotesingle{}index de la ligne de la case cliquée \\
+\hline
+{\em int} & $\ast$col l\textquotesingle{}index de la col de la case cliquée \\
+\hline
+{\em \hyperlink{structJoueur}{Joueur}} & $\ast$jo joueur courant \\
+\hline
+{\em int} & placement Gestion des grilles \+: 1 pour la grille de placement des bateaux ,2 pour la grille de jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int action du joueur (-\/1 = quitter, 0 = case cliquée, 1 = espace) 
+\end{DoxyReturn}
+\hypertarget{init_8c_abb6490ca8a627191d1bbcb87008bb8a3}{}\label{init_8c_abb6490ca8a627191d1bbcb87008bb8a3} 
+\index{init.\+c@{init.\+c}!get\+\_\+grid\+\_\+index@{get\+\_\+grid\+\_\+index}}
+\index{get\+\_\+grid\+\_\+index@{get\+\_\+grid\+\_\+index}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+grid\+\_\+index()}{get\_grid\_index()}}
+{\footnotesize\ttfamily int get\+\_\+grid\+\_\+index (\begin{DoxyParamCaption}\item[{int}]{x\+\_\+position,  }\item[{int}]{y\+\_\+position,  }\item[{int $\ast$}]{index\+\_\+row,  }\item[{int $\ast$}]{index\+\_\+cols }\end{DoxyParamCaption})}
+
+
+
+retourne l\textquotesingle{}index d\textquotesingle{}une case cliquée dans la grille de jeu 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & x\+\_\+position, y\+\_\+position, les coordonnées de la souris au moment du clic \\
+\hline
+{\em int} & {\itshape index\+\_\+row, int} index\+\_\+cols les indexs correspondant à la case cliquée (pas de convertion ascii)\\
+\hline
+\end{DoxyParams}
+x correspond à cols et y à rows \begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\hypertarget{init_8c_ade18a303e83af8e99fcdf7134675ba82}{}\label{init_8c_ade18a303e83af8e99fcdf7134675ba82} 
+\index{init.\+c@{init.\+c}!initialiser\+\_\+joueur@{initialiser\+\_\+joueur}}
+\index{initialiser\+\_\+joueur@{initialiser\+\_\+joueur}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+joueur()}{initialiser\_joueur()}}
+{\footnotesize\ttfamily int initialiser\+\_\+joueur (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j }\end{DoxyParamCaption})}
+
+
+
+Initialise le joueur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j,le} & joueur\\
+\hline
+\end{DoxyParams}
+Le joueur saisit son nom. L\textquotesingle{}historique est alloué est initialisé à O. Les bateaux sont alloués puis saisis. \begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE si les malloc fail, E\+X\+I\+T\+\_\+\+S\+U\+C\+E\+SS sinon 
+\end{DoxyReturn}
+\hypertarget{init_8c_a385484b82955bff9dc724959c91d5235}{}\label{init_8c_a385484b82955bff9dc724959c91d5235} 
+\index{init.\+c@{init.\+c}!is\+\_\+case\+\_\+bateau@{is\+\_\+case\+\_\+bateau}}
+\index{is\+\_\+case\+\_\+bateau@{is\+\_\+case\+\_\+bateau}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{is\+\_\+case\+\_\+bateau()}{is\_case\_bateau()}}
+{\footnotesize\ttfamily int is\+\_\+case\+\_\+bateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+regarde si un bateau occupe la case donnée 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier de 0 à N\+B\+\_\+\+L\+I\+G\+N\+E\+S-\/1 pour la ligne (P\+AS LE C\+O\+DE A\+S\+C\+II DE LA L\+E\+T\+T\+RE) \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em b,tableau} & de bateaux du joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 si la case est libre, bateau.\+id sinon 
+\end{DoxyReturn}
+\hypertarget{init_8c_ad5115a83570d5896e9d99762ec386416}{}\label{init_8c_ad5115a83570d5896e9d99762ec386416} 
+\index{init.\+c@{init.\+c}!pause\+\_\+game@{pause\+\_\+game}}
+\index{pause\+\_\+game@{pause\+\_\+game}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{pause\+\_\+game()}{pause\_game()}}
+{\footnotesize\ttfamily int pause\+\_\+game (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran,  }\item[{int $\ast$}]{ind\+\_\+rows,  }\item[{int $\ast$}]{ind\+\_\+cols }\end{DoxyParamCaption})}
+
+
+
+Gestion des events sur l\textquotesingle{}écran de jeu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ecran \\
+\hline
+{\em int} & $\ast$ index ligne \\
+\hline
+{\em int} & $\ast$ index col \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int choix du joueur (-\/1 pour quitter, 0 pour le clic d\textquotesingle{}une case, 1 pour la barre espace) 
+\end{DoxyReturn}
+\hypertarget{init_8c_ab212272e1815e5912277a8637ffa925f}{}\label{init_8c_ab212272e1815e5912277a8637ffa925f} 
+\index{init.\+c@{init.\+c}!pause\+\_\+simple\+\_\+screen@{pause\+\_\+simple\+\_\+screen}}
+\index{pause\+\_\+simple\+\_\+screen@{pause\+\_\+simple\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{pause\+\_\+simple\+\_\+screen()}{pause\_simple\_screen()}}
+{\footnotesize\ttfamily int pause\+\_\+simple\+\_\+screen (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran }\end{DoxyParamCaption})}
+
+
+
+Gestion des events sur l\textquotesingle{}écran des règles et celui des coups joués. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ecran\\
+\hline
+\end{DoxyParams}
+3 events possibles \+: fermer/échap + 1 bouton \char`\"{}ok\char`\"{} \begin{DoxyReturn}{Returns}
+int choix du joueur (-\/1 ou 0) 
+\end{DoxyReturn}
+\hypertarget{init_8c_a2e4733c792c96bd06e123909392121c8}{}\label{init_8c_a2e4733c792c96bd06e123909392121c8} 
+\index{init.\+c@{init.\+c}!pause\+\_\+welcome\+\_\+screen@{pause\+\_\+welcome\+\_\+screen}}
+\index{pause\+\_\+welcome\+\_\+screen@{pause\+\_\+welcome\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{pause\+\_\+welcome\+\_\+screen()}{pause\_welcome\_screen()}}
+{\footnotesize\ttfamily int pause\+\_\+welcome\+\_\+screen (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran }\end{DoxyParamCaption})}
+
+
+
+Gestion des events sur l\textquotesingle{}ecran d\textquotesingle{}accueil. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ecran\\
+\hline
+\end{DoxyParams}
+5 events possibles \+: fermer programme/touche échap/clic sur bouton 1/clic sur bouton 2/clic sur bouton 3/ \begin{DoxyReturn}{Returns}
+int -\/1 pour fermer le programme/toucher échap, 1 pour jouer en solo, 2 pour jouer en multi, 3 pour afficher les regles 
+\end{DoxyReturn}
+\hypertarget{init_8c_a5bf35c36438d94fe1dc2bd1d3cc29ce8}{}\label{init_8c_a5bf35c36438d94fe1dc2bd1d3cc29ce8} 
+\index{init.\+c@{init.\+c}!rules\+\_\+screen@{rules\+\_\+screen}}
+\index{rules\+\_\+screen@{rules\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{rules\+\_\+screen()}{rules\_screen()}}
+{\footnotesize\ttfamily void rules\+\_\+screen (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran }\end{DoxyParamCaption})}
+
+
+
+Ecran qui affiche les règles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ ecran\\
+\hline
+\end{DoxyParams}
+La fonction attend que le joueur clique sur le bouton ok \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{init_8c_ab497aa0ad8946951ee43825906296399}{}\label{init_8c_ab497aa0ad8946951ee43825906296399} 
+\index{init.\+c@{init.\+c}!saisir\+\_\+bateaux@{saisir\+\_\+bateaux}}
+\index{saisir\+\_\+bateaux@{saisir\+\_\+bateaux}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{saisir\+\_\+bateaux()}{saisir\_bateaux()}}
+{\footnotesize\ttfamily void saisir\+\_\+bateaux (\begin{DoxyParamCaption}\item[{\hyperlink{structJoueur}{Joueur} $\ast$}]{j,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran,  }\item[{Uint32}]{colors\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+le joueur saisit les emplacements de ses bateaux 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j,le} & joueur \\
+\hline
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ ecran \\
+\hline
+{\em int32} & colors\mbox{[}\mbox{]}\\
+\hline
+\end{DoxyParams}
+le joueur choisi une case. Si le choix est mauvais, un message d\textquotesingle{}erreur s\textquotesingle{}affiche et on réitère \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+$<$ Règles \+: 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2
+
+$<$ S\+E\+NS 0 = vers le bas (par défaut) et 1 = vers la droite \hypertarget{init_8c_a7793340605544fa6ee619ca6c5f67f13}{}\label{init_8c_a7793340605544fa6ee619ca6c5f67f13} 
+\index{init.\+c@{init.\+c}!simple\+\_\+screen@{simple\+\_\+screen}}
+\index{simple\+\_\+screen@{simple\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{simple\+\_\+screen()}{simple\_screen()}}
+{\footnotesize\ttfamily int simple\+\_\+screen (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran,  }\item[{char $\ast$}]{chaine }\end{DoxyParamCaption})}
+
+
+
+Ecran qui affiche une chaine donnée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ ecran \\
+\hline
+{\em char} & $\ast$ chaine à écrire\\
+\hline
+\end{DoxyParams}
+La fonction attend que le joueur clique sur le bouton ok \begin{DoxyReturn}{Returns}
+int choix du joueur (-\/1 si échap/quitter, 0 si clic sur continuer/ok) 
+\end{DoxyReturn}
+\hypertarget{init_8c_a2481c4ea2f7ebc63b9be1912fa1654df}{}\label{init_8c_a2481c4ea2f7ebc63b9be1912fa1654df} 
+\index{init.\+c@{init.\+c}!touche\+\_\+bateau@{touche\+\_\+bateau}}
+\index{touche\+\_\+bateau@{touche\+\_\+bateau}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{touche\+\_\+bateau()}{touche\_bateau()}}
+{\footnotesize\ttfamily int touche\+\_\+bateau (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structBateau}{Bateau} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+regarde si une case donnée est déjà occupée ou touche une case déjà occcupée par un bateau du joueur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier pour la ligne (correspondant à l\textquotesingle{}index de la ligne \+: 0 à N\+B\+\_\+\+L\+I\+G\+N\+E-\/1, pas au code A\+S\+C\+II) \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em b,tableau} & de bateaux du joueur\\
+\hline
+\end{DoxyParams}
+la fonction regarde toutes les cases mitoyennes à la case donnée et vérifie si ce sont des cases occupées ou non \begin{DoxyReturn}{Returns}
+booléen 
+\end{DoxyReturn}
+\hypertarget{init_8c_a6bb2a99f97b5db7480d30eb5b361b77d}{}\label{init_8c_a6bb2a99f97b5db7480d30eb5b361b77d} 
+\index{init.\+c@{init.\+c}!verifier\+\_\+saisie\+\_\+bateaux@{verifier\+\_\+saisie\+\_\+bateaux}}
+\index{verifier\+\_\+saisie\+\_\+bateaux@{verifier\+\_\+saisie\+\_\+bateaux}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{verifier\+\_\+saisie\+\_\+bateaux()}{verifier\_saisie\_bateaux()}}
+{\footnotesize\ttfamily int verifier\+\_\+saisie\+\_\+bateaux (\begin{DoxyParamCaption}\item[{char}]{error\mbox{[}$\,$\mbox{]},  }\item[{int}]{l,  }\item[{int}]{c,  }\item[{int}]{s,  }\item[{int}]{taille,  }\item[{\hyperlink{structJoueur}{Joueur}}]{j }\end{DoxyParamCaption})}
+
+
+
+vérifie le placement d\textquotesingle{}un bateau 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l,un} & entier pour la ligne \\
+\hline
+{\em c,un} & entier pour la colonne \\
+\hline
+{\em s,un} & entier pour l\textquotesingle{}orientation \\
+\hline
+{\em taille,un} & entier pour la taille du bateau concerné \\
+\hline
+{\em j,le} & joueur\\
+\hline
+\end{DoxyParams}
+Pour qu\textquotesingle{}un placement soit valide, il faut que la saisie soit correcte, conforme à la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu\textquotesingle{}elle ne touche pas un autre bateau. \begin{DoxyReturn}{Returns}
+booléen. F\+A\+L\+Se si mauvais placement, T\+R\+UE sinon 
+\end{DoxyReturn}
+\hypertarget{init_8c_a43a3066474a651dafe7da90e41998f78}{}\label{init_8c_a43a3066474a651dafe7da90e41998f78} 
+\index{init.\+c@{init.\+c}!welcome\+\_\+screen@{welcome\+\_\+screen}}
+\index{welcome\+\_\+screen@{welcome\+\_\+screen}!init.\+c@{init.\+c}}
+\subsubsection{\texorpdfstring{welcome\+\_\+screen()}{welcome\_screen()}}
+{\footnotesize\ttfamily int welcome\+\_\+screen (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{ecran,  }\item[{Uint32}]{colors\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+écran d\textquotesingle{}accueil avec trois boutons \+: mode solo (IA) $\vert$ mode multi (2 joueurs) $\vert$ rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em S\+D\+L\+\_\+\+Surface} & $\ast$ ecran \\
+\hline
+{\em Uint32} & colors\mbox{[}\mbox{]} les couleurs définies dans le main \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int choix de l\textquotesingle{}écran qui suivra (1,2,3) 
+\end{DoxyReturn}
