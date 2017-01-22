@@ -63,7 +63,7 @@ void game(void) {
 		printf ("\n============================[DEBUT DU JEU]===================================\n\n");
 		joueur_courant = (rand()%2); /*1 ou 0*/
 
-		printf("C'est le Joueur %s qui commence ! \n",joueurs[joueur_courant].name);
+		printf("C'est %s qui commence ! \n",joueurs[joueur_courant].name);
 
 		while(jouer) 
 		{
@@ -105,6 +105,81 @@ void game(void) {
 
 	/*VS IA*/
 	else if (IA == 2){
+		printf ("\n==========================[JOUEUR 1 - BIENVENUE !]=============================\n\n");
+	    initialiser_joueur(&joueurs[0], mode_placement);
+	    system_message("                      Faites ENTRER pour continuer");
+		cls();
+	    printf ("\n==========================[grille de R2D2]=============================\n\n");
+	    mode_placement = 2;
+	    initialiser_ia(&joueurs[1], mode_placement);
+	    /*
+	    system_message("                      Faites ENTRER pour continuer");
+	   	*/
+		cls();
+		printf ("\n==========================[VOUS ALLEZ JOUER CONTRE R2D2!!!]=============================\n\n");
+		printf ("\n      [la grille de R2D2 est affichée au dessus pour les tricheur]     \n\n");
+		printf ("\n============================[DEBUT DU JEU]===================================\n\n");
+		joueur_courant = (rand()%2); /*1 ou 0*/
+
+		printf("C'est %s qui commence ! \n",joueurs[joueur_courant].name);
+
+		while(jouer) 
+		{
+			printf("\n============================[A %s DE JOUER!]==========================================\n",joueurs[joueur_courant].name);
+			/*tour joueur*/
+			if(joueur_courant == 0) {
+				affiche_etat_bateaux(joueurs[joueur_courant].bateaux);
+				/*saisie de la case*/
+				afficher_grille(joueurs[joueur_courant],1);
+				saisir_coup(&l,&c,joueurs[joueur_courant].historique);
+				printf("Vous avez joué en %c %d\n", l, c);
+				/*on récupère les bateaux adverses pour comparer avec la case choisie*/
+				btx_adverses = joueurs[1].bateaux;
+				res_coup = resultat_coup(l,c,btx_adverses,joueurs[joueur_courant].historique);
+				/*on met à jour la grille de jeu*/
+				joueurs[joueur_courant].historique[l-'A'][c] = res_coup;
+				afficher_grille(joueurs[joueur_courant],1);
+				/*si le joueur a gagne on sort de la boucle*/
+				if(gagne(btx_adverses)){
+					printf("\n=============================[VOUS AVEZ GAGNE !]======================================\n");
+					printf("\n=============================[FIN DE LA PARTIE !]=====================================\n");
+					jouer = 0;
+				}
+				/*sinon on continue et on passe au joueur suivant*/
+				else {
+					system_message("Entrée pour continuer");
+					cls();
+					/*on passe au joueur adverse*/
+					joueur_courant = 1;
+				}
+			}
+			/*tour IA*/
+			else {
+				coup_ia_random(&l,&c,joueurs[joueur_courant].historique);
+				printf("%s a joué en %c %d\n",joueurs[joueur_courant].name, l, c);
+				btx_adverses = joueurs[0].bateaux;
+				res_coup = resultat_coup(l,c,btx_adverses,joueurs[joueur_courant].historique);
+				/*on met à jour la grille de jeu*/
+				joueurs[joueur_courant].historique[l-'A'][c] = res_coup;
+				/*
+				afficher_grille(joueurs[joueur_courant],1);
+				*/
+				if(gagne(btx_adverses)){
+					printf("\n=============================[VOUS AVEZ GAGNE !]======================================\n");
+					printf("\n=============================[FIN DE LA PARTIE !]=====================================\n");
+					jouer = 0;
+				} else {
+					system_message("Entrée pour continuer");
+					cls();
+					/*on passe au joueur adverse*/
+					joueur_courant = 0;
+				}
+			}
+			
+		}
+
+		free_joueur(&joueurs[0]);
+		free_joueur(&joueurs[1]);
 
 	}
 }
@@ -151,7 +226,7 @@ int deja_joue(int l, int c, int ** historique){
  * @return     int (valeur ASCII du char 'o' ou de l'id du bateau)
  */
 int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
-	printf("\n\nCASE %c%d \n",l,c );
+	/*printf("\n\nCASE %c%d \n",l,c );*/
 	int res = is_case_bateau(l-'A',c,btx_adverses);
 	if(res == -1){
 		printf("\nRESULTAT : A l'eau ! \n");

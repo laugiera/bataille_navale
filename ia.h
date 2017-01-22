@@ -14,5 +14,13 @@
 int main();
 */
 void placement_aleatoire(int taille, int *col, int *ligne, int *sens);
+/*
+int initialiser_ia(Joueur *j, int mode_placement);
+*/
+void coup_ia_random(int *l, int *c, int **historique);
 
 #endif
+
+/*
+BUG inknown type Joueur qd prototype déclaré
+*/

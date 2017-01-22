@@ -10,6 +10,7 @@
 #include <string.h>
 #include "init.h"
 #include "game.h"
+#include "ia.h"
 
 
 int main( int argc, char *argv[] ){

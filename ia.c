@@ -14,32 +14,19 @@
 #include <time.h>
 
 #include "ia.h"
+#include "init.h"
+#include "game.h"
 
-/* main pour test
-int main() {
-	int i;
-	int taille = 3;
-	int col = 0;
-	int ligne = 0;
-	int sens = 0;
-	for(i=0; i<5; i++) {
-	placement_aleatoire(taille, &col, &ligne, &sens);
-	printf("col : %d\nligne : %c\n, sens : %d\n\n", col, ligne, sens);
-	}
-	return 1;
-}
-*/
 
 
 /**
  * @brief      fournit des coordonées aléatoires pour un bateau
  * @param      taille, un entier pour la taille du bateau
- * @param 	   c, un entier pour la colonne
- * @param 	   s, un entier pour l'orientation
- * @param 	   taille, un entier pour la taille du bateau concerné
- * @param 	   j, le joueur
- * @details    Pour qu'un placement soit valide, il faut que la saisie soit correcte, conforme à la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu'elle ne touche pas un autre bateau.
- * @return     booléen. FALSe si mauvais placement, TRUE sinon
+ * @param 	   *col, pointeur sur la variable colonne
+ * @param 	   *ligne, pointeur sur la variable ligne (code ASCII)
+ * @param 	   *sens, pointeur sur le sens
+ * @details    à besoin d'une initialisation de rand préalable, renvoie un code ASCII pour la ligne
+ * @return     rien
  */
 void placement_aleatoire(int taille, int *col, int *ligne, int *sens) {
     char alphabet[] = "ABCDEFGHIJ";
@@ -52,3 +39,66 @@ void placement_aleatoire(int taille, int *col, int *ligne, int *sens) {
     	*ligne = alphabet[rand()%(10-taille+1)];
     }
 }
+
+/**
+ * @brief      Initialise l'IA
+ * @param      j, l'IA
+ * @param      mode_placement, doit être défini comme aléatoire (=2) avant d'appeler la fct
+ * @details    Le nom est défini. L'historique est alloué est initialisé à O. Les bateaux sont alloués puis positionnés aléatoirement. Possibilité de coupler dans une condition avec la fct init_joueur, à voir...
+ * @return     EXIT_FAILURE si les malloc fail, EXIT_SUCESS sinon
+ */
+
+int initialiser_ia(Joueur *j, int mode_placement){
+
+	int i,k;
+	/*pseudo*/
+	strcpy(j->name, "R2D2");
+	/*historique - grille de jeu - allocation*/
+	j->historique = malloc((NB_LIGNES)*sizeof(int*));
+	if(j->historique == NULL)
+		return EXIT_FAILURE;
+	else {
+		for (i = 0; i < NB_LIGNES; i++){
+    		j->historique[i] = malloc(sizeof(int) * NB_COLONNES+1);
+    		if(j->historique[i]==NULL)
+    			return EXIT_FAILURE;
+		}
+	}
+	/*historique - initialisation*/
+	for (i = 0; i < NB_LIGNES; i++)
+	{
+		for (k = 0; k < NB_COLONNES; k++)
+		{
+			j->historique[i][k]='.';
+		}
+	}
+	/*bateaux*/
+	j->bateaux = malloc(NB_BATEAUX * sizeof(Bateau));
+	if(j->bateaux == NULL)
+		return EXIT_FAILURE;
+	saisir_bateaux(j, mode_placement);
+	return EXIT_SUCCESS;
+}
+
+
+/**
+ * @brief      génère des coordonnées aléatoires pour le coup que l'IA tire
+ * @param      l, pointeur vers le caractère de la ligne
+ * @param      c, pointeur vers l'int de la colone
+ * @param      historique, grille de jeu de l'ia
+ * @details    génère de nouvelles coordonnées jusqu'à tomber sur une case qui n'a pas encore été jouée
+ * @return     void
+ */
+void coup_ia_random(int *l, int *c, int **historique) {
+	do{
+		*c = rand()%10;
+    	*l = 'A'+rand()%10;
+	}while(verifier_lignes(*l)==0 || verifier_colonne(*c)==0 || deja_joue(*l,*c,historique));
+}
+
+/*
+TO DO : 
+- associer init_ia avec init_jouer et ajouter un param IA dans saisir_bateau pour empecher l'affichage de la grille de l'IA
+- empecher le message d'erreur de deja_joue avec IA
+-enlever verif_lign et col dans coup_ia_random
+*/
