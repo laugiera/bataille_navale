@@ -11,6 +11,7 @@
 #include <string.h>
 #include <time.h>
 #include "init.h"
+#include "ia.h"
 
 
 
@@ -106,7 +107,7 @@ void rules_screen (void){
  * @brief     Ecran de menu
  * @return    1 (Joueur vs Ordinateur) or 2 (Joueur vs joueur)
  */
-int menu_screen(void){
+int menu_screenIA(void){
 	int mode = 0;
 	printf ("\n");
     printf ("============================[MENU:]===================================\n");
@@ -224,7 +225,7 @@ void afficher_bateaux(Bateau *b){
  * @return     EXIT_FAILURE si les malloc fail, EXIT_SUCESS sinon
  */
 
-int initialiser_joueur(Joueur *j, int plmnt){
+int initialiser_joueur(Joueur *j, int mode_placement){
 
 	int i,k;
 	/*pseudo*/
@@ -254,7 +255,7 @@ int initialiser_joueur(Joueur *j, int plmnt){
 	j->bateaux = malloc(NB_BATEAUX * sizeof(Bateau));
 	if(j->bateaux == NULL)
 		return EXIT_FAILURE;
-	saisir_bateaux(j, plmnt);
+	saisir_bateaux(j, mode_placement);
 	return EXIT_SUCCESS;
 }
 
@@ -279,12 +280,12 @@ void free_joueur(Joueur *j){
  * @details    le joueur saisit une case, un sens d'orientation et le jeu vérifie la saisie. Si la saisie est bonne, le bateau est initialisé et la grille maj affichée
  * @return     void
  */
-void saisir_bateaux(Joueur *j, int plmnt){
+void saisir_bateaux(Joueur *j, int mode_placement){
 
             srand(time(NULL));
-            int tailles[NB_BATEAUX]={2,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+            int tailles[NB_BATEAUX]={5,4,3,3,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
             int i,colonne,ligne,sens;
-    if (plmnt==1){
+    if (mode_placement==1){
                 printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
                 afficher_grille(*j,0);
             for (i = 0; i < NB_BATEAUX; i++)
@@ -303,7 +304,7 @@ void saisir_bateaux(Joueur *j, int plmnt){
                     scanf("%d",&sens);
                     f_purge(stdin);
                     /*tq saisie mauvaise*/
-                }while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j)==0);
+                }while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j, mode_placement)==0);
 
                 /*initialisation bateau*/
                 (j->bateaux+i)->taille=tailles[i];
@@ -319,37 +320,12 @@ void saisir_bateaux(Joueur *j, int plmnt){
         }
     else
     {
-
-            afficher_grille(*j,0);
             for (i = 0; i < NB_BATEAUX; i++)
-            {
-                int nbr_colonne=(rand() % (9 - 0 + 1)) + 0;
-                int lettre=(rand() % (9 - 0 + 1)) + 0;
-                char alphabet[] = "ABCDEFGHIJ";
-
+            {	
                 (j->bateaux+i)->id=i+1;
                 do {
-                        if (nbr_colonne>5 && lettre<=5)
-                        {
-                            sens=0;
-                        }
-                        else if (lettre>5 && nbr_colonne<=5)
-                        {
-                            sens=1;
-                        }
-                        else if (nbr_colonne<=5 && lettre<=5)
-                        {
-                            sens=(rand()%2);
-                        }
-                        else if (lettre>5 && nbr_colonne>5)
-                        {
-                             nbr_colonne=(rand() % (9 - 0 + 1)) + 0;
-                             lettre=(rand() % (9 - 0 + 1)) + 0;
-                        }
-                        ligne = alphabet[lettre];
-                        colonne=nbr_colonne;
-
-                }while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j)==0);
+                    placement_aleatoire(tailles[i], &colonne, &ligne, &sens);
+                }while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j, mode_placement)==0);
 
                 /*initialisation bateau*/
                 (j->bateaux+i)->taille=tailles[i];
@@ -358,10 +334,8 @@ void saisir_bateaux(Joueur *j, int plmnt){
                 (j->bateaux+i)->ligne = ligne;
                 (j->bateaux+i)->colonne = colonne;
                 (j->bateaux+i)->sens = sens;
-                /*grille mise à jour */
-                afficher_grille(*j,0);
-
             }
+            afficher_grille(*j,0);
     }
 
 }
@@ -373,10 +347,11 @@ void saisir_bateaux(Joueur *j, int plmnt){
  * @param 	   s, un entier pour l'orientation
  * @param 	   taille, un entier pour la taille du bateau concerné
  * @param 	   j, le joueur
- * @details    Pour qu'un placement soit valide, il faut que la saisie soit correcte, conforme à la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu'elle ne touche pas un autre bateau.
+ * @param 	   mode_placement, int 1 pour manuel, 2 pour aléatoire
+ * @details    Pour qu'un placement soit valide, il faut que la saisie soit correcte, conforme à la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu'elle ne touche pas un autre bateau. Le mode de placement décide de l'affichage ou non des messages d'erreur.
  * @return     booléen. FALSe si mauvais placement, TRUE sinon
  */
-int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
+int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j, int mode_placement){
 
 	/* l_index : index de la ligne dans la matrice de la grille, l est le code ASCII de la ligne*/
 	int l_index = l - 'A' ;
@@ -402,7 +377,9 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 	if (s == 0) {
 		for(i = l_index; i<l_index+taille; i++) {
 			if(touche_bateau(i,c,j.bateaux)) {
-				printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
+				if (mode_placement == 1) {
+					printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
+				}
 				return 0;
 			}
 
@@ -412,7 +389,9 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 	else if (s == 1) {
 		for(i = c; i<c+taille; i++) {
 			if(touche_bateau(l_index,i,j.bateaux)) {
-				printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
+				if (mode_placement == 1) {
+					printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
+				}
 				return 0;
 			}
 

@@ -12,6 +12,7 @@
 #include <time.h>
 #include "init.h"
 #include "game.h"
+#include "ia.h"
 
 
 /**
@@ -40,11 +41,11 @@ void game(void) {
 	/*ecrans d'accueil*/
 	welcome_screen();
 	rules_screen();
-	int IA = menu_screen();
+	int IA = menu_screenIA();
 
 	/*variables utiles*/
 	Joueur joueurs[2];
-	int plmnt = menu_screenPlacemnt();
+	int mode_placement = menu_screenPlacemnt(); /* 1 : manuel; 2 : aleatoire*/
 	Bateau * btx_adverses;
 	int joueur_courant, res_coup, l, c;
 	int jouer = 1;
@@ -52,11 +53,11 @@ void game(void) {
 	/*MODE VS Joueur*/
 	if(IA == 1){
 		printf ("\n==========================[JOUEUR 1 - BIENVENUE !]=============================\n\n");
-	    initialiser_joueur(&joueurs[0], plmnt);
+	    initialiser_joueur(&joueurs[0], mode_placement);
 	    system_message("                      Faites ENTRER pour continuer");
 		cls();
 	    printf ("\n==========================[JOUEUR 2 - BIENVENUE !]=============================\n\n");
-	    initialiser_joueur(&joueurs[1], plmnt);
+	    initialiser_joueur(&joueurs[1], mode_placement);
 	    system_message("                      Faites ENTRER pour continuer");
 		cls();
 		printf ("\n============================[DEBUT DU JEU]===================================\n\n");
@@ -189,7 +190,7 @@ int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
  * @return     boolean	true si coulé, false sinon
  */
 int is_coule(int **historique, Bateau * b){
-	int i,k,l;
+	int i,l;
 	l = b->ligne - 'A';
 	if(b->nbTouche == b->taille) {
 		b->etat = 0;
