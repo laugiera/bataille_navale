@@ -1,0 +1,109 @@
+# depslib dependency file v1.0
+1484398126 source:c:\users\laura\desktop\bataille\game.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+	"game.h"
+
+1484396947 c:\users\laura\desktop\bataille\init.h
+
+1484396988 c:\users\laura\desktop\bataille\game.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+	"game.h"
+
+1483474530 source:c:\users\laura\desktop\bataille\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"init.h"
+	"game.h"
+
+1484396947 source:c:\users\laura\desktop\bataille\init.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+
+1484389952 source:g:\progc\bataille\game.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+	"game.h"
+
+1483613288 g:\progc\bataille\init.h
+
+1484389960 g:\progc\bataille\game.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+	"game.h"
+
+1483617164 source:g:\progc\bataille\init.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+
+1483474530 source:g:\progc\bataille\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"init.h"
+	"game.h"
+
+1483474530 source:c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"init.h"
+	"game.h"
+
+1484396947 c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\init.h
+
+1484496944 c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\game.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+	"game.h"
+
+1484498870 source:c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\init.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+
+1484498153 source:c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\game.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"init.h"
+	"game.h"
+	"IA.h"
+
+1484497048 c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\ia.h
+
+1484497857 source:c:\users\julian\desktop\cours\=patey=\imac\bataille navale\bataille\ia.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"init.h"
+	"game.h"
+	"IA.h"
+

@@ -2,8 +2,8 @@
  * @file      init.c
  * @author    LAUGIER AA - REYES Laura - LANDRY-LINET Lou
  * @version   1.0
- * @date      23 DÃ©cembre 2016
- * @brief     DÃ©finis les structures et les mÃ©thodes du jeu
+ * @date      23 Décembre 2016
+ * @brief     Définis les structures et les méthodes du jeu
  * @details    ~
  */
 #include <stdio.h>
@@ -31,7 +31,7 @@ void f_purge(FILE *fp)
 	}
 }
 /**
- * @brief   Efface tout ce qu'il y a affichÃ© Ã  l'Ã©cran
+ * @brief   Efface tout ce qu'il y a affiché à l'écran
  * @return    void
  */
  void cls (void)
@@ -40,7 +40,7 @@ void f_purge(FILE *fp)
 }
 
 /**
- * @brief     Affiche un message Ã  l'utilisateur et lui demande d'appuyer sur entrÃ©e
+ * @brief     Affiche un message à l'utilisateur et lui demande d'appuyer sur entrée
  * param 	char *, le message a afficher
  * @return    void
  */
@@ -78,7 +78,7 @@ void welcome_screen (void) {
 }
 
 /**
- * @brief      Ecran des rÃ¨gles
+ * @brief      Ecran des règles
  * @return    void
  */
 void rules_screen (void){
@@ -104,7 +104,7 @@ void rules_screen (void){
 
 /**
  * @brief     Ecran de menu
- * @return    1 (Joueur vs Ordinateur) or 2 (Joueur vs joueur)
+ * @return    2 (Joueur vs Ordinateur) or 1 (Joueur vs joueur)
  */
 int menu_screen(void){
 	int mode = 0;
@@ -127,7 +127,7 @@ int menu_screen(void){
 
 /**
  * @brief     Ecran de menu pour placement bateaux
- * @return    1 (manuel) or 2 (alÃ©atoire)
+ * @return    1 (manuel) or 2 (aléatoire)
  */
 int menu_screenPlacemnt(void){
 	int mode = 0;
@@ -150,9 +150,9 @@ int menu_screenPlacemnt(void){
 
 /**
  * @brief      Affiche la grille de jeu
- * @details    La grille et les bateaux de @a jo ('.' inconnu; 'o' eau; '%d' bateau; 'X' coulÃ©)
- * @param    jo		Joueur correspondant Ã  la grille
- * @param      etat	BoolÃ©en : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
+ * @details    La grille et les bateaux de @a jo ('.' inconnu; 'o' eau; '%d' bateau; 'X' coulé)
+ * @param    jo		Joueur correspondant à la grille
+ * @param      etat	Booléen : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
  * @return    void
  */
 void afficher_grille(Joueur jo, int etat){ //modifier chiffre colonne
@@ -216,11 +216,11 @@ void afficher_bateaux(Bateau *b){
 /**
  * @brief      Initialise le joueur
  * @param      j, le joueur
- * @details    Le joueur saisit son nom. L'historique est allouÃ© est initialisÃ© Ã  O. Les bateaux sont allouÃ©s puis saisis.
+ * @details    Le joueur saisit son nom. L'historique est alloué est initialisé à O. Les bateaux sont alloués puis saisis.
  * @return     EXIT_FAILURE si les malloc fail, EXIT_SUCESS sinon
  */
 
-int initialiser_joueur(Joueur *j, int plmnt){
+int initialiser_joueur(Joueur *j, int plmt){
 
 	int i,k;
 	/*pseudo*/
@@ -250,12 +250,12 @@ int initialiser_joueur(Joueur *j, int plmnt){
 	j->bateaux = malloc(NB_BATEAUX * sizeof(Bateau));
 	if(j->bateaux == NULL)
 		return EXIT_FAILURE;
-	saisir_bateaux(j, plmnt);
+	saisir_bateaux(j, plmt);
 	return EXIT_SUCCESS;
 }
 
 /**
- * @brief      libÃ¨re la mÃ©moire allouÃ©e au joueur
+ * @brief      libère la mémoire allouée au joueur
  * @param      j, le joueur
  * @return     void
  */
@@ -272,16 +272,16 @@ void free_joueur(Joueur *j){
 /**
  * @brief      le joueur saisit les emplacements de ses bateaux
  * @param      j, le joueur
- * @details    le joueur saisit une case, un sens d'orientation et le jeu vÃ©rifie la saisie. Si la saisie est bonne, le bateau est initialisÃ© et la grille maj affichÃ©e
+ * @details    le joueur saisit une case, un sens d'orientation et le jeu vérifie la saisie. Si la saisie est bonne, le bateau est initialisé et la grille maj affichée
  * @return     void
  */
-void saisir_bateaux(Joueur *j, int plmnt){
+void saisir_bateaux(Joueur *j, int plmt){
 
             srand(time(NULL));
-            int tailles[NB_BATEAUX]={5,4}; /*!< RÃ¨gles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+            int tailles[NB_BATEAUX]={5,4}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
             int i,colonne,ligne,sens;
-    if (plmnt==1){
-                printf("Saisissez vos bateaux (coordonnÃ©es de la premiÃ¨re case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
+    if (plmt==1){
+                printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
                 afficher_grille(*j,0);
             for (i = 0; i < NB_BATEAUX; i++)
             {
@@ -307,7 +307,7 @@ void saisir_bateaux(Joueur *j, int plmnt){
                 (j->bateaux+i)->ligne = ligne;
                 (j->bateaux+i)->colonne = colonne;
                 (j->bateaux+i)->sens = sens;
-                /*grille mise Ã  jour */
+                /*grille mise à jour */
                 afficher_grille(*j,0);
 
             } //Fin for
@@ -352,7 +352,7 @@ void saisir_bateaux(Joueur *j, int plmnt){
                 (j->bateaux+i)->ligne = ligne;
                 (j->bateaux+i)->colonne = colonne;
                 (j->bateaux+i)->sens = sens;
-                /*grille mise Ã  jour */
+                /*grille mise à jour */
                 afficher_grille(*j,0);
 
             } //Fin for
@@ -361,14 +361,14 @@ void saisir_bateaux(Joueur *j, int plmnt){
 }
 
 /**
- * @brief      vÃ©rifie le placement d'un bateau
+ * @brief      vérifie le placement d'un bateau
  * @param      l, un entier pour la ligne
  * @param 	   c, un entier pour la colonne
  * @param 	   s, un entier pour l'orientation
- * @param 	   taille, un entier pour la taille du bateau concernÃ©
+ * @param 	   taille, un entier pour la taille du bateau concerné
  * @param 	   j, le joueur
- * @details    Pour qu'un placement soit valide, il faut que la saisie soit correcte, conforme Ã  la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu'elle ne touche pas un autre bateau.
- * @return     boolÃ©en. FALSe si mauvais placement, TRUE sinon
+ * @details    Pour qu'un placement soit valide, il faut que la saisie soit correcte, conforme à la grille (le bateau ne sort pas). Il faut que la case ne chevauche pas un autre bateau ET qu'elle ne touche pas un autre bateau.
+ * @return     booléen. FALSe si mauvais placement, TRUE sinon
  */
 int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 
@@ -382,7 +382,7 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 		printf("Erreur de saisie - \n");
 		return 0;
 	}
-	/*conforme Ã  la grille, le bateau ne sort pas*/
+	/*conforme à la grille, le bateau ne sort pas*/
 	if(dans_la_grille(l,c,s,taille) == 0) {
 		printf("Placement hors de la grille\n");
 		return 0;
@@ -418,41 +418,41 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 }
 
 /**
- * @brief      vÃ©rifie qu'une ligne saisie est conforme Ã  la grille
+ * @brief      vérifie qu'une ligne saisie est conforme à la grille
  * @param      s, un entier pour la ligne
  * @details    la ligne est entre 'A' et 'A'+NB_LIGNES
- * @return     boolÃ©en
+ * @return     booléen
  */
 int verifier_lignes(int  s){
 	return (s >='A'&& s <=('A'+NB_LIGNES));
 }
 
 /**
- * @brief      vÃ©rifie qu'une colonne saisie est conforme Ã  la grille
+ * @brief      vérifie qu'une colonne saisie est conforme à la grille
  * @param      s, un entier pour la colonne
  * @details    la colonne est entre 1 et NB_COLONNES
- * @return     boolÃ©en
+ * @return     booléen
  */
 int verifier_colonne(int s){
 	return (s >= 0 && s < NB_COLONNES);
 }
 
 /**
- * @brief      vÃ©rifie que le sens/orientation saisi est rÃ©alisable
+ * @brief      vérifie que le sens/orientation saisi est réalisable
  * @param      s, un entier pour le sens
  * @details    0 haut; 1 droite;
- * @return     boolÃ©en
+ * @return     booléen
  */
 int verifier_sens(int s){
 	return (s ==0 || s == 1);
 }
 
 /**
- * @brief      regarde si un bateau occupe la case donnÃ©e
- * @param      l, un entier de 0 Ã  NB_LIGNES-1 pour la ligne (PAS LE CODE ASCII DE LA LETTRE)
+ * @brief      regarde si un bateau occupe la case donnée
+ * @param      l, un entier de 0 à NB_LIGNES-1 pour la ligne (PAS LE CODE ASCII DE LA LETTRE)
  * @param      c, un entier pour la colonne
  * @param      b, tableau de bateaux du joueur
- * @return     -1 si la case est libre, 0 s'il n'y a aucun bateau placÃ© sur la grille (initialisation), bateau.id sinon
+ * @return     -1 si la case est libre, 0 s'il n'y a aucun bateau placé sur la grille (initialisation), bateau.id sinon
  */
 int is_case_bateau(int l, int c, Bateau *b){
 	int i, resultat = -1;
@@ -471,7 +471,7 @@ int is_case_bateau(int l, int c, Bateau *b){
 			resultat = (b+i)->id;
 		}
 
-		/*case Ã  droite*/
+		/*case à droite*/
 		else if ((b+i)->sens == 1 &&
 			(b+i)->ligne == 'A'+l &&
 			c > (b+i)->colonne &&
@@ -489,8 +489,8 @@ int is_case_bateau(int l, int c, Bateau *b){
  * @param      l, un entier pour la ligne
  * @param 	   c, un entier pour la colonne
  * @param 	   s, un entier pour l'orientation
- * @param 	   taille, un entier pour la taille du bateau concernÃ©
- * @return     boolÃ©en, FALSE si Ã§a sort de la grille
+ * @param 	   taille, un entier pour la taille du bateau concerné
+ * @return     booléen, FALSE si ça sort de la grille
  */
 int dans_la_grille(int l, int c, int s,int taille){
 
@@ -499,19 +499,19 @@ int dans_la_grille(int l, int c, int s,int taille){
 	if (s == 0 && l+taille <= 'A'+NB_LIGNES){
 		return 1;
 	}
-	/*case Ã  droite*/
+	/*case à droite*/
 	else if (s == 1 && c+taille < NB_COLONNES+1)
 		return 1;
 	return 0;
 }
 
 /**
- * @brief      regarde si une case donnÃ©e est dÃ©jÃ  occupÃ©e ou touche une case dÃ©jÃ  occcupÃ©e par un bateau du joueur
- * @param      l, un entier pour la ligne (correspondant Ã  l'index de la ligne : 0 Ã  NB_LIGNE-1, pas au code ASCII)
+ * @brief      regarde si une case donnée est déjà occupée ou touche une case déjà occcupée par un bateau du joueur
+ * @param      l, un entier pour la ligne (correspondant à l'index de la ligne : 0 à NB_LIGNE-1, pas au code ASCII)
  * @param 	   c, un entier pour la colonne
  * @param 	   b, tableau de bateaux du joueur
- * @details    la fonction regarde toutes les cases mitoyennes Ã  la case donnÃ©e et vÃ©rifie si ce sont des cases occupÃ©es ou non
- * @return     boolÃ©en
+ * @details    la fonction regarde toutes les cases mitoyennes à la case donnée et vérifie si ce sont des cases occupées ou non
+ * @return     booléen
  */
 int touche_bateau(int l, int c, Bateau *b){
 		/*

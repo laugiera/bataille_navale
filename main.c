@@ -2,7 +2,7 @@
  * @file      main.c
  * @author    LAUGIER AA - REYES Laura - LANDRY-LINET Lou
  * @version   1.0
- * @date      23 DÃ©cembre 2016
+ * @date      23 Décembre 2016
  * @brief     ~
  */
 #include <stdio.h>
