@@ -9,7 +9,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "init.h"
+
+
 
 /**
  * @brief      Purge le buffer pour la saisie au clavier
@@ -70,7 +73,7 @@ void welcome_screen (void) {
 	printf ("\n\n");
 	printf("**** VIENS TESTER TES APTITUDES JEUNE ELU PADAWAN DU ROYAUME DES COOCKIES ****\n\n");
 	printf ("\n\n");
-	system_message("Entrée pour continuer");
+	system_message("                      Faites ENTRER pour continuer");
 	cls();
 }
 
@@ -95,7 +98,7 @@ void rules_screen (void){
 	printf (" | 7. Le premier joueur qui a deviney l'emplacement de tous les navires      |\n");
     printf (" |   adverses gagne.                                                         |\n");
 	printf ("==============================================================================\n\n");
-	system_message("Entrée pour continuer");
+	system_message("                      Faites ENTRER pour continuer");
 	cls();
 }
 
@@ -106,18 +109,41 @@ void rules_screen (void){
 int menu_screen(void){
 	int mode = 0;
 	printf ("\n");
-    printf ("============================[MENU:]===========================================\n");
-    printf (" |                                                                          |\n");
-	printf (" | Choisissez un mode :                                                     |\n");
-	printf (" | 1. MODE JOUEUR VS JOUEUR                                                 |\n");
-	printf (" | 2. MODE JOUEUR VS ORDINATEUR.                                            |\n");
-	printf ("==============================================================================\n\n");
+    printf ("============================[MENU:]===================================\n");
+    printf (" |                                                                   |\n");
+	printf (" | Choisissez un mode :                                              |\n");
+	printf (" | 1. MODE JOUEUR VS JOUEUR                                          |\n");
+	printf (" | 2. MODE JOUEUR VS ORDINATEUR.                                     |\n");
+	printf ("======================================================================\n\n");
 	do{
 		printf("Saisir le mode (1 ou 2) :\n");
 		scanf("%d",&mode);
 		f_purge(stdin);
 	}while(mode != 1 && mode != 2);
-	system_message("Entrée pour continuer");
+	system_message("                      Faites ENTRER pour continuer");
+	cls();
+	return mode;
+}
+
+/**
+ * @brief     Ecran de menu pour placement bateaux
+ * @return    1 (manuel) or 2 (aléatoire)
+ */
+int menu_screenPlacemnt(void){
+	int mode = 0;
+	printf ("\n");
+    printf ("============================[MENU:]===================================\n");
+    printf (" |                                                                   |\n");
+	printf (" | Choisissez un mode de placement des bateaux :                     |\n");
+	printf (" | 1. MODE MANUEL.                                                   |\n");
+	printf (" | 2. MODE ALEATOIRE.                                                |\n");
+	printf ("======================================================================\n\n");
+	do{
+		printf("Saisir le mode (1 ou 2) :\n");
+		scanf("%d",&mode);
+		f_purge(stdin);
+	}while(mode != 1 && mode != 2);
+	system_message("                      Faites ENTRER pour continuer");
 	cls();
 	return mode;
 }
@@ -129,7 +155,7 @@ int menu_screen(void){
  * @param      etat	Booléen : 0 = grille de placement des bateaux du joueur et 1 = grille de jeu du joueur
  * @return    void
  */
-void afficher_grille(Joueur jo, int etat){
+void afficher_grille(Joueur jo, int etat){ //modifier chiffre colonne
 	int i,j,k,lettre='A';
 	printf("\n\n   |");
 	for (k = 1; k <= NB_COLONNES; k++)
@@ -139,17 +165,17 @@ void afficher_grille(Joueur jo, int etat){
 	{
 		printf(" %c |",lettre);
 		lettre++;
-		for (j = 1; j <= NB_COLONNES; j++)
+		for (j = 0; j < NB_COLONNES; j++)
 		{
 			if(etat == 1) /*affichage grille de jeu*/
 				printf(" %c |",jo.historique[i][j] );
 			else if(etat == 0) /*affichage placement bateaux du joueur*/
 			{
-			  int case_b = is_case_bateau(i,j,jo.bateaux); 
+			  int case_b = is_case_bateau(i,j,jo.bateaux);
 		      if(case_b!= -1) /*si case de bateau */
-		        printf(" %d |",case_b ); 
+		        printf(" %d |",case_b );
 		      else  /*sinon */
-		        printf(" . |"); 
+		        printf(" . |");
 			}
 
 		}
@@ -159,7 +185,7 @@ void afficher_grille(Joueur jo, int etat){
 
 /**
  * @brief      Affiche le joueur et sa grille de jeu
- * @param    j		Joueur correspondant 
+ * @param    j		Joueur correspondant
  * @return    void
  */
 void afficher_joueur(Joueur j){
@@ -193,7 +219,9 @@ void afficher_bateaux(Bateau *b){
  * @details    Le joueur saisit son nom. L'historique est alloué est initialisé à O. Les bateaux sont alloués puis saisis.
  * @return     EXIT_FAILURE si les malloc fail, EXIT_SUCESS sinon
  */
-int initialiser_joueur(Joueur *j){
+
+int initialiser_joueur(Joueur *j, int plmnt){
+
 	int i,k;
 	/*pseudo*/
 	printf("Quel est ton pseudo ?\n");
@@ -213,16 +241,16 @@ int initialiser_joueur(Joueur *j){
 	/*historique - initialisation*/
 	for (i = 0; i < NB_LIGNES; i++)
 	{
-		for (k = 1; k <= NB_COLONNES; k++)
+		for (k = 0; k < NB_COLONNES; k++)
 		{
-			j->historique[i][k]='.'; 
+			j->historique[i][k]='.';
 		}
-	}	
+	}
 	/*bateaux*/
 	j->bateaux = malloc(NB_BATEAUX * sizeof(Bateau));
 	if(j->bateaux == NULL)
 		return EXIT_FAILURE;
-	saisir_bateaux(j);
+	saisir_bateaux(j, plmnt);
 	return EXIT_SUCCESS;
 }
 
@@ -236,7 +264,7 @@ void free_joueur(Joueur *j){
 	free(j->bateaux);
 	for (i = 0; i < NB_LIGNES; i++)
 	{
-		free(j->historique[i]);		
+		free(j->historique[i]);
 	}
 	free(j->historique);
 }
@@ -247,39 +275,88 @@ void free_joueur(Joueur *j){
  * @details    le joueur saisit une case, un sens d'orientation et le jeu vérifie la saisie. Si la saisie est bonne, le bateau est initialisé et la grille maj affichée
  * @return     void
  */
-void saisir_bateaux(Joueur *j){
-	printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
-	int tailles[NB_BATEAUX]={2,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
-	int i,colonne,ligne,sens;
-	afficher_grille(*j,0);
-	for (i = 0; i < NB_BATEAUX; i++)
-	{
+void saisir_bateaux(Joueur *j, int plmnt){
 
-		(j->bateaux+i)->id=i+1; 
-		printf("Saisie du bateau %d, taille %d\n",i,tailles[i]);
-		do {
-			printf("ligne : ");
-			ligne = fgetc(stdin);
-			f_purge(stdin);
-			printf("colonne : ");
-			scanf("%d",&colonne);
-			f_purge(stdin);
-			printf("sens : ");
-			scanf("%d",&sens);
-			f_purge(stdin);
-			/*tq saisie mauvaise*/
-		}while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j)==0);
+            srand(time(NULL));
+            int tailles[NB_BATEAUX]={5,4}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+            int i,colonne,ligne,sens;
+    if (plmnt==1){
+                printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");
+                afficher_grille(*j,0);
+            for (i = 0; i < NB_BATEAUX; i++)
+            {
 
-		/*initialisation bateau*/
-		(j->bateaux+i)->taille=tailles[i];
-		(j->bateaux+i)->etat = 1;
-		(j->bateaux+i)->ligne = ligne;
-		(j->bateaux+i)->colonne = colonne;
-		(j->bateaux+i)->sens = sens;
-		/*grille mise à jour */		
-		afficher_grille(*j,0);
+                (j->bateaux+i)->id=i+1;
+                printf("Saisie du bateau %d, taille %d\n",i,tailles[i]);
+                do {
+                    printf("ligne : ");
+                    ligne = fgetc(stdin);
+                    f_purge(stdin);
+                    printf("colonne : ");
+                    scanf("%d",&colonne);
+                    f_purge(stdin);
+                    printf("sens : ");
+                    scanf("%d",&sens);
+                    f_purge(stdin);
+                    /*tq saisie mauvaise*/
+                }while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j)==0);
 
-	}
+                /*initialisation bateau*/
+                (j->bateaux+i)->taille=tailles[i];
+                (j->bateaux+i)->etat = 1;
+                (j->bateaux+i)->ligne = ligne;
+                (j->bateaux+i)->colonne = colonne;
+                (j->bateaux+i)->sens = sens;
+                /*grille mise à jour */
+                afficher_grille(*j,0);
+
+            } //Fin for
+        }//Fin if
+    else
+    {
+
+            afficher_grille(*j,0);
+            for (i = 0; i < NB_BATEAUX; i++)
+            {
+                int nbr_colonne=(rand() % (9 - 0 + 1)) + 0;
+                int lettre=(rand() % (9 - 0 + 1)) + 0;
+                char alphabet[] = "ABCDEFGHIJ";
+
+                (j->bateaux+i)->id=i+1;
+                do {
+                        if (nbr_colonne>5 && lettre<=5)
+                        {
+                            sens=0;
+                        }
+                        else if (lettre>5 && nbr_colonne<=5)
+                        {
+                            sens=1;
+                        }
+                        else if (nbr_colonne<=5 && lettre<=5)
+                        {
+                            sens=(rand()%2);
+                        }
+                        else if (lettre>5 && nbr_colonne>5)
+                        {
+                             nbr_colonne=(rand() % (9 - 0 + 1)) + 0;
+                             lettre=(rand() % (9 - 0 + 1)) + 0;
+                        }
+                        ligne = alphabet[lettre];
+                        colonne=nbr_colonne;
+
+                }while(verifier_saisie_bateaux(ligne, colonne, sens,tailles[i],*j)==0);
+
+                /*initialisation bateau*/
+                (j->bateaux+i)->taille=tailles[i];
+                (j->bateaux+i)->etat = 1;
+                (j->bateaux+i)->ligne = ligne;
+                (j->bateaux+i)->colonne = colonne;
+                (j->bateaux+i)->sens = sens;
+                /*grille mise à jour */
+                afficher_grille(*j,0);
+
+            } //Fin for
+    }
 
 }
 
@@ -297,10 +374,10 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 
 	/* l_index : index de la ligne dans la matrice de la grille, l est le code ASCII de la ligne*/
 	int l_index = l - 'A' ;
-	int i; 
+	int i;
 
 	/*saisie correcte */
-	if(verifier_lignes(l)==0 || 
+	if(verifier_lignes(l)==0 ||
 		verifier_colonne(c)==0 || verifier_sens(s)==0){
 		printf("Erreur de saisie - \n");
 		return 0;
@@ -322,7 +399,7 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 				printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
 				return 0;
 			}
-		
+
 		}
 	}
 	/*parcourir vers la droite*/
@@ -332,17 +409,17 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j){
 				printf("Erreur - Les bateaux ne doivent pas se toucher ni se chevaucher!!! GROS COQUIN!!!! m'enfin voyons\n");
 				return 0;
 			}
-		
+
 		}
 	}
-			
+
 	return (1);
 
 }
 
 /**
  * @brief      vérifie qu'une ligne saisie est conforme à la grille
- * @param      s, un entier pour la ligne 
+ * @param      s, un entier pour la ligne
  * @details    la ligne est entre 'A' et 'A'+NB_LIGNES
  * @return     booléen
  */
@@ -352,18 +429,18 @@ int verifier_lignes(int  s){
 
 /**
  * @brief      vérifie qu'une colonne saisie est conforme à la grille
- * @param      s, un entier pour la colonne 
+ * @param      s, un entier pour la colonne
  * @details    la colonne est entre 1 et NB_COLONNES
  * @return     booléen
  */
 int verifier_colonne(int s){
-	return (s >= 1 && s <= NB_COLONNES);
+	return (s >= 0 && s < NB_COLONNES);
 }
 
 /**
  * @brief      vérifie que le sens/orientation saisi est réalisable
  * @param      s, un entier pour le sens
- * @details    0 haut; 1 droite; 
+ * @details    0 haut; 1 droite;
  * @return     booléen
  */
 int verifier_sens(int s){
@@ -380,23 +457,23 @@ int verifier_sens(int s){
 int is_case_bateau(int l, int c, Bateau *b){
 	int i, resultat = -1;
 	for (i = 0; i < NB_BATEAUX; i++)
-	{	
+	{
 		/*premiere case*/
 		if((b+i)->ligne == 'A'+l && (b+i)->colonne == c) {
 			resultat = (b+i)->id;
 		}
 
-		/*case en bas*/	
-		else if ((b+i)->sens == 0 && 
-			(b+i)->colonne == c && 
+		/*case en bas*/
+		else if ((b+i)->sens == 0 &&
+			(b+i)->colonne == c &&
 			'A'+l>(b+i)->ligne &&
 			'A'+l<=(b+i)->ligne+((b+i)->taille-1)) {
 			resultat = (b+i)->id;
 		}
 
 		/*case à droite*/
-		else if ((b+i)->sens == 1 && 
-			(b+i)->ligne == 'A'+l && 
+		else if ((b+i)->sens == 1 &&
+			(b+i)->ligne == 'A'+l &&
 			c > (b+i)->colonne &&
 			c <=(b+i)->colonne+((b+i)->taille-1)) {
 			resultat = (b+i)->id;
@@ -421,7 +498,7 @@ int dans_la_grille(int l, int c, int s,int taille){
 		return 1;
 	}
 	/*case à droite*/
-	else if (s == 1 && c+taille <= NB_COLONNES+1)
+	else if (s == 1 && c+taille < NB_COLONNES+1)
 		return 1;
 	return 0;
 }
@@ -454,6 +531,6 @@ int touche_bateau(int l, int c, Bateau *b){
 		is_case_bateau(l-1, c-1, b)!=-1 ||
 		is_case_bateau(l-1, c+1, b)!=-1 ||
 		is_case_bateau(l+1, c-1, b)!=-1 ||
-		is_case_bateau(l+1, c+1, b)!=-1 
+		is_case_bateau(l+1, c+1, b)!=-1
 		);
 }

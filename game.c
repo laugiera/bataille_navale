@@ -9,29 +9,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h> 
+#include <time.h>
 #include "init.h"
 #include "game.h"
 
 
 /**
  * @brief      Boucle de jeu principale
- * @details    
+ * @details
  algo :
-	initialisation du jeu : 
-		->saisir les joueurs et leurs bateaux 
+	initialisation du jeu :
+		->saisir les joueurs et leurs bateaux
 		->decider qui commence (aleatoire)
 	jeu :
 		->afficher la grille de jeu du joueur qui commence
 		->saisir choix de la case
 		->vérifier saisie
 			>> si mauvaise saisie : retour à l'étape du dessus
-		->afficher le resultat du coup 
+		->afficher le resultat du coup
 		->mettre à jour la grille de jeu
 		->vérifier si le joueur n'a pas gagné
 			>> si le joueur a gagné : *fin de la boucle et du jeu
 		->passer au joueur suivant
-		->again and again 
+		->again and again
  * @return    void
  */
 void game(void) {
@@ -44,21 +44,21 @@ void game(void) {
 
 	/*variables utiles*/
 	Joueur joueurs[2];
+	int plmnt = menu_screenPlacemnt();
 	Bateau * btx_adverses;
 	int joueur_courant, res_coup, l, c;
-	int jouer = 1;
 
 	/*MODE VS Joueur*/
 	if(IA == 1){
-		printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueurs[0]);
-	    system_message("Entrée pour continuer");
+		printf ("\n==========================[JOUEUR 1 - BIENVENUE !]=============================\n\n");
+	    initialiser_joueur(&joueurs[0], plmnt);
+	    system_message("                      Faites ENTRER pour continuer");
 		cls();
-	    printf ("\n============================[JOUEUR 2 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueurs[1]);
-	    system_message("Entrée pour continuer");
+	    printf ("\n==========================[JOUEUR 2 - BIENVENUE !]=============================\n\n");
+	    initialiser_joueur(&joueurs[1], plmnt);
+	    system_message("                      Faites ENTRER pour continuer");
 		cls();
-		printf ("\n============================[DEBUT DU JEU]=============================================\n");
+		printf ("\n============================[DEBUT DU JEU]===================================\n\n");
 		joueur_courant = (rand()%2); /*1 ou 0*/
 
 		printf("C'est le Joueur %s qui commence ! \n",joueurs[joueur_courant].name);
