@@ -8,10 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h> 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_image.h>
 #include "init.h"
+#include "game.h"
 
 
 int main( int argc, char *argv[] ){
@@ -20,6 +22,7 @@ int main( int argc, char *argv[] ){
 	if(TTF_Init() == -1 || SDL_Init(SDL_INIT_VIDEO) == -1)
 		exit(EXIT_FAILURE);
 	printf("ok libs\n");
+	srand(time(NULL));
 	/*VARIABLES */
 
 	SDL_Surface *ecran = SDL_SetVideoMode(LARGEUR_F, HAUTEUR_F, 32, SDL_HWSURFACE);
@@ -39,18 +42,16 @@ int main( int argc, char *argv[] ){
 		choix = welcome_screen(ecran,colors);
 		if (choix == 1)
 		{
-			game_screen(ecran,colors);
+			game(0,ecran,colors);
 			choix = -1;
 		}
 		else if (choix == 2)
 		{
-			game_screen(ecran,colors);
-			choix = -1;
+			
 		}
 		else if (choix == 3)
 		{
 			rules_screen(ecran);
-			choix = 0;
 		}
 	}while(choix != -1);
 

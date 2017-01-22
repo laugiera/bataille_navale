@@ -8,12 +8,10 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-void game(void);
-void saisir_coup(int* l, int* c, int **historique);
+void game(int solo, SDL_Surface * ecran, Uint32 colors[]);
 int deja_joue(int l, int c, int **historique);
 int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique);
 int is_coule(int **historique, Bateau * b);
 int gagne(Bateau * btx_adverses);
-void affiche_etat_bateaux(Bateau * bateaux);
 
 #endif

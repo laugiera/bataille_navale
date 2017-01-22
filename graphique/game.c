@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h> 
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
+#include <SDL/SDL_image.h>
 #include "init.h"
 #include "game.h"
 
@@ -34,97 +37,100 @@
 		->again and again 
  * @return    void
  */
-void game(void) {
-	srand(time(NULL));
-
-	/*ecrans d'accueil*/
-	welcome_screen();
-	rules_screen();
-	int IA = menu_screen();
-
+void game(int solo, SDL_Surface * ecran, Uint32 colors[]) {
+	
 	/*variables utiles*/
 	Joueur joueurs[2];
 	Bateau * btx_adverses;
 	int joueur_courant, res_coup, l, c;
-	int jouer = 1;
+	int jouer = 1, choix;
+	int dj_joue = 0;
+	char chaine[MAX_SAISIE], error[MAX_SAISIE] = " ";
 
 	/*MODE VS Joueur*/
-	if(IA == 1){
-		printf ("\n============================[JOUEUR 1 - BIENVENUE !]===================================\n");
-	    initialiser_joueur(&joueurs[0]);
-	    system_message("Entrée pour continuer");
-		cls();
-	    printf ("\n============================[JOUEUR 2 - BIENVENUE !]===================================\n");
+	if(solo == 0){
+		if(simple_screen(ecran,"BIENVENUE, Joueur 1 !") == -1)
+			exit(1);
+		initialiser_joueur(&joueurs[0]);
+	    sprintf(joueurs[0].name, "Joueur 1");
+	    saisir_bateaux(&joueurs[0],ecran,colors);
+	    if(simple_screen(ecran,"BIENVENUE, Joueur 2 !") == -1)
+			exit(1);
 	    initialiser_joueur(&joueurs[1]);
-	    system_message("Entrée pour continuer");
-		cls();
-		printf ("\n============================[DEBUT DU JEU]=============================================\n");
-		joueur_courant = (rand()%2); /*1 ou 0*/
+	    sprintf(joueurs[1].name, "Joueur 2");
+	    saisir_bateaux(&joueurs[1],ecran,colors);
+		joueur_courant = (rand()%2); 
+		sprintf(chaine,"C'est le  %s qui commence !",joueurs[joueur_courant].name);
+		if(simple_screen(ecran,chaine)== -1)
+			exit(1);
+		
 
-		printf("C'est le Joueur %s qui commence ! \n",joueurs[joueur_courant].name);
-
-		while(jouer) 
+		do
 		{
-			printf("\n============================[A VOTRE TOUR %s!]==========================================\n",joueurs[joueur_courant].name);
-			affiche_etat_bateaux(joueurs[joueur_courant].bateaux);
 			/*saisie de la case*/
-			afficher_grille(joueurs[joueur_courant],1);
-			saisir_coup(&l,&c,joueurs[joueur_courant].historique);
+			do {
+				choix = game_screen(ecran,colors,"Cliquez sur une case !",error, "", &l, &c,&joueurs[joueur_courant],2);
+				if (choix ==-1)
+					exit(1); /*echap ou quitter*/
+				printf("deja joue %c %d\n",l+'A',c);
+
+
+				dj_joue = deja_joue(l,c,joueurs[joueur_courant].historique);
+				if(dj_joue)
+					sprintf(error,"Vous avez deja joue cette case !");
+				else
+					sprintf(error," ");
+
+			}/*tq la case choisie est pas bonne*/
+			while(dj_joue);
+
 			/*on récupère les bateaux adverses pour comparer avec la case choisie*/
 			if(joueur_courant == 1)
 				btx_adverses = joueurs[0].bateaux;
 			else
 				btx_adverses = joueurs[1].bateaux;
+			printf("res coup\n");
 			res_coup = resultat_coup(l,c,btx_adverses,joueurs[joueur_courant].historique);
+
 			/*on met à jour la grille de jeu*/
-			joueurs[joueur_courant].historique[l-'A'][c] = res_coup;
-			afficher_grille(joueurs[joueur_courant],1);
+			joueurs[joueur_courant].historique[c][l] = res_coup;
+
+			sprintf(chaine,"CASE : %c%d %s",l+'A',c,res_coup=='o'?"A l'eau !":"Touchey");
+			if(simple_screen(ecran,chaine)== -1)
+					exit(1);
+
 			/*si le joueur a gagne on sort de la boucle*/
 			if(gagne(btx_adverses)){
-				printf("\n=============================[VOUS AVEZ GAGNE !]======================================\n");
-				printf("\n=============================[FIN DE LA PARTIE !]=====================================\n");
+				sprintf(chaine,"THE END : Le joueur %s a gagne !\n",joueurs[joueur_courant].name);
+				if(simple_screen(ecran,chaine)== -1)
+					exit(1);
 				jouer = 0;
 			}
 			/*sinon on continue et on passe au joueur suivant*/
 			else {
-				system_message("Entrée pour continuer");
-				cls();
 				/*on passe au joueur adverse*/
 				if(joueur_courant == 1)
 					joueur_courant = 0;
 				else
 					joueur_courant = 1;
+
+				sprintf(chaine,"Au tour de %s !",joueurs[joueur_courant].name);
+				if(simple_screen(ecran,chaine)== -1)
+					exit(1);
 			}
-		}
+		}while(jouer);
+
 
 		free_joueur(&joueurs[0]);
 		free_joueur(&joueurs[1]);
 	}
 
 	/*VS IA*/
-	else if (IA == 2){
+	else if (solo == 1){
 
 	}
 }
 
-/**
- * @brief      Saisis une case et vérifie la saisie
- * @param      *l le caractère de la ligne
- * @param	   *c l'entier de la colonne
- * @param	   int ** grille de jeu
- * @return     void
- */
-void saisir_coup(int* l, int* c, int **historique){
-	do{
-		printf("Saisir une ligne (A - %c):\n",'A'+NB_LIGNES-1);
-		(*l) = fgetc(stdin);
-		f_purge(stdin);
-		printf("Saisir une colonne (1-%d):\n",NB_COLONNES);
-		scanf("%d",c);
-		f_purge(stdin);
-	}while(verifier_lignes(*l)==0 || verifier_colonne(*c)==0 || deja_joue(*l,*c,historique));
-
-}
 /**
  * @brief      cherche si un coup a déjà été joué
  * @param      l le charactère de la ligne
@@ -133,10 +139,10 @@ void saisir_coup(int* l, int* c, int **historique){
  * @return     boolean, vrai si déjà joué, faux sinon
  */
 int deja_joue(int l, int c, int ** historique){
-		if(historique[l-'A'][c]!='.'){
+		if(historique[c][l]!='.'){
 				printf("Vous avez déjà joué cette case, recommencez la saisie.\n");
 				return 1;
-			}
+		}
 		return 0;
 }
 
@@ -149,8 +155,8 @@ int deja_joue(int l, int c, int ** historique){
  * @return     int (valeur ASCII du char 'o' ou de l'id du bateau)
  */
 int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
-	printf("\n\nCASE %c%d \n",l,c );
-	int res = is_case_bateau(l-'A',c,btx_adverses);
+	printf("\n\nCASE %c%d \n",l+'A',c );
+	int res = is_case_bateau(l,c,btx_adverses);
 	if(res == -1){
 		printf("\nRESULTAT : A l'eau ! \n");
 		return 'o';
@@ -187,7 +193,7 @@ int is_coule(int **historique, Bateau * b){
 	int i,k, nb =1;
 	for (i = 0; i < NB_LIGNES; i++)
 	{
-		for (k = 1; k <= NB_COLONNES; k++)
+		for (k = 0; k <= NB_COLONNES; k++)
 		{
 			if(historique[i][k]==b->id+'0')
 				nb++;
@@ -197,7 +203,7 @@ int is_coule(int **historique, Bateau * b){
 		b->etat = 0;
 		for (i = 0; i < NB_LIGNES; i++)
 		{
-			for (k = 1; k <= NB_COLONNES; k++)
+			for (k = 0; k <= NB_COLONNES; k++)
 			{
 				if(historique[i][k]==b->id+'0')
 					historique[i][k]='X';
@@ -223,16 +229,4 @@ int gagne(Bateau * btx_adverses){
 	return res;
 }
 
-/**
- * @brief      affiche l'état des bateaux du joueur courant
- * @param	   Bateau* les bateaux
- * @return     void
- */
-void affiche_etat_bateaux(Bateau * bateaux){
-	printf("\n\nVoici l'état de vos bateaux :\n");
-	int i;
-	for(i=0; i<NB_BATEAUX; i++){
-		printf("Le bateau %d est %s\n",(bateaux+i)->id,(bateaux+i)->etat==0?"coulé":"en vie" );
-	}
-}
 
