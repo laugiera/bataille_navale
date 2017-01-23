@@ -283,7 +283,7 @@ void free_joueur(Joueur *j){
 void saisir_bateaux(Joueur *j, int mode_placement){
 
             srand(time(NULL));
-            int tailles[NB_BATEAUX]={2,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+            int tailles[NB_BATEAUX]={5,4,3,3,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
             int i,colonne,ligne,sens;
     if (mode_placement==1){
                 printf("Saisissez vos bateaux (coordonnées de la première case et sens):\n Sens : 0 vertical (vers le bas); 1 horizontal (vers la droite); \n");

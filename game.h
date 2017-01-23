@@ -8,6 +8,18 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+/* a cause de mon pb de link*/
+ typedef enum {
+	mode_aleatoire,
+	mode_cible
+} ModeIA;
+typedef enum {
+	vertical,
+	horizontal,
+	gauche,
+	droite
+} Direction;
+
 void game(void);
 void saisir_coup(int* l, int* c, int **historique);
 int deja_joue(int l, int c, int **historique);

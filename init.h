@@ -13,7 +13,7 @@
 #define NB_LIGNES 10
 #define NB_COLONNES 10
 
-#define NB_BATEAUX 2
+#define NB_BATEAUX 5
 
 #define MAX_SAISIE 20
 #define BLOC_MALLOC 100

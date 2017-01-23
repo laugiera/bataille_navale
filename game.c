@@ -110,7 +110,11 @@ void game(void) {
 	    system_message("                      Faites ENTRER pour continuer");
 		cls();
 	    printf ("\n==========================[grille de R2D2]=============================\n\n");
+	    /* VARIABLES D'IA */
 	    mode_placement = 2;
+	    ModeIA mode_ia = mode_aleatoire;
+	    int l_cible = 0, c_cible = 0;
+		/*FIN DES VARIABLES*/
 	    initialiser_ia(&joueurs[1], mode_placement);
 	    /*
 	    system_message("                      Faites ENTRER pour continuer");
@@ -155,15 +159,17 @@ void game(void) {
 			}
 			/*tour IA*/
 			else {
-				coup_ia_random(&l,&c,joueurs[joueur_courant].historique);
+				coup_ia_intelligent(&l,&c,joueurs[joueur_courant].historique, mode_ia, l_cible, c_cible);
 				printf("%s a joué en %c %d\n",joueurs[joueur_courant].name, l, c);
 				btx_adverses = joueurs[0].bateaux;
 				res_coup = resultat_coup(l,c,btx_adverses,joueurs[joueur_courant].historique);
+				/*on switch le mode d'IA*/
+				choix_mode_ia(&mode_ia, &l_cible, &c_cible, &l, &c, res_coup);
 				/*on met à jour la grille de jeu*/
 				joueurs[joueur_courant].historique[l-'A'][c] = res_coup;
-				/*
+				
 				afficher_grille(joueurs[joueur_courant],1);
-				*/
+				
 				if(gagne(btx_adverses)){
 					printf("\n=============================[VOUS AVEZ GAGNE !]======================================\n");
 					printf("\n=============================[FIN DE LA PARTIE !]=====================================\n");
@@ -223,7 +229,7 @@ int deja_joue(int l, int c, int ** historique){
  * @param	   c l'entier de la colonne
  * @param	   Bateau * btx_adverses
  * @param	   int ** grille de jeu
- * @return     int (valeur ASCII du char 'o' ou de l'id du bateau)
+ * @return     int (valeur ASCII du char 'o' pour à l'eau, '+' pour touché, 'X' pour coulé, peut renvoyer l'ID du bateau)
  */
 int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
 	/*printf("\n\nCASE %c%d \n",l,c );*/
@@ -251,6 +257,7 @@ int resultat_coup(int l, int c, Bateau * btx_adverses, int **historique){
 			faut pas dire quel bateau est touché non?*/
 			printf("\nRESULTAT : TOUCHEYY !\n");
 			return '+';
+			/*return res+'0'; Pour renvoyer l'ID du bateau*/
 	}
 	/*return res+'0';*/
 }

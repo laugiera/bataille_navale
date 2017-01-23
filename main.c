@@ -14,7 +14,7 @@
 
 
 int main( int argc, char *argv[] ){
-
+	printf("%d\n", NB_BATEAUX);
 	game();
 
 	return EXIT_SUCCESS;

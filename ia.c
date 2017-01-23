@@ -96,9 +96,229 @@ void coup_ia_random(int *l, int *c, int **historique) {
 	}while(verifier_lignes(*l)==0 || verifier_colonne(*c)==0 || deja_joue(*l,*c,historique));
 }
 
+/**
+ * @brief      génère des coordonnées ciblées pour le coup que l'IA tire
+ * @param      l, pointeur vers le caractère de la ligne
+ * @param      c, pointeur vers l'int de la colone
+ * @param      historique, grille de jeu de l'ia
+ * @param      l_cible, la ligne de la cible (code ASCII)
+ * @param      c_cible, la colone de la cible
+ * @details    effectue un quadrillage autour d'une zone donnée par la cible en fonction de l'historique de tir
+ * @return     void
+ */
+void coup_ia_cible(int *l, int *c, int **historique, int l_cible, int c_cible) {
+	/*direction vertical: 0, horizontal: 1*/
+	printf("cible : %c%d\n",l_cible, c_cible);
+	Sens sens = vertical;
+	/*pour les test tester si la cible est bien un touché sinon faire un random*/
+	/*regarde les 4 cardinales autour de la case*/
+	/*si une est touché set une direction, sinon tire une au hasard BREAK*/
+	/*direction : regarde un bout à l'autre */
+	/*si une case 'o' d'un coté tire de l'autre sinon tire au hasard*/
+	if (historique[l_cible-'A'][c_cible] == '+') {
+		/*si aucun adjacent n'est touché tirer au hasard*/
+		if (ia_check_adjacent(historique, l_cible, c_cible, &sens) == 0) {
+			coup_ia_random4cases(l, c, historique, l_cible, c_cible);
+			printf("res random 4 : %c%d\n", *l, *c);
+		} else {
+			coup_ia_random2cases(l, c, historique, l_cible, c_cible, sens);
+			printf("res random 2 : %c%d\n", *l, *c);
+		}
+	} else {
+		printf("ERREUR choix mode, utilisation random par défaut\n");
+		coup_ia_random(l, c, historique);
+	}
+}
+
+/**
+ * @brief      cherche a savoir si des cases adjacentes à la cible ont déja été jouées
+ * @param      historique, grille de jeu de l'ia
+ * @param      l_cible, la ligne de la cible (code ASCII)
+ * @param      c_cible, la colone de la cible
+ * @param      *sens, pointeur vers le sens du bateau
+ * @details    regarde aussi si les cases adjacentes sont dans la map et donne le sens du bateau si besoin
+ * @return     int, 1 : s'il y a une cases touchée adjacente, O: sinon
+ */
+int ia_check_adjacent(int **historique, int l_cible, int c_cible, Sens *sens) {
+	if ( verifier_lignes(l_cible+1)==1 &&
+		 verifier_lignes(l_cible-1)==1 &&
+		 verifier_colonne(c_cible+1)==1 &&
+		 verifier_colonne(c_cible+1)==1 )
+	{
+		if (historique[l_cible-'A'+1][c_cible] != '+' &&
+			historique[l_cible-'A'][c_cible+1] != '+' &&
+			historique[l_cible-'A'-1][c_cible] != '+' &&
+			historique[l_cible-'A'][c_cible-1] != '+' ) {
+			return 0;
+		} else if ( historique[l_cible-'A'+1][c_cible] == '+' || historique[l_cible-'A'-1][c_cible] == '+') {
+			*sens = vertical;
+			return 1;
+		} else {
+			*sens = horizontal;
+			return 1;
+		}
+	}
+else return 0; /*temporaire fix*/
+}
+
+
+/**
+ * @brief      génère des coordonnées aléatoires d'une cases adjacente à la cible
+ * @param      l, pointeur vers le caractère de la ligne
+ * @param      c, pointeur vers l'int de la colone
+ * @param      historique, grille de jeu de l'ia
+ * @param      l_cible, la ligne de la cible (code ASCII)
+ * @param      c_cible, la colone de la cible
+ * @details    génère de nouvelles coordonnées jusqu'à tomber sur une case qui n'a pas encore été jouée
+ * @return     void
+ */
+void coup_ia_random4cases(int *l, int *c, int **historique, int l_cible, int c_cible) {
+	printf("Pas d'indice random 4 cases\n");
+	do{
+		Sens sens = (Sens)(rand()%2);
+		if(sens == vertical) {
+			*c = c_cible;
+			if(rand()%2 == 0) {
+				*l = l_cible-1;
+			} else {
+				*l = l_cible+1;
+			}
+		} else {
+			*l = l_cible;
+			if(rand()%2 == 0) {
+				*c = c_cible-1;
+			} else {
+				*c = c_cible+1;
+			}
+		}
+		printf("sens : %d \ncase : %c %d \n",sens,*l, *c);
+	}while(verifier_lignes(*l)==0 || verifier_colonne(*c)==0 || deja_joue(*l,*c,historique));
+}
+
+/**
+ * @brief      génère des coordonnées aléatoires d'une case en bout de bateau
+ * @param      l, pointeur vers le caractère de la ligne
+ * @param      c, pointeur vers l'int de la colone
+ * @param      historique, grille de jeu de l'ia
+ * @param      l_cible, la ligne de la cible (code ASCII)
+ * @param      c_cible, la colone de la cible
+ * @param      sens, horizontal ou vertical, sens du bateau
+ * @details    génère de nouvelles coordonnées jusqu'à tomber sur une case qui n'a pas encore été jouée
+ * @return     void
+ */
+void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_cible, Sens sens) {
+	int i = 0, j=0;
+	printf("IA random 2 cases\n");
+	if (sens == vertical) {
+		*c = c_cible;
+		/*trouver les extrèmes du bateau*/
+		while (historique[l_cible-'A'+i][c_cible] == '+' && verifier_lignes(l_cible+i+1) == 1) {
+			i++;
+		}
+		while (historique[l_cible-'A'-j][c_cible] == '+' && verifier_lignes(l_cible-j-1) == 1) {
+			j++;
+		}
+		/*regarder leur état et choisir en fonction (normalement au moins un des deux doit etre inconnu sinon on aurait déjà changé de mode*/
+		printf("Les desu cases sont %c%d et %c%d\n",l_cible-j, c_cible, l_cible+i, c_cible);
+		if(historique[l_cible-'A'+i][c_cible] != '.') {
+			*l= l_cible-j;
+		} else if (historique[l_cible-'A'-j][c_cible] != '.') {
+			*l= l_cible+i;
+		} else if (historique[l_cible-'A'+i][c_cible] == '.' && historique[l_cible-'A'-j][c_cible] == '.'){
+			if(rand()%2 == 0) {
+				*l= l_cible-j;
+			} else {
+				*l= l_cible+i;
+			}
+		} else {
+			printf("ERREUR : cas 2 inconnues en bout de bateau, Not possible\n");
+		}
+	} else {
+		*l = l_cible;
+		/*trouver les extrèmes du bateau*/
+		while (historique[l_cible-'A'][c_cible+i] == '+' && verifier_colonne(c_cible+i+1) == 1) {
+			i++;
+		}
+		while (historique[l_cible-'A'][c_cible-j] == '+' && verifier_colonne(c_cible-j-1) == 1) {
+			j++;
+		}
+		printf("Les desu cases sont %c%d et %c%d\n",l_cible, c_cible-j, l_cible, c_cible+i);
+		/*regarder leur état et choisir en fonction (normalement au moins un des deux doit etre inconnu sinon on aurait déjà changé de mode*/
+		if(historique[l_cible-'A'][c_cible+i] != '.') {
+			*c= c_cible-j;
+		} else if (historique[l_cible-'A'][c_cible-j] != '.') {
+			*c= c_cible+i;
+		} else if(historique[l_cible-'A'][c_cible+i] == '.' && historique[l_cible-'A'][c_cible-j] == '.'){
+			if(rand()%2 == 0) {
+				*c= c_cible-j;
+			} else {
+				*c= c_cible+i;
+			}
+		} else {
+			printf("ERREUR : cas 2 inconnues en bout de bateau, Not possible\n");
+		}
+	}
+}
+
+/**
+ * @brief      génère des coordonnées intelligente pour le coup que l'IA tire
+ * @param      l, pointeur vers le caractère de la ligne
+ * @param      c, pointeur vers l'int de la colone
+ * @param      historique, grille de jeu de l'ia
+ * @param      mode, 1 : aléatoire, 2 : cible
+ * @param      l_cible, la ligne de la cible (code ASCII)
+ * @param      c_cible, la colone de la cible
+ * @details    à venir
+ * @return     void
+ */
+void coup_ia_intelligent(int *l, int *c, int **historique, ModeIA mode, int l_cible, int c_cible) {
+	if (mode == mode_aleatoire) {
+		coup_ia_random(l, c, historique);
+		printf("coup aléatoire\n");
+	} else {
+		coup_ia_cible(l, c, historique, l_cible, c_cible);
+		printf("res coup ciblé : %c%d\n",*l, *c );
+		printf("coup ciblé\n");
+	}
+}
+
+
+/**
+ * @brief      switch entre les différents mode d'ia et ajuste la cible si besoin
+ * @param      *mode_ia, pointeur vers le mode d'IA
+ * @param      *l_cible, poiteur vers la ligne de la cible (code ASCII)
+ * @param      *c_cible, poiteur vers la colone de la cible
+ * @param      *l, poiteur vers la ligne du dernier coup tiré (code ASCII)
+ * @param      *c, poiteur vers la colone du dernier coup tiré
+ * @param      res_coup, resultat du coup précédent
+ * @details    En fonction du resultat du coup précédent, change éventuellement de mode et/ou de cible
+ * @return     void
+ */
+void choix_mode_ia(ModeIA *mode_ia, int *l_cible, int *c_cible, int *l, int *c, int res_coup) {
+	if(*mode_ia == mode_aleatoire) {
+		if(res_coup == '+') {
+			*mode_ia = mode_cible;
+			*l_cible = *l;
+			*c_cible = *c;
+		} else {
+			/*éventuellement éliminer les cases autour*/
+		}
+	} else {
+		if(res_coup == 'X') {
+			*mode_ia = mode_aleatoire;
+		} 
+		/*peut etre rajouter des trucs*/
+	}
+}
+
 /*
 TO DO : 
 - associer init_ia avec init_jouer et ajouter un param IA dans saisir_bateau pour empecher l'affichage de la grille de l'IA
 - empecher le message d'erreur de deja_joue avec IA
 -enlever verif_lign et col dans coup_ia_random
+- peut etre ajouter un truc pour bloquer si jamais qqn essaye d'augmenter le nb de bateau et qu'il y a des pb pour les placer aléatoirement
+-coup ia cible : check ligne et col qui doivent etre dans la grille
+
+Pour aléillorer l'IA
+-élimination auto des cases autour d'un bateau
 */
