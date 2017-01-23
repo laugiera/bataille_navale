@@ -163,11 +163,11 @@ void game(void) {
 				printf("%s a joué en %c %d\n",joueurs[joueur_courant].name, l, c);
 				btx_adverses = joueurs[0].bateaux;
 				res_coup = resultat_coup(l,c,btx_adverses,joueurs[joueur_courant].historique);
-				/*on switch le mode d'IA*/
+				/*switch le mode d'IA*/
 				choix_mode_ia(&mode_ia, &l_cible, &c_cible, &l, &c, res_coup);
 				/*on met à jour la grille de jeu*/
 				joueurs[joueur_courant].historique[l-'A'][c] = res_coup;
-				
+				completer_historique_ia(joueurs[joueur_courant].historique);
 				afficher_grille(joueurs[joueur_courant],1);
 				
 				if(gagne(btx_adverses)){

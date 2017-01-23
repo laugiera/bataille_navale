@@ -36,6 +36,7 @@ void coup_ia_random4cases(int *l, int *c, int **historique, int l_cible, int c_c
 void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_cible, Sens sens);
 void coup_ia_intelligent(int *l, int *c, int **historique, ModeIA mode, int l_cible, int c_cible);
 void choix_mode_ia(ModeIA *mode_ia, int *l_cible, int *c_cible, int *l, int *c, int res_coup);
+void completer_historique_ia(int **historique);
 
 #endif
 

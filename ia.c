@@ -136,29 +136,22 @@ void coup_ia_cible(int *l, int *c, int **historique, int l_cible, int c_cible) {
  * @param      l_cible, la ligne de la cible (code ASCII)
  * @param      c_cible, la colone de la cible
  * @param      *sens, pointeur vers le sens du bateau
- * @details    regarde aussi si les cases adjacentes sont dans la map et donne le sens du bateau si besoin
+ * @details    regarde aussi si les cases adjacentes sont dans la map et donne le sens du bateau si il peut etre determiné
  * @return     int, 1 : s'il y a une cases touchée adjacente, O: sinon
  */
 int ia_check_adjacent(int **historique, int l_cible, int c_cible, Sens *sens) {
-	if ( verifier_lignes(l_cible+1)==1 &&
-		 verifier_lignes(l_cible-1)==1 &&
-		 verifier_colonne(c_cible+1)==1 &&
-		 verifier_colonne(c_cible+1)==1 )
-	{
-		if (historique[l_cible-'A'+1][c_cible] != '+' &&
-			historique[l_cible-'A'][c_cible+1] != '+' &&
-			historique[l_cible-'A'-1][c_cible] != '+' &&
-			historique[l_cible-'A'][c_cible-1] != '+' ) {
-			return 0;
-		} else if ( historique[l_cible-'A'+1][c_cible] == '+' || historique[l_cible-'A'-1][c_cible] == '+') {
-			*sens = vertical;
-			return 1;
-		} else {
-			*sens = horizontal;
-			return 1;
-		}
+	/*int touche = 0;*/
+	if((verifier_lignes(l_cible+1)==1 && historique[l_cible-'A'+1][c_cible] == '+') ||
+	   (verifier_lignes(l_cible-1)==1 && historique[l_cible-'A'-1][c_cible] == '+')) {
+		*sens = vertical;
+		return 1;
+	} else if ((verifier_colonne(c_cible+1)==1 && historique[l_cible-'A'][c_cible+1] == '+') ||
+			   (verifier_colonne(c_cible-1)==1 && historique[l_cible-'A'][c_cible-1] == '+')) {
+		*sens = horizontal;
+		return 1;
+	} else {
+		return 0;
 	}
-else return 0; /*temporaire fix*/
 }
 
 
@@ -242,7 +235,7 @@ void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_c
 		while (historique[l_cible-'A'][c_cible-j] == '+' && verifier_colonne(c_cible-j-1) == 1) {
 			j++;
 		}
-		printf("Les desu cases sont %c%d et %c%d\n",l_cible, c_cible-j, l_cible, c_cible+i);
+		printf("Les deux cases sont %c%d et %c%d\n",l_cible, c_cible-j, l_cible, c_cible+i);
 		/*regarder leur état et choisir en fonction (normalement au moins un des deux doit etre inconnu sinon on aurait déjà changé de mode*/
 		if(historique[l_cible-'A'][c_cible+i] != '.') {
 			*c= c_cible-j;
@@ -295,21 +288,38 @@ void coup_ia_intelligent(int *l, int *c, int **historique, ModeIA mode, int l_ci
  * @return     void
  */
 void choix_mode_ia(ModeIA *mode_ia, int *l_cible, int *c_cible, int *l, int *c, int res_coup) {
-	if(*mode_ia == mode_aleatoire) {
-		if(res_coup == '+') {
-			*mode_ia = mode_cible;
-			*l_cible = *l;
-			*c_cible = *c;
-		} else {
-			/*éventuellement éliminer les cases autour*/
-		}
-	} else {
-		if(res_coup == 'X') {
-			*mode_ia = mode_aleatoire;
-		} 
-		/*peut etre rajouter des trucs*/
-	}
+	if(*mode_ia == mode_aleatoire && res_coup == '+') {
+		*mode_ia = mode_cible;
+		*l_cible = *l;
+		*c_cible = *c;
+	} else if (*mode_ia == mode_cible && res_coup == 'X'){
+		*mode_ia = mode_aleatoire;
+	} 
 }
+
+void completer_historique_ia(int **historique) {
+	int i, j;
+	for (i=0; i<NB_LIGNES; i++) {
+		for(j=0; j<NB_COLONNES; j++){
+			if (historique[i][j] == 'X') {
+				if (verifier_lignes(i+1)==1 && historique[i+1][j]=='.') {
+					historique[i+1][j]='o';
+				}
+				if (verifier_lignes(i-1)==1 && historique[i-1][j]=='.') {
+					historique[i-1][j]='o';
+				}
+				if (verifier_colonne(j+1)==1 && historique[i][j+1]=='.') {
+					historique[i][j+1]='o';
+				}
+				if (verifier_colonne(j-1)==1 && historique[i][j-1]=='.') {
+					historique[i][j-1]='o';
+				}
+			}
+		}
+	}
+	/*parcourir la matrice trouver toutes les cases X et remplacer tous les '.' qui les entourent (si ils existent) par des 'o'*/
+}
+
 
 /*
 TO DO : 
