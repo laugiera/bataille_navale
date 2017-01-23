@@ -18,10 +18,12 @@
 #define NB_LIGNES 10 
 #define NB_COLONNES 10 
 
-#define NB_BATEAUX 5
+#define NB_BATEAUX 2
 
 #define MAX_SAISIE 80
 #define BLOC_MALLOC 100
+
+#define DECALAGE	100
 
 
 /**

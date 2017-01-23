@@ -26,13 +26,13 @@ int get_grid_index(int x_position, int y_position, int *index_row, int *index_co
 	for (i = 0; i < 10; i++)
 	{
 		/*printf("TAILLE_CELL*(i+1) = %d et TAILLE_CELL*(i+2) = %d\n",TAILLE_CELL*(i+1),TAILLE_CELL*(i+2) );*/
-		if(x_position>=TAILLE_CELL*(i+1) && x_position<TAILLE_CELL*(i+2))
+		if(x_position>=DECALAGE + TAILLE_CELL*(i+1) && x_position<DECALAGE + TAILLE_CELL*(i+2))
 		{
 			/*printf("ok col (x) FOUND !\n");*/
 			for (j = 0; j < 10; j++)
 			{
 				/*printf("TAILLE_CELL*(j+1) = %d et TAILLE_CELL*(j+2) = %d\n",TAILLE_CELL*(j+1),TAILLE_CELL*(j+2) );*/
-				if(y_position>=TAILLE_CELL*(j+1) && y_position<TAILLE_CELL*(j+2))
+				if(y_position>=DECALAGE + TAILLE_CELL*(j+1) && y_position<DECALAGE + TAILLE_CELL*(j+2))
 				{
 					/*printf("ok ligne (y) FOUND ! \n");*/
 					(*index_row) = j;
@@ -58,19 +58,19 @@ int welcome_screen(SDL_Surface * ecran, Uint32 colors[]){
 	position.x=0;
 	position.y=0;
 
-	SDL_Surface *background = IMG_Load("img/fondACCUEIL.png");
-	SDL_Surface *modeJoVsJO = IMG_Load("img/multi.png");
-	SDL_Surface *modeIA = IMG_Load("img/solo.png");
-	SDL_Surface *rules = IMG_Load("img/rules.png");
+	SDL_Surface *background = IMG_Load("img/Accueuil.jpg");
+	SDL_Surface *modeJoVsJO = IMG_Load("img/bouton_multi.png");
+	SDL_Surface *modeIA = IMG_Load("img/bouton_IA.png");
+	SDL_Surface *rules = IMG_Load("img/bouton_rules.png");
 
 	SDL_BlitSurface(background,NULL,ecran,&position);
 	
 	position.x=(LARGEUR_F/2)-(LARGEUR_BUTTON/2);
-	position.y=300;
+	position.y=380;
 	SDL_BlitSurface(modeIA, NULL, ecran, &position);
-	position.y=450;
+	position.y=530;
 	SDL_BlitSurface(modeJoVsJO, NULL, ecran, &position);
-	position.y=600;
+	position.y=680;
 	SDL_BlitSurface(rules, NULL, ecran, &position);
 
 	SDL_Flip(ecran); 
@@ -95,8 +95,8 @@ void rules_screen(SDL_Surface * ecran){
 	position.x=0;
 	position.y=0;
 
-	SDL_Surface *background = IMG_Load("img/fondACCUEIL.png");
-	SDL_Surface *retour = IMG_Load("img/multi.png");
+	SDL_Surface *background = IMG_Load("img/Regles.jpg");
+	SDL_Surface *retour = IMG_Load("img/bouton_retour.png");
 
 	SDL_BlitSurface(background,NULL,ecran,&position);
 	
@@ -134,7 +134,7 @@ int game_screen(SDL_Surface * ecran, Uint32 colors[], char * title, char * error
 	SDL_Surface *title_surf = NULL;
 	SDL_Surface *error_surf = NULL;
 	SDL_Surface *sens_surf = NULL;
-	SDL_Surface *continuer_btn = NULL;
+	SDL_Surface *background = IMG_Load("img/Fond_Neutre.jpg");
 
 	SDL_Rect position;
 
@@ -144,60 +144,61 @@ int game_screen(SDL_Surface * ecran, Uint32 colors[], char * title, char * error
 	police_grille = TTF_OpenFont("polices/batmfa__.ttf", 30);
 	police_txt = TTF_OpenFont("polices/Starjedi.ttf", 20);
 
-	SDL_Color couleurNoire = {0, 0, 0};
-	SDL_Color couleurRouge = {255, 0, 0};
+	SDL_Color couleurJaune = {255, 208, 45};
+	SDL_Color couleurRouge = {255, 84, 0};
 	 
 	int i,j;
 	char string [80];
 	int  is_bateau;
 
 	/*ALLOC SURFACES*/
-
-	SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+	position.x=0;
+	position.y=0;
+	SDL_BlitSurface(background,NULL,ecran,&position);
 
 	/*titre txt*/
-	position.x=40;
-	position.y=600;
-	title_surf = TTF_RenderText_Blended(police_txt, title, couleurNoire);
+	position.x=DECALAGE;
+	position.y=650;
+	title_surf = TTF_RenderText_Blended(police_txt, title, couleurJaune);
 	SDL_BlitSurface(title_surf, NULL, ecran, &position);
 
 	/*sens txt*/
-	position.x=40;
-	position.y=660;
-	sens_surf = TTF_RenderText_Blended(police_txt, sens_txt, couleurNoire);
+	position.x=DECALAGE;
+	position.y=700;
+	sens_surf = TTF_RenderText_Blended(police_txt, sens_txt, couleurJaune);
 	SDL_BlitSurface(sens_surf, NULL, ecran, &position);
 
 	/*error txt*/
 	if(strlen(error)!=0){
-		position.x=40;
-		position.y=720;
+		position.x=DECALAGE;
+		position.y=750;
 		error_surf = TTF_RenderText_Blended(police_txt, error, couleurRouge);
 		SDL_BlitSurface(error_surf, NULL, ecran, &position);				
 	}
 
 	/*grille index*/
-	position.x=TAILLE_CELL;
-	position.y=0;
+	position.x=DECALAGE+TAILLE_CELL;
+	position.y=DECALAGE;
 	for (i = 0; i < 10; i++) /*colonnes index*/
 	{
 		sprintf(string,"%d",i);
-		cols[i] = TTF_RenderText_Blended(police_grille, string, couleurNoire);
+		cols[i] = TTF_RenderText_Blended(police_grille, string, couleurJaune);
     	SDL_BlitSurface(cols[i], NULL, ecran, &position); /* Blit du texte */
 		position.x += TAILLE_CELL;
 	}
-	position.x=0;
-	position.y=TAILLE_CELL;
+	position.x=DECALAGE;
+	position.y=DECALAGE+TAILLE_CELL;
 	for (i = 0; i < 10; i++) /*lignes index txt*/
 	{		
 		sprintf(string,"%c",'A'+i);
-		rows[i] = TTF_RenderText_Blended(police_grille, string, couleurNoire);
+		rows[i] = TTF_RenderText_Blended(police_grille, string, couleurJaune);
     	SDL_BlitSurface(rows[i], NULL, ecran, &position); /* Blit du texte */
 		position.y += TAILLE_CELL;	
 	}
 
 	/*grille cases*/
-	position.y =TAILLE_CELL;
-	position.x = TAILLE_CELL;
+	position.y = DECALAGE + TAILLE_CELL;
+	position.x = DECALAGE + TAILLE_CELL;
 	for (i = 0; i < 10; i++) 
 	{
 		for (j = 0; j < 10; j++)
@@ -206,29 +207,27 @@ int game_screen(SDL_Surface * ecran, Uint32 colors[], char * title, char * error
 			/*grille placement bateaux*/
 			if (placement <= 1 && is_bateau != -1){
 				sprintf(string,"%d",is_bateau);
-				grid[i][j]=TTF_RenderText_Blended(police_grille, string, couleurNoire);
+				grid[i][j]=TTF_RenderText_Blended(police_grille, string, couleurJaune);
 			}
 			/*grille jeu*/
 			else if(placement == 2 && jo->historique[i][j]!='.'){ /*si case bateau*/
 				if(jo->historique[i][j]=='o')
-					sprintf(string,"~"); /*eau*/
+					grid[i][j]=IMG_Load("img/espace.png"); /*eau*/
 				else if (jo->historique[i][j]=='X') /*couley*/
-					sprintf(string,"C");
+					grid[i][j]=IMG_Load("img/coule.png");
 				else /*touchey*/
-					sprintf(string,"X");
-				grid[i][j]=TTF_RenderText_Blended(police_grille, string, couleurNoire);
+					grid[i][j]=IMG_Load("img/touche.png");
 
 			}
 			else { /*case inconnue*/
-				grid[i][j]=SDL_CreateRGBSurface(SDL_HWSURFACE, TAILLE_CELL, TAILLE_CELL, 32, 0, 0, 0, 0);
-				SDL_FillRect(grid[i][j], NULL, colors[(j+i)%2]); 
+				grid[i][j]=IMG_Load("img/inconnu.png");
 			}
 
 			SDL_BlitSurface(grid[i][j], NULL, ecran, &position); 
 			position.y += TAILLE_CELL;
 		}
 		position.x += TAILLE_CELL;
-		position.y = TAILLE_CELL;
+		position.y = DECALAGE + TAILLE_CELL;
 	}
 	printf("Init Grid ok\n");
 
@@ -273,8 +272,8 @@ int simple_screen(SDL_Surface * ecran, char * chaine){
 
 	SDL_Color couleurBlanc = {255, 255, 255};
 
-	SDL_Surface *background = IMG_Load("img/fondACCUEIL.png");
-	SDL_Surface *retour = IMG_Load("img/multi.png");
+	SDL_Surface *background = IMG_Load("img/Fond_Neutre.jpg");
+	SDL_Surface *retour = IMG_Load("img/bouton_continuer.png");
 
 	SDL_BlitSurface(background,NULL,ecran,&position);
 	
@@ -333,15 +332,15 @@ int pause_welcome_screen(SDL_Surface *ecran){
 					x=event.button.x;
 					y=event.button.y;
 					if(x>(LARGEUR_F/2)-(LARGEUR_BUTTON/2) && x<(LARGEUR_F/2)+(LARGEUR_BUTTON/2)){
-						if(y>300 && y<400){
+						if(y>380 && y<480){
 							choix=1;
 							continuer = 0;
 						}
-						else if(y>450 && y<550){
+						else if(y>530 && y<630){
 							choix=2;
 							continuer = 0;
 						}
-						else if(y>600 && y<700){
+						else if(y>680 && y<780){
 							choix=3;
 							continuer = 0;
 						}
@@ -431,7 +430,7 @@ int pause_game(SDL_Surface *ecran, int* ind_rows,int* ind_cols){
 				if (event.button.button == SDL_BUTTON_LEFT){
 					x=event.button.x;
 					y=event.button.y;
-					if(x>TAILLE_CELL && x<TAILLE_CELL+(10*TAILLE_CELL) && y>TAILLE_CELL && y<TAILLE_CELL+(10*TAILLE_CELL)){
+					if(x>(TAILLE_CELL + DECALAGE) && x<(TAILLE_CELL + DECALAGE)+(10*TAILLE_CELL) && y>(TAILLE_CELL + DECALAGE) && y<(TAILLE_CELL + DECALAGE)+(10*TAILLE_CELL)){
 						get_grid_index(x,y,ind_rows,ind_cols);
 						printf("GRID TOUUUUUCH  %c %d\n",(*ind_rows)+'A',*ind_cols);
 						continuer = 0;
@@ -508,7 +507,7 @@ void free_joueur(Joueur *j){
  * @return     void
  */
 void saisir_bateaux(Joueur *j, SDL_Surface* ecran, Uint32 colors[]){
-	int i,tailles[NB_BATEAUX]={5,4,3,3,1}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
+	int i,tailles[NB_BATEAUX]={3,2}; /*!< Règles : 1 bateau de taille 5, 1 de taille 4, 2 de taille 3, 1 de taille 2*/
 	int colonne=NB_COLONNES+10, ligne=' ', sens=0, choix, saisie=0; /*!< SENS 0 = vers le bas (par défaut) et 1 = vers la droite */
 	char titre[MAX_SAISIE], error[MAX_SAISIE] = "", sens_txt[MAX_SAISIE];
 
@@ -516,6 +515,7 @@ void saisir_bateaux(Joueur *j, SDL_Surface* ecran, Uint32 colors[]){
 	{
 		(j->bateaux+i)->id=i+1; 
 		do {
+			saisie = 0;
 			sprintf(titre,"%s ! Saisie du bateau %d, taille %d !",j->name,i+1,tailles[i]);
 			sprintf(sens_txt, "Sens : %s (barre espace pour changer)",sens==0?"vers le bas":"vers la droite");
 			choix = game_screen(ecran,colors,titre,error, sens_txt, &ligne, &colonne,j,1);

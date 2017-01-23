@@ -42,12 +42,11 @@ int main( int argc, char *argv[] ){
 		choix = welcome_screen(ecran,colors);
 		if (choix == 1)
 		{
-			game(0,ecran,colors);
-			choix = -1;
 		}
 		else if (choix == 2)
 		{
-			
+			game(2,ecran,colors);
+			choix = -1;			
 		}
 		else if (choix == 3)
 		{

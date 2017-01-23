@@ -48,7 +48,7 @@ void game(int solo, SDL_Surface * ecran, Uint32 colors[]) {
 	char chaine[MAX_SAISIE], error[MAX_SAISIE] = " ";
 
 	/*MODE VS Joueur*/
-	if(solo == 0){
+	if(solo == 2){
 		if(simple_screen(ecran,"BIENVENUE, Joueur 1 !") == -1)
 			exit(1);
 		initialiser_joueur(&joueurs[0]);
@@ -101,7 +101,7 @@ void game(int solo, SDL_Surface * ecran, Uint32 colors[]) {
 
 			/*si le joueur a gagne on sort de la boucle*/
 			if(gagne(btx_adverses)){
-				sprintf(chaine,"THE END : Le joueur %s a gagne !\n",joueurs[joueur_courant].name);
+				sprintf(chaine,"THE END : Le %s a gagne !\n",joueurs[joueur_courant].name);
 				if(simple_screen(ecran,chaine)== -1)
 					exit(1);
 				jouer = 0;
