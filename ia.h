@@ -37,7 +37,3 @@ void choix_mode_ia(ModeIA *mode_ia, int *l_cible, int *c_cible, int *l, int *c, 
 void completer_historique_ia(int **historique);
 
 #endif
-
-/*
-BUG inknown type Joueur qd prototype déclaré
-*/

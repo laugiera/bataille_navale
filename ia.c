@@ -47,7 +47,6 @@ void placement_aleatoire(int taille, int *col, int *ligne, int *sens) {
  * @details    Le nom est défini. L'historique est alloué est initialisé à O. Les bateaux sont alloués puis positionnés aléatoirement. Possibilité de coupler dans une condition avec la fct init_joueur, à voir...
  * @return     EXIT_FAILURE si les malloc fail, EXIT_SUCESS sinon
  */
-
 int initialiser_ia(Joueur *j, int mode_placement){
 
 	int i,k;
@@ -107,7 +106,6 @@ void coup_ia_random(int *l, int *c, int **historique) {
  * @return     void
  */
 void coup_ia_cible(int *l, int *c, int **historique, int l_cible, int c_cible) {
-	/*direction vertical: 0, horizontal: 1*/
 	printf("cible : %c%d\n",l_cible, c_cible);
 	Sens sens = vertical;
 	if (historique[l_cible-'A'][c_cible] == '+') {
@@ -200,7 +198,7 @@ void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_c
 	printf("IA random 2 cases\n");
 	if (sens == vertical) {
 		*c = c_cible;
-		/*trouver les extrèmes du bateau*/
+		/*trouver les extrèmes du bateau vertical*/
 		while (historique[l_cible-'A'+i][c_cible] == '+' && verifier_lignes(l_cible+i+1) == 1) {
 			i++;
 		}
@@ -208,7 +206,6 @@ void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_c
 			j++;
 		}
 		/*regarder leur état et choisir en fonction (normalement au moins un des deux doit etre inconnu sinon on aurait déjà changé de mode*/
-		printf("Les desu cases sont %c%d et %c%d\n",l_cible-j, c_cible, l_cible+i, c_cible);
 		if(historique[l_cible-'A'+i][c_cible] != '.') {
 			*l= l_cible-j;
 		} else if (historique[l_cible-'A'-j][c_cible] != '.') {
@@ -224,14 +221,13 @@ void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_c
 		}
 	} else {
 		*l = l_cible;
-		/*trouver les extrèmes du bateau*/
+		/*trouver les extrèmes du bateau horizontal*/
 		while (historique[l_cible-'A'][c_cible+i] == '+' && verifier_colonne(c_cible+i+1) == 1) {
 			i++;
 		}
 		while (historique[l_cible-'A'][c_cible-j] == '+' && verifier_colonne(c_cible-j-1) == 1) {
 			j++;
 		}
-		printf("Les deux cases sont %c%d et %c%d\n",l_cible, c_cible-j, l_cible, c_cible+i);
 		/*regarder leur état et choisir en fonction (normalement au moins un des deux doit etre inconnu sinon on aurait déjà changé de mode*/
 		if(historique[l_cible-'A'][c_cible+i] != '.') {
 			*c= c_cible-j;
@@ -250,7 +246,7 @@ void coup_ia_random2cases(int *l, int *c, int **historique, int l_cible, int c_c
 }
 
 /**
- * @brief      génère des coordonnées intelligente pour le coup que l'IA tire
+ * @brief      génère des coordonnées intelligente pour le coup que l'IA tire en fonction du mode
  * @param      l, pointeur vers le caractère de la ligne
  * @param      c, pointeur vers l'int de la colone
  * @param      historique, grille de jeu de l'ia
@@ -266,7 +262,6 @@ void coup_ia_intelligent(int *l, int *c, int **historique, ModeIA mode, int l_ci
 		printf("coup aléatoire\n");
 	} else {
 		coup_ia_cible(l, c, historique, l_cible, c_cible);
-		printf("res coup ciblé : %c%d\n",*l, *c );
 		printf("coup ciblé\n");
 	}
 }
@@ -297,7 +292,7 @@ void choix_mode_ia(ModeIA *mode_ia, int *l_cible, int *c_cible, int *l, int *c, 
 /**
  * @brief      complete l'historique autour des bateaux coulés
  * @param      historique, historique de l'ia
- * @details    met des 'o' à l'eau sur les cases adjacentes aux bateaux coulés puisque deux bateaux ne peuvent pas se toucher
+ * @details    met des 'o' à l'eau sur les cases adjacentes aux bateaux coulés puisque deux bateaux ne peuvent pas se toucher, ne traite pas les diagonales par contre
  * @return     void
  */
 void completer_historique_ia(int **historique) {
@@ -320,19 +315,4 @@ void completer_historique_ia(int **historique) {
 			}
 		}
 	}
-	/*premier test pour une raison inconnue il n'a pas voulu mettre le 'o' au dessus de la premiere case
-	ne marche pas en verticale*/
 }
-
-
-/*
-TO DO : 
-- associer init_ia avec init_jouer et ajouter un param IA dans saisir_bateau pour empecher l'affichage de la grille de l'IA
-- empecher le message d'erreur de deja_joue avec IA
--enlever verif_lign et col dans coup_ia_random
-- peut etre ajouter un truc pour bloquer si jamais qqn essaye d'augmenter le nb de bateau et qu'il y a des pb pour les placer aléatoirement
--coup ia cible : check ligne et col qui doivent etre dans la grille
-
-Pour aléillorer l'IA
--élimination auto des cases autour d'un bateau
-*/
