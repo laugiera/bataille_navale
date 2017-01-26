@@ -11,7 +11,9 @@
 #include <string.h>
 #include <time.h>
 #include "init.h"
+
 #include "ia.h"
+
 
 
 
@@ -409,7 +411,8 @@ int verifier_saisie_bateaux(int  l, int c, int  s, int taille, Joueur j, int mod
  * @return     booléen
  */
 int verifier_lignes(int  s){
-	return (s >='A'&& s <=('A'+NB_LIGNES));
+	printf("ligne : %c, min : %c, max : %c \n",s, 'A', 'A'+NB_LIGNES-1);
+	return (s >='A'&& s <('A'+NB_LIGNES));
 }
 
 /**

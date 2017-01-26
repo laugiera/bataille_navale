@@ -7,9 +7,9 @@
  */
 
 
-#ifndef GAME_H_
-#define GAME_H_
-
+#ifndef IA_H_
+#define IA_H_
+#include "init.h"
 
 typedef enum {
 	mode_aleatoire,
@@ -22,13 +22,11 @@ typedef enum {
 } Sens;
 
 
-/*main pour test
-int main();
-*/
+
 void placement_aleatoire(int taille, int *col, int *ligne, int *sens);
-/*
+
 int initialiser_ia(Joueur *j, int mode_placement);
-*/
+
 void coup_ia_random(int *l, int *c, int **historique);
 void coup_ia_cible(int *l, int *c, int **historique, int l_cible, int c_cible);
 int ia_check_adjacent(int **historique, int l_cible, int c_cible, Sens *sens); 

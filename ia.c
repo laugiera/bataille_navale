@@ -110,17 +110,14 @@ void coup_ia_cible(int *l, int *c, int **historique, int l_cible, int c_cible) {
 	/*direction vertical: 0, horizontal: 1*/
 	printf("cible : %c%d\n",l_cible, c_cible);
 	Sens sens = vertical;
-	/*pour les test tester si la cible est bien un touché sinon faire un random*/
-	/*regarde les 4 cardinales autour de la case*/
-	/*si une est touché set une direction, sinon tire une au hasard BREAK*/
-	/*direction : regarde un bout à l'autre */
-	/*si une case 'o' d'un coté tire de l'autre sinon tire au hasard*/
 	if (historique[l_cible-'A'][c_cible] == '+') {
 		/*si aucun adjacent n'est touché tirer au hasard*/
 		if (ia_check_adjacent(historique, l_cible, c_cible, &sens) == 0) {
 			coup_ia_random4cases(l, c, historique, l_cible, c_cible);
 			printf("res random 4 : %c%d\n", *l, *c);
-		} else {
+		} 
+		/*si une case adjacente est déja touchée, le sens du bateau est detrminée et on frappe au hasard une des deux extremitées*/
+		else {
 			coup_ia_random2cases(l, c, historique, l_cible, c_cible, sens);
 			printf("res random 2 : %c%d\n", *l, *c);
 		}
@@ -140,7 +137,6 @@ void coup_ia_cible(int *l, int *c, int **historique, int l_cible, int c_cible) {
  * @return     int, 1 : s'il y a une cases touchée adjacente, O: sinon
  */
 int ia_check_adjacent(int **historique, int l_cible, int c_cible, Sens *sens) {
-	/*int touche = 0;*/
 	if((verifier_lignes(l_cible+1)==1 && historique[l_cible-'A'+1][c_cible] == '+') ||
 	   (verifier_lignes(l_cible-1)==1 && historique[l_cible-'A'-1][c_cible] == '+')) {
 		*sens = vertical;
@@ -297,15 +293,22 @@ void choix_mode_ia(ModeIA *mode_ia, int *l_cible, int *c_cible, int *l, int *c, 
 	} 
 }
 
+
+/**
+ * @brief      complete l'historique autour des bateaux coulés
+ * @param      historique, historique de l'ia
+ * @details    met des 'o' à l'eau sur les cases adjacentes aux bateaux coulés puisque deux bateaux ne peuvent pas se toucher
+ * @return     void
+ */
 void completer_historique_ia(int **historique) {
 	int i, j;
 	for (i=0; i<NB_LIGNES; i++) {
 		for(j=0; j<NB_COLONNES; j++){
 			if (historique[i][j] == 'X') {
-				if (verifier_lignes(i+1)==1 && historique[i+1][j]=='.') {
+				if (verifier_lignes('A'+i+1)==1 && historique[i+1][j]=='.') {
 					historique[i+1][j]='o';
 				}
-				if (verifier_lignes(i-1)==1 && historique[i-1][j]=='.') {
+				if (verifier_lignes('A'+i-1)==1 && historique[i-1][j]=='.') {
 					historique[i-1][j]='o';
 				}
 				if (verifier_colonne(j+1)==1 && historique[i][j+1]=='.') {
@@ -317,7 +320,8 @@ void completer_historique_ia(int **historique) {
 			}
 		}
 	}
-	/*parcourir la matrice trouver toutes les cases X et remplacer tous les '.' qui les entourent (si ils existent) par des 'o'*/
+	/*premier test pour une raison inconnue il n'a pas voulu mettre le 'o' au dessus de la premiere case
+	ne marche pas en verticale*/
 }
 
 
